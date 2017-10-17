@@ -88,8 +88,13 @@ what subsystem (or subsystems) your changes touch.
 Use `git rebase` (not `git merge`) to sync your work from time to time.
 
 ```sh
+# If you are a contributor who has forked the project.
 $ git fetch upstream
-$ git rebase upstream/v0.01  # or upstream/master
+$ git rebase upstream/master
+
+# OR if you are a part of the pathway-team.
+$ git fetch origin
+$ git rebase origin/master
 ```
 
 

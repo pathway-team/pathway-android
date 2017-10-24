@@ -3,6 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_routes_map"
+            android:title="Routes Map" />
+        <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
             android:title="Import" />

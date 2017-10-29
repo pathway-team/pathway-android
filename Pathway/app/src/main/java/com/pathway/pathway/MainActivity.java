@@ -3,8 +3,11 @@ package com.pathway.pathway;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +23,8 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Chronometer;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,6 +39,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.RoundCap;
 
 import org.json.JSONObject;
 
@@ -54,6 +60,10 @@ public class MainActivity extends AppCompatActivity
     private LatLng lastLoc;
     private Polyline userRoute;
     private JSONObject dataRoute;
+    private Button btnStart;
+    private long startTime = 0;
+    private Chronometer timerRoute;
+
 
     private enum RunStates {OFF, RUN, PAUSE}
 
@@ -90,6 +100,16 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        btnStart = (Button) findViewById(R.id.btn_Start);
+        btnStart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onStartPressed(v);
+                    }
+        });
+
+        timerRoute = (Chronometer) findViewById(R.id.chronometer);
+        timerRoute.setFormat("%s");
 
         if (mapApiClient == null) {
             mapApiClient = new GoogleApiClient.Builder(this)
@@ -99,10 +119,10 @@ public class MainActivity extends AppCompatActivity
                     .build();
         }
 
-        locRequest = LocationRequest.create()
+/*        locRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(3000)
-                .setFastestInterval(1000);
+                .setFastestInterval(1000);*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -178,10 +198,12 @@ public class MainActivity extends AppCompatActivity
                 .title("Marker in Sydney"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        PolylineOptions routeOptions = new PolylineOptions()
-        .color(Color.RED)
-        .width(4);
-        userRoute = googleMap.addPolyline(routeOptions);
+/*        PolylineOptions routeOptions = new PolylineOptions()
+                .color(Color.RED)
+                .width(12)
+                .startCap(new RoundCap())
+                .endCap(new RoundCap());
+        userRoute = googleMap.addPolyline(routeOptions);*/
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -201,12 +223,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
-        List<LatLng> points = userRoute.getPoints();
-        points.add(lastLoc);
-        userRoute.setPoints(points);
-        coordMsg = String.format("XY: %s", lastLoc.toString());
+        if (userRoute != null) {
+            List<LatLng> points = userRoute.getPoints();
+            points.add(lastLoc);
+            userRoute.setPoints(points);
+        }
+        coordMsg = String.format("XY: %s.\nElev: %s", lastLoc.toString(), );
         mMap.animateCamera(CameraUpdateFactory.newLatLng(lastLoc));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 18));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 16));
     }
 
     @Override
@@ -217,6 +241,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         startLocationUpdates();
+        //stopLocationUpdates();
     }
 
     @Override
@@ -296,14 +321,36 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void onStartPressed() {
+    public void onStartPressed(View v) {
+        if (runState == RunStates.OFF) {
 
-        if (this.runState == RunStates.OFF) {
+            btnStart.setText("Stop");
+            Snackbar.make(v, "Recording...", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
+            runState = RunStates.RUN;
+            PolylineOptions routeOptions = new PolylineOptions()
+                    .color(Color.RED)
+                    .width(12)
+                    .startCap(new RoundCap())
+                    .endCap(new RoundCap());
+            timerRoute.setBase(SystemClock.elapsedRealtime());
+            timerRoute.start();
+            userRoute = mMap.addPolyline(routeOptions);
+            startLocationUpdates();
         }
+        else if(runState == RunStates.RUN) {
+            btnStart.setText("Start");
+            Snackbar.make(v, "Recording Stopped.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
+            runState = RunStates.OFF;
+            userRoute.remove();
+            userRoute = null;
+            timerRoute.stop();
+            stopLocationUpdates();
+        }
     }
-
     public void onStopPressed() {
 
     }

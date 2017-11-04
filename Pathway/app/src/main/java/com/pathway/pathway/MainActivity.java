@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity
             points.add(lastLoc);
             userRoute.setPoints(points);
         }
-        coordMsg = String.format("XY: %s.\nElev: %s", lastLoc.toString(), );
+        coordMsg = String.format("XY: %s.\nElev: %s", lastLoc.toString());
         mMap.animateCamera(CameraUpdateFactory.newLatLng(lastLoc));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 16));
     }

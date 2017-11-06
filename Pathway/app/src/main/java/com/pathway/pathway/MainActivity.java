@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity
     private Chronometer timerRoute;
 
 
-    private enum RunStates {OFF, RUN, PAUSE}
+    private enum RunStates {OFF, RUN, PAUSE};
 
-    ;
+
     private RunStates runState = RunStates.OFF;
     private String coordMsg;
 

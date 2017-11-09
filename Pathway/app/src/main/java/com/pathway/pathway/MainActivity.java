@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.BottomSheetBehavior;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -41,6 +42,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -84,7 +86,29 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, coordMsg, Snackbar.LENGTH_LONG)
+                String jsonString =     "{" +
+                                "\"type\": \"LineString\"," +
+                                "\"bbox\": [-79.811818, 36.065488, -79.811308, 36.067061]," +
+                                "\"coordinates\": [" +
+                                "	[-79.811818, 36.065488, 250.8]," +
+                                "	[-79.811646, 36.065553, 251.1]," +
+                                "	[-79.811601, 36.065565, 250.8]" +
+                                " ]," +
+                                "\"timestamps\": [0, 3, 5]," +
+                                "\"distance\": 5280.0," +
+                                "\"rid\": 2," +
+                                "\"pid\": 1," +
+                                "\"name\": \"Bus Stop\"," +
+                                "\"diffRtng\": \"A-1\"," +
+                                "\"activity\": \"walk\"" +
+                                "}";
+                Route testRoute = new Route();
+                try {
+                   testRoute = new Route(jsonString);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Snackbar.make(view, testRoute.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -99,6 +123,8 @@ public class MainActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
 
         btnStart = (Button) findViewById(R.id.btn_Start);
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -198,13 +224,6 @@ public class MainActivity extends AppCompatActivity
                 .title("Marker in Sydney"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-/*        PolylineOptions routeOptions = new PolylineOptions()
-                .color(Color.RED)
-                .width(12)
-                .startCap(new RoundCap())
-                .endCap(new RoundCap());
-        userRoute = googleMap.addPolyline(routeOptions);*/
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
@@ -212,10 +231,8 @@ public class MainActivity extends AppCompatActivity
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
-
         googleMap.setOnMyLocationButtonClickListener(this);
         googleMap.setMyLocationEnabled(true);
-
     }
 
 
@@ -333,13 +350,15 @@ public class MainActivity extends AppCompatActivity
                     .color(Color.RED)
                     .width(12)
                     .startCap(new RoundCap())
-                    .endCap(new RoundCap());
+                    .endCap(new RoundCap())
+                    .clickable(true);
             timerRoute.setBase(SystemClock.elapsedRealtime());
             timerRoute.start();
             userRoute = mMap.addPolyline(routeOptions);
             startLocationUpdates();
         }
         else if(runState == RunStates.RUN) {
+
             btnStart.setText("Start");
             Snackbar.make(v, "Recording Stopped.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();

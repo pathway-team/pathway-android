@@ -1,9 +1,14 @@
 package com.pathway.pathway_android;
+import com.facebook.GraphRequest;
+import com.facebook.GraphRequestAsyncTask;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.pathway.pathway_android.Achievements;
 import com.pathway.pathway_android.R;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -15,6 +20,10 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.FacebookSdk;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class FBLoginButton extends AppCompatActivity {
 
@@ -46,32 +55,50 @@ public class FBLoginButton extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                startActivity(i);
+               // startActivity(i);
+
+
+                GraphRequestAsyncTask graphRequestAsyncTask = new GraphRequest(
+                        loginResult.getAccessToken(),
+                        //AccessToken.getCurrentAccessToken(),
+                        "/me/friends",
+                        null,
+                        HttpMethod.GET,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse response) {
+                                    Intent intent = new Intent(FBLoginButton.this,FriendsList.class);
+                                try {
+                                        JSONArray rawName = response.getJSONObject().getJSONArray("data");
+                                        intent.putExtra("jsondata", rawName.toString());
+                                        startActivity(intent);
+                                } catch (JSONException e) {
+                                        e.printStackTrace();
+                                }
+                            }
+                        }
+                ).executeAsync();
 
 
                 Toast.makeText(getApplicationContext(), "Logging In...", Toast.LENGTH_SHORT).show();
 
                 String userID = loginResult.getAccessToken().getUserId();
 
+
                 /*
-
-                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-
-
-
-                       displayUserInfo(object);
-
-
-
-                    }
-                });
+                GraphRequest graphRequest = GraphRequest.newPostRequest(AccessToken.getCurrentAccessToken(), "/user_id/notifications",
+                        null,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse graphResponse) {
+                                Log.d("", "------ graphResponse = " + graphResponse);
+                            }
+                        }
+                );
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "first_name, last_name, email, id");
                 graphRequest.setParameters(parameters);
                 graphRequest.executeAsync();
-    */
+                */
+
             }
 
             @Override

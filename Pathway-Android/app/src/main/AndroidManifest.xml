@@ -36,9 +36,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".LoginActivity"
-            >
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,9 +64,6 @@
                 <data android:scheme="fb1560940130595086" />
             </intent-filter>
         </activity>
-
-
-
         <activity
             android:name=".PathwayNavDrawer"
             android:label="@string/title_activity_pathway_nav_drawer"
@@ -76,25 +71,23 @@
         <activity
             android:name=".accountlogin"
             android:label="@string/title_activity_accountlogin" />
-        <activity android:name=".routespopup"></activity>
-        <activity android:name=".routepop"
-            android:theme="@style/AppTheme.poptheme"
-            ></activity>
-
-
+        <activity android:name=".routespopup" />
         <activity
-            android:name="com.pathway.pathway_android.Achievements"
+            android:name=".routepop"
+            android:theme="@style/AppTheme.poptheme" />
+        <activity
+            android:name=".Achievements"
             android:label="@string/Achievements"
             android:screenOrientation="portrait" />
-        <activity android:name="com.pathway.pathway_android.FBLoginButton" />
-        <activity android:name="com.pathway.pathway_android.RegisterActivity" />
-        <activity android:name="com.pathway.pathway_android.UserPage" />
+        <activity android:name=".FBLoginButton" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".UserPage" />
         <activity
-            android:name="com.pathway.pathway_android.MapsActivity"
-            android:label="@string/title_activity_maps"
- />
-        <activity android:name="com.pathway.pathway_android.Editpage"></activity>
-
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Editpage" />
+        <activity android:name=".FriendsList"
+                  android:label="Friends List"></activity>
     </application>
 
 </manifest>

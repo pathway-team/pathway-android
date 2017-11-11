@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.maps.android.SphericalUtil;
+
 /**
  * Created by Johnny on 11/5/2017.
  */
@@ -107,8 +109,31 @@ public class Route extends JSONObject {
     }
 
 
-    public void addPoint(LatLng point) {
+    public void addCoords(LatLng point) {
         coords.add(new Double[] {point.longitude, point.latitude, 0.0});
+    }
+
+    public void addCoords(LatLng point, Double elev) {
+        coords.add(new Double[] {point.longitude, point.latitude, elev});
+    }
+
+
+    public void setBbox(Double min_x, Double min_y, Double max_x, Double max_y) {
+
+    }
+
+    public void setBbox(Double bounds[]) {
+        if (bounds.length != 4) {
+
+        }
+    }
+
+    public void setCoords(){
+
+    }
+
+    public void calcBBox() {
+       // this.bbox = LatLngBounds.
     }
 
     public List<LatLng> getDrawPoints() {

@@ -41,11 +41,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
+import com.google.maps.android.SphericalUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -61,10 +70,11 @@ public class MainActivity extends AppCompatActivity
     private LocationRequest locRequest;
     private LatLng lastLoc;
     private Polyline userRoute;
-    private JSONObject dataRoute;
+    private Route currentRoute;
+    private List<Route> nearbyRoutes;
     private Button btnStart;
-    private long startTime = 0;
     private Chronometer timerRoute;
+    //private FetchData dataConnect = new FetchData();
 
 
     private enum RunStates {OFF, RUN, PAUSE}
@@ -102,12 +112,36 @@ public class MainActivity extends AppCompatActivity
                                 "\"diffRtng\": \"A-1\"," +
                                 "\"activity\": \"walk\"" +
                                 "}";
-                Route testRoute = new Route();
+
+                Route testRoute = null;
+                String test = "";
                 try {
-                   testRoute = new Route(jsonString);
+                    test = new FetchData(test).execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                try {
+                   testRoute = new Route(test);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                PolylineOptions routeOptions = new PolylineOptions()
+                        .color(Color.BLUE)
+                        .width(16)
+                        .startCap(new RoundCap())
+                        .endCap(new RoundCap())
+                        .clickable(true);
+                Polyline oldRoutes = mMap.addPolyline(routeOptions);
+                //oldRoutes.
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(testRoute.getDrawPoints().get(0)));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(testRoute.getDrawPoints().get(0), 16));
+                oldRoutes.setPoints(testRoute.getDrawPoints());
+                if (lastLoc == null) {
+                    lastLoc = testRoute.getDrawPoints().get(testRoute.getDrawPoints().size() - 1);
+                }
+                double elevation = getElev(lastLoc);
                 Snackbar.make(view, testRoute.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -240,6 +274,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
+        //double altitude = location.getAltitude();
+        //double elevation = this.getElev(location);
         if (userRoute != null) {
             List<LatLng> points = userRoute.getPoints();
             points.add(lastLoc);
@@ -373,4 +409,35 @@ public class MainActivity extends AppCompatActivity
     public void onStopPressed() {
 
     }
+
+
+    public double getElev(LatLng point) {
+        double result = -100000.0;
+
+        String path = "http://maps.googleapis.com/maps/api/elevation/" + "json?locations="
+                + String.valueOf(point.latitude) + "," + String.valueOf(point.longitude) + "&sensor=true";
+        try {
+            URL url = new URL(String.format(path));
+            HttpURLConnection connection =
+                    (HttpURLConnection)url.openConnection();
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+
+            String tmp;
+            while ((tmp = reader.readLine()) != null) {
+                sb.append(tmp);
+            }
+
+            JSONArray feature = new JSONArray(sb.toString());
+            result = Double.parseDouble(feature.getJSONObject(0).getString("elevation"));
+
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

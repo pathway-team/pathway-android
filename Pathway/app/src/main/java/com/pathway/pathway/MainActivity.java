@@ -45,7 +45,12 @@ import com.google.android.gms.maps.model.RoundCap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -61,10 +66,11 @@ public class MainActivity extends AppCompatActivity
     private LocationRequest locRequest;
     private LatLng lastLoc;
     private Polyline userRoute;
-    private JSONObject dataRoute;
+    private Route currentRoute;
+    private List<Route> nearbyRoutes;
     private Button btnStart;
-    private long startTime = 0;
     private Chronometer timerRoute;
+    //private FetchData dataConnect = new FetchData();
 
 
     private enum RunStates {OFF, RUN, PAUSE}
@@ -102,12 +108,31 @@ public class MainActivity extends AppCompatActivity
                                 "\"diffRtng\": \"A-1\"," +
                                 "\"activity\": \"walk\"" +
                                 "}";
-                Route testRoute = new Route();
+
+                Route testRoute = null;
+                String test = "";
                 try {
-                   testRoute = new Route(jsonString);
+                    test = new FetchData(test).execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                try {
+                   testRoute = new Route(test);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                PolylineOptions routeOptions = new PolylineOptions()
+                        .color(Color.BLUE)
+                        .width(16)
+                        .startCap(new RoundCap())
+                        .endCap(new RoundCap())
+                        .clickable(true);
+                Polyline oldRoutes = mMap.addPolyline(routeOptions);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(testRoute.getDrawPoints().get(0)));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(testRoute.getDrawPoints().get(0), 16));
+                oldRoutes.setPoints(testRoute.getDrawPoints());
                 Snackbar.make(view, testRoute.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -373,4 +398,6 @@ public class MainActivity extends AppCompatActivity
     public void onStopPressed() {
 
     }
+
+
 }

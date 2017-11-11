@@ -16,6 +16,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "device_DB";
     private static final String TABLE_ROUTES = "tbl_routes";
+    private static final String TABLE_RUNS = "tbl_runs";
 
     //routes information
     private static final String KEY_ID = "id";
@@ -27,8 +28,9 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_ROUTES_TABLE = String.format("CREATE TABLE %s (%s INTEGER PRIMARY " +
-                "KEY AUTOINCREMENT, %s TEXT);", KEY_ID, KEY_JSON);
+        String CREATE_ROUTES_TABLE = String.format("CREATE TABLE %s " +
+                "(%s INTEGER PRIMARY " + "KEY AUTOINCREMENT, " +
+                "%s TEXT);", KEY_ID, KEY_JSON);
         db.execSQL(CREATE_ROUTES_TABLE);
     }
 

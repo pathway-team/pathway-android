@@ -38,7 +38,7 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_maps">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +48,7 @@
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="1560940130595086" />
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name="com.facebook.FacebookActivity"

@@ -14,6 +14,7 @@ import com.facebook.FacebookException;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.FacebookSdk;
 
 public class FBLoginButton extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class FBLoginButton extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
 

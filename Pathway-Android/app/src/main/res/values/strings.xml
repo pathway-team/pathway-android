@@ -22,4 +22,6 @@
         completions."
     </string>
     <string name="Achievements">achievements_string</string>
+
+    <string name="facebook_app_id">1560940130595086</string>
 </resources>

@@ -1,12 +1,23 @@
 package com.example.daniel.loginregister;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import static com.example.daniel.loginregister.R.id.tvAge;
 import static com.example.daniel.loginregister.R.id.tvSex;
@@ -31,8 +42,8 @@ public class Editpage extends AppCompatActivity {
         final String sex = intent.getStringExtra("sex");
         final String email = intent.getStringExtra("email");
         final String username = intent.getStringExtra("username");
-        final int age = intent.getIntExtra("age", -1);
-        final int weight = intent.getIntExtra("weight", -1);
+        final String age = intent.getStringExtra("age");
+        final String weight = intent.getStringExtra("weight");
 
         etEmail1.setText(email);
         etUsername1.setText(username);
@@ -49,6 +60,25 @@ public class Editpage extends AppCompatActivity {
                 editIntent.putExtra("age", age);
                 editIntent.putExtra("sex", sex);
                 editIntent.putExtra("weigth", weight);
+
+               try{
+                   URL url = new URL("https://www.youtube.com");
+                   HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                   conn.setReadTimeout(10000);
+                   conn.setConnectTimeout(15000);
+                   conn.setRequestMethod("PUT");
+                   conn.setDoOutput(true);
+                   conn.setDoInput(true);
+                   Uri.Builder builder = new Uri.Builder()
+                           .appendQueryParameter("username", username)
+                           .appendQueryParameter("email", email)
+                           .appendQueryParameter("age", age)
+                           .appendQueryParameter("sex", sex)
+                           .appendQueryParameter("weight", weight);
+               } catch(Exception e){
+                   e.printStackTrace();
+               }
+
                 Editpage.this.startActivity(editIntent);
             }
         });

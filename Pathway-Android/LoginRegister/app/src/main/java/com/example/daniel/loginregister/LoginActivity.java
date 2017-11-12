@@ -2,6 +2,7 @@ package com.example.daniel.loginregister;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,13 +24,24 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import static android.R.attr.data;
 
@@ -63,10 +75,34 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(c, "Please fill in user name and password", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                try {
+                    URL url = new URL("https://www.youtube.com");
+                    HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
+                    conn.setReadTimeout(10000);
+                    conn.setConnectTimeout(15000);
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
 
-                Networking n = new Networking();
-                //n.execute(url, Networking.NETWORK_STATE_REGISTER);
+                    Uri.Builder builder = new Uri.Builder()
+                            .appendQueryParameter("username", username)
+                            .appendQueryParameter("password", password);
+                    String query = builder.build().getEncodedQuery();
+                    OutputStream os = conn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(query);
+                    writer.flush();
+                    writer.close();
+                    os.close();
+                    conn.connect();
 
+                    int responsecode = conn.getResponseCode();
+                    if(responsecode == HttpURLConnection.HTTP_OK){
+                        //call nav activity and set up main hub.
+                    }
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -86,63 +122,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-    public class Networking extends AsyncTask{
-        public static final int NETWORK_STATE_REGISTER = 1;
-        @Override
-        protected Object doInBackground(Object[] params){
-            getJson((String) params[0], (Integer) params[1]);
-            return null;
-        }
-
-    }
-
-    private void getJson(String url, int state){
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpPost request = new HttpPost(url);
-        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-        boolean valid = false;
-        switch(state){
-            case Networking.NETWORK_STATE_REGISTER:
-                //postParameters.add(new BasicNameValuePair("userName", username));
-                //postParameters.add(new BasicNameValuePair("password", password));
-                valid = true;
-                break;
-            default:
-                break;
-        }
-
-        if(valid){
-            StringBuffer stringBuffer = new StringBuffer("");
-            try{
-                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(postParameters);
-                request.setEntity(entity);
-                HttpResponse response = httpClient.execute(request);
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                String line = "";
-                String lineSeparator = System.getProperty("line.separator");
-                while((line = bufferedReader.readLine()) != null){
-                    stringBuffer.append(line + lineSeparator);
-                }
-                bufferedReader.close();
-
-            }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-            decodeResultIntoJson(stringBuffer.toString());
-        }
-
-        else{
-
-        }
-
-    }
-
-    private void decodeResultIntoJson(String response){
-
-    }
-
-
 }
 

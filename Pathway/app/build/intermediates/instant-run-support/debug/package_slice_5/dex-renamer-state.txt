@@ -1,4 +1,0 @@
-#Fri Nov 10 17:30:33 EST 2017
-base.0=/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5
-renamed.0=classes.dex
-file.0=/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex

@@ -4,50 +4,55 @@ package com.pathway.pathway;
  * Created by Johnny on 11/10/2017.
  */
 
-
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import android.os.AsyncTask;
 
+import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-
     public class FetchData extends AsyncTask<String, Void, String> {
 
-        private static final String OPEN_DATABASE =
-                "http://192.168.0.11:8000/%s/";
+        public interface FetchDataCallbackInterface {
+            // method called when server's data get fetched
+            public void fetchDataCallback (String result);
+        }
+
+        private static final String OPEN_DATABASE = "http://138.197.103.225:8000/%s/";
+
+
+        HttpURLConnection urlConnect;
+        String url;
+        FetchDataCallbackInterface fdCBInterface;
 
         private String result;
 
-        FetchData(String input) {
-            this.result = input;
+        FetchData(String inURL, FetchDataCallbackInterface cbInterface) {
+            this.url = inURL;
+            this.fdCBInterface = cbInterface;
         }
 
-        public String getJSONString() {
-            this.execute();
-            return this.result;
-        }
 
 
         @Override
-        protected String doInBackground(String... strings) {
-            //result = "UNDEFINED";
+        protected String doInBackground(String... params) {
+            StringBuilder sb = new StringBuilder();
             try {
                 URL url = new URL(String.format(OPEN_DATABASE, "routes"));
-                HttpURLConnection connection =
-                        (HttpURLConnection)url.openConnection();
+                //URL url = new URL(this.url);
+                urlConnect = (HttpURLConnection)url.openConnection();
 
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream()));
-                StringBuilder sb = new StringBuilder();
+
+                urlConnect = (HttpURLConnection) url.openConnection();
+                InputStream in = new BufferedInputStream(urlConnect.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                //BufferedReader reader = new BufferedReader(
+                //        new InputStreamReader(urlConnect.getInputStream()));
 
                 String tmp;
                 while ((tmp = reader.readLine()) != null) {
@@ -57,21 +62,24 @@ import android.util.Log;
                 //result = sb.toString();
 
                 JSONArray feature = new JSONArray(sb.toString());
-                JSONObject route = new JSONObject(feature.getJSONObject(0).getString("data"));
-                result = String.valueOf(new JSONObject(feature.getJSONObject(0).getString("data")));
+                JSONObject route = new JSONObject(feature.getJSONObject(1).getString("data"));
+                result = String.valueOf(new JSONObject(feature.getJSONObject(1).getString("data")));
                 //result = String.valueOf(route.getString("data"));
 
-                connection.disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+            finally {
+                urlConnect.disconnect();
             }
             return result;
         }
 
         @Override
-        protected void onPostExecute(String temp) {
-            result = temp;
-        }
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            this.fdCBInterface.fetchDataCallback(result);
+          }
 
     }
 

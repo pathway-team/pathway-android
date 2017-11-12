@@ -21,7 +21,7 @@ public class Route extends JSONObject {
     private Double[] bbox = new Double[4];  //[west, south, east, north]
     private ArrayList<Double[]> coords;     //longitude, latitude, elevation
     //index i of coords corresponds to index i of timestamp. set and get together.
-    private Integer[] timestamps;  //relative time in seconds.
+    private List<Integer> timestamps;  //relative time in seconds.
     private Double distance;
     private int rid;
     private int pid;
@@ -49,8 +49,8 @@ public class Route extends JSONObject {
                 "}");
 
         this.bbox = this.stringToDoubleArray(this.getString("bbox"));
-        this.coords = this.stringToArrayList(this.getString("coordinates"));
-        this.timestamps = this.stringToIntArray(this.getString("timestamps"));
+        this.coords = this.stringToArrayDoubleList(this.getString("coordinates"));
+        this.timestamps = this.stringToIntList(this.getString("timestamps"));
         this.distance = Double.parseDouble(this.getString("distance"));
         this.rid = Integer.parseInt(this.getString("rid"));
         this.pid = Integer.parseInt(this.getString("pid"));
@@ -63,8 +63,8 @@ public class Route extends JSONObject {
     Route(String routeData) throws JSONException {
         super(routeData);
         this.bbox = this.stringToDoubleArray(this.getString("bbox"));
-        this.coords = this.stringToArrayList(this.getString("coordinates"));
-        this.timestamps = this.stringToIntArray(this.getString("timestamps"));
+        this.coords = this.stringToArrayDoubleList(this.getString("coordinates"));
+        this.timestamps = this.stringToIntList(this.getString("timestamps"));
         this.distance = Double.parseDouble(this.getString("distance"));
         this.rid = Integer.parseInt(this.getString("rid"));
         this.pid = Integer.parseInt(this.getString("pid"));
@@ -93,7 +93,16 @@ public class Route extends JSONObject {
         return results;
     }
 
-    public ArrayList<Double[]> stringToArrayList(String input) {
+    public List<Integer> stringToIntList(String input) {
+        String[] items = input.substring(1, input.length() - 1).split(",");
+        List<Integer> results = new ArrayList();
+        for (int i = 0; i < items.length; i++) {
+            results.add(Integer.parseInt(items[i]));
+        }
+        return results;
+    }
+
+    public ArrayList<Double[]> stringToArrayDoubleList(String input) {
         ArrayList<Double[]> results = new ArrayList<Double[]>();
         String[] items = input.substring(1, input.length() - 1)
                 .replaceAll("[\\[\\]]", "").split(",");
@@ -117,23 +126,58 @@ public class Route extends JSONObject {
         coords.add(new Double[] {point.longitude, point.latitude, elev});
     }
 
+    public void addTime(int sec) {
+        timestamps.add(sec);
+    }
+
 
     public void setBbox(Double min_x, Double min_y, Double max_x, Double max_y) {
-
+        this.bbox[0] = min_x;
+        this.bbox[1] = min_y;
+        this.bbox[2] = max_x;
+        this.bbox[3] = max_y;
     }
 
     public void setBbox(Double bounds[]) {
-        if (bounds.length != 4) {
-
+        if (bounds.length != 4 || (bounds[0] > bounds[2] || (bounds[1] > bounds[3]))) {
+            //handle invalid bounding box
+        }
+        else {
+            for (int i = 0; i < 4; i++) {
+                this.bbox[i] = bounds[i];
+            }
         }
     }
 
-    public void setCoords(){
-
+    public void setCoords(ArrayList<Double[]> coordinates){
+        this.coords = coordinates;
     }
 
     public void calcBBox() {
-       // this.bbox = LatLngBounds.
+        Double min_x = null, min_y = null, max_x = null, max_y = null;
+        Double temp[] = new Double[3];
+        for (int i = 0; i < coords.size(); i++) {
+            temp = coords.get(i);
+            if ((min_x == null)) {
+                min_x = temp[0];
+                min_y = temp[1];
+                max_x = temp[0];
+                max_y = temp[1];
+            }
+            if (min_x > temp[0]) {
+                min_x = temp[0];
+            }
+            if (min_y > temp[1]) {
+                min_y = temp[1];
+            }
+            if (max_x < temp[0]) {
+                max_x = temp[0];
+            }
+            if (max_y < temp[1]) {
+                max_y = temp[1];
+            }
+        }
+        this.setBbox(min_x, min_y, max_x, max_y);
     }
 
     public List<LatLng> getDrawPoints() {

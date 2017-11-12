@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher_round.png",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/home/eewest/.android/build-cache/1aa3a714c96b6555a1eba7452296460967f73fcd/output/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/home/eewest/.android/build-cache/1aa3a714c96b6555a1eba7452296460967f73fcd/output/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
+    }
+]

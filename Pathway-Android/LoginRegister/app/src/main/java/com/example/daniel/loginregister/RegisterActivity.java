@@ -53,53 +53,89 @@ public class RegisterActivity extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                System.out.println("hello");
-                String username = etUsername.getText()+"";
-                String age = etAge.getText()+"";
-                String email = etEmail.getText()+"";
-                String weight = etWeight.getText()+"";
-                String sex = etSex.getText()+"";
-                String password = etPassword.getText()+"";
-                if(username.length() == 0 || age.length() == 0 || email.length() == 0 || weight.length() == 0 || sex.length() == 0 || password.length() == 0){
-                    Toast.makeText(c,"Please fill all fields to register", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                try {
-                    System.out.println("you are here");
-                    URL url = new URL("http://138.197.103.255:8000/users/");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    //conn.setReadTimeout(10000);
-                    //conn.setConnectTimeout(15000);
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
+                boolean result = false;
+                httpHandler handler = new httpHandler(getApplicationContext());
+                handler.execute();
 
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("username", username);
-                    jsonObject.put("password", password);
-                    jsonObject.put("age", age);
-                    jsonObject.put("gender", sex);
-                    jsonObject.put("country", weight);
-
-                    DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream());
-                    dataOutputStream.writeBytes(jsonObject.toString());
-                    dataOutputStream.flush();
-                    dataOutputStream.close();
-
-
-                    conn.connect();
-
-                    int responsecode = conn.getResponseCode();
-                    if(responsecode == HttpURLConnection.HTTP_OK){
-                        Log.d("hey", "you are here");
-                        //login user and call nav activity and set up main hub.
-                    }
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
             }
         });
+    }
+
+    public int ByPost(){
+        int responsecode = -1;
+        try {
+            URL url = new URL("http://138.197.103.225:8000/users/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            //conn.setReadTimeout(10000);
+            //conn.setConnectTimeout(15000);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("username", "goblinslayer");
+            jsonObject.put("password", "wherearethegoblins");
+            jsonObject.put("age", 28);
+            jsonObject.put("gender", "M");
+            jsonObject.put("country", "USA");
+
+            try (DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream())) {
+                String j = jsonObject.toString();
+                System.out.println(j);
+                dataOutputStream.writeBytes(j);
+                dataOutputStream.flush();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+            conn.connect();
+
+            responsecode = conn.getResponseCode();
+
+            if(responsecode == HttpURLConnection.HTTP_OK){
+                //login user and call nav activity and set up main hub.
+                System.out.println(responsecode);
+
+            }else{
+                System.out.println(responsecode);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return responsecode;
+    }
+
+    class httpHandler extends AsyncTask<Void, Void, Boolean> {
+        Context context;
+        public int responsecode;
+        httpHandler(Context c) {
+            context = c;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            responsecode = ByPost();
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            super.onPostExecute(success);
+        }
+
+        @Override
+        protected void onCancelled() {
+
+        }
     }
 }

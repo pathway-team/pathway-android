@@ -1,0 +1,87 @@
+[
+    {
+        "outputFile": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v22/values-v22.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 74,
+                    "endOffset": 125
+                },
+                "from": {
+                    "file": "/home/eewest/.android/build-cache/1aa3a714c96b6555a1eba7452296460967f73fcd/output/res/values-v22/values-v22.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 74,
+                        "endOffset": 125
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 130,
+                    "endColumn": 86,
+                    "endOffset": 212
+                },
+                "from": {
+                    "file": "/home/eewest/.android/build-cache/1aa3a714c96b6555a1eba7452296460967f73fcd/output/res/values-v22/values-v22.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 130,
+                        "endColumn": 86,
+                        "endOffset": 212
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 217,
+                    "endLine": 8,
+                    "endColumn": 12,
+                    "endOffset": 548
+                },
+                "from": {
+                    "file": "/home/eewest/.android/build-cache/1aa3a714c96b6555a1eba7452296460967f73fcd/output/res/values-v22/values-v22.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 217,
+                        "endLine": 8,
+                        "endColumn": 12,
+                        "endOffset": 548
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 553,
+                    "endLine": 13,
+                    "endColumn": 12,
+                    "endOffset": 896
+                },
+                "from": {
+                    "file": "/home/eewest/.android/build-cache/1aa3a714c96b6555a1eba7452296460967f73fcd/output/res/values-v22/values-v22.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 553,
+                        "endLine": 13,
+                        "endColumn": 12,
+                        "endOffset": 896
+                    }
+                }
+            }
+        ]
+    }
+]

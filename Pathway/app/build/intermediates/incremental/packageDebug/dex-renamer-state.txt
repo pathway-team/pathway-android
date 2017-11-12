@@ -1,0 +1,7 @@
+#Fri Nov 10 17:30:34 EST 2017
+base.0=/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_0202808a773fde2a360181d96eb46c349819394b
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_5feae8fd30d9103b6c4f9804c6f0bf87c78fda3c/classes.dex
+base.1=/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_5feae8fd30d9103b6c4f9804c6f0bf87c78fda3c
+file.0=/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_0202808a773fde2a360181d96eb46c349819394b/classes.dex

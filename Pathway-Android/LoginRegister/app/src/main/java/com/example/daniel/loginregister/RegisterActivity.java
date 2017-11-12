@@ -37,18 +37,25 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class RegisterActivity extends AppCompatActivity {
     Context c = this;
+    EditText etUsername;
+    EditText etAge;
+    EditText etEmail;
+    EditText etWeight;
+    EditText etSex;
+    EditText etPassword;
+    Button bRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
-        final EditText etAge = (EditText) findViewById(R.id.etAge);
-        final EditText etEmail = (EditText) findViewById(R.id.etEmail1);
-        final EditText etWeight = (EditText) findViewById(R.id.etWeight);
-        final EditText etSex = (EditText) findViewById(R.id.etSex);
-        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
-        final Button bRegister = (Button) findViewById(R.id.bRegister);
+        etUsername = (EditText) findViewById(R.id.etUsername);
+        etAge = (EditText) findViewById(R.id.etAge);
+        etEmail = (EditText) findViewById(R.id.etEmail1);
+        etWeight = (EditText) findViewById(R.id.etWeight);
+        etSex = (EditText) findViewById(R.id.etSex);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        bRegister = (Button) findViewById(R.id.bRegister);
 
         bRegister.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,8 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
             conn.setDoOutput(true);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("username", "goblinslayer");
-            jsonObject.put("password", "wherearethegoblins");
+            jsonObject.put("username", etUsername.getText().toString());
+            jsonObject.put("password", "thejoker12");
             jsonObject.put("age", 28);
             jsonObject.put("gender", "M");
             jsonObject.put("country", "USA");

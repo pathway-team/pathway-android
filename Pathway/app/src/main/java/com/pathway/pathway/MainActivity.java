@@ -1,6 +1,7 @@
 package com.pathway.pathway;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity
     private List<Route> nearbyRoutes;
     private Button btnStart;
     private Chronometer timerRoute;
+
+    // take us to the login activity
+    TextView activityLink;
     //private FetchData dataConnect = new FetchData();
 
 
@@ -240,6 +245,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_login) {
+            Intent myIntent = new Intent(this, LoginActivity.class);
+            startActivity(myIntent);
+            //activityLink = (TextView) findViewById(R.id.tvRegisterHere);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

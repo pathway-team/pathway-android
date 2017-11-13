@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -124,5 +125,42 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public int ByPost(){
+        int responsecode = -1;
+        try{
+            URL url = new URL("http://138.197.103.225:8000/users/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("username", etUsername.getText().toString());
+            jsonObject.put("password", etPassword.getText().toString());
+
+            try(DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream())){
+                String j = jsonObject.toString();
+                dataOutputStream.writeBytes(j);
+                dataOutputStream.flush();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+
+            conn.connect();
+
+            responsecode = conn.getResponseCode();
+
+            if(responsecode == HttpURLConnection.HTTP_OK){
+                //populate user nav drawer and start it up
+            }
+        } catch(Exception e){
+
+        }
+        return responsecode;
+    }
+
 }
 

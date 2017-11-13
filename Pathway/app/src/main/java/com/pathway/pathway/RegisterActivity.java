@@ -85,11 +85,11 @@ public class RegisterActivity extends AppCompatActivity {
             conn.setDoOutput(true);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("username", "yeatanothertestuserohmygod");
-            jsonObject.put("password", "thejoker12");
-            jsonObject.put("age", 28);
-            jsonObject.put("gender", "M");
-            jsonObject.put("country", "USA");
+            jsonObject.put("username", etUsername.getText().toString());
+            jsonObject.put("password", etPassword.getText().toString());
+            jsonObject.put("age", etAge.getText());
+            jsonObject.put("gender", etSex.getText().toString());
+            jsonObject.put("country", etWeight.getText().toString());
 
             try (DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream())) {
                 String j = jsonObject.toString();

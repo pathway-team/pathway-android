@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
     private RunStates runState = RunStates.OFF;
     private String coordMsg;
 
-
+    DeviceDBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        dbHandler = new DeviceDBHandler(getApplicationContext());
+
+        dbHandler.createTables();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

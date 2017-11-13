@@ -9,29 +9,27 @@ import android.os.AsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import android.util.Base64;
+import android.util.Log;
 
 public class SendData extends AsyncTask<String, Void, Integer> {
 
     public interface SendDataCallbackInterface {
         // method called when server's data get fetched
-        public void fetchDataCallback(String result);
+        public void sendDataCallback(Integer result);
     }
 
-    private static final String OPEN_DATABASE = "http://138.197.103.225:8000/%s/";
+    private static final String OPEN_DATABASE = "http://138.197.103.225:8000/routes/";
 
 
     HttpURLConnection urlConnect;
     String url;
     SendDataCallbackInterface fdCBInterface;
+    //JSONObject inRoute;
     Route inRoute;
-
-    private String result;
 
     SendData(String inURL, Route input, SendDataCallbackInterface cbInterface) {
         this.url = inURL;
@@ -43,40 +41,50 @@ public class SendData extends AsyncTask<String, Void, Integer> {
 
     @Override
     protected Integer doInBackground(String... params) {
-        StringBuilder sb = new StringBuilder();
+        int responseCode = -1;
         try {
-            URL url = new URL(String.format(OPEN_DATABASE, "routes"));
-            //URL url = new URL(this.url);
+            String userPass = "jebragg:avalon11";
+            String encoding = Base64.encodeToString(userPass.getBytes(), Base64.DEFAULT);
+
+
+            //URL url = new URL(String.format(OPEN_DATABASE, "routes"));
+            URL url = new URL(this.url);
             urlConnect = (HttpURLConnection)url.openConnection();
             urlConnect.setRequestProperty("Content-Type", "application/json");
             urlConnect.setRequestProperty("Accept", "application/json");
+            urlConnect.setRequestProperty("Authorization", "Basic " + encoding);
             urlConnect.setRequestMethod("POST");
             urlConnect.setDoInput(true);
             urlConnect.setDoOutput(true);
 
+            JSONObject testJson = new JSONObject();
 
-
-
-
-
-            urlConnect = (HttpURLConnection) url.openConnection();
-            InputStream in = new BufferedInputStream(urlConnect.getInputStream());
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-            //BufferedReader reader = new BufferedReader(
-            //        new InputStreamReader(urlConnect.getInputStream()));
-
-            String tmp;
-            while ((tmp = reader.readLine()) != null) {
-                sb.append(tmp);
+            try {
+                testJson.put("min_lat", inRoute.getBounds()[1]);
+                testJson.put("min_long", inRoute.getBounds()[0]);
+                testJson.put("max_lat", inRoute.getBounds()[3]);
+                testJson.put("max_long", inRoute.getBounds()[2]);
+                //testJson.put("user", "jebragg");
+                testJson.put("routeid", inRoute.getRID());
+                testJson.put("parentid", inRoute.getPID());
+                testJson.put("data", inRoute.toString());
+                //testJson.put("atype", inRoute.getActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            //result = sb.toString();
 
-            JSONArray feature = new JSONArray(sb.toString());
-            JSONObject route = new JSONObject(feature.getJSONObject(1).getString("data"));
-            result = String.valueOf(new JSONObject(feature.getJSONObject(1).getString("data")));
-            //result = String.valueOf(route.getString("data"));
+            try(DataOutputStream dataOutputStream = new DataOutputStream(urlConnect.getOutputStream())) {
+                String j = testJson.toString();
+                dataOutputStream.writeBytes(j);
+                dataOutputStream.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            urlConnect.connect();
+            String result = urlConnect.getResponseMessage();
+            responseCode = urlConnect.getResponseCode();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,13 +92,13 @@ public class SendData extends AsyncTask<String, Void, Integer> {
         finally {
             urlConnect.disconnect();
         }
-        return result;
+        return responseCode;
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
-        this.fdCBInterface.fetchDataCallback(result);
+        this.fdCBInterface.sendDataCallback(result);
       }
 
 }

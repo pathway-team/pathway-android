@@ -188,4 +188,51 @@ public class Route extends JSONObject {
         return temp;
     }
 
+    public Double[] getBounds() {
+        return this.bbox;
+    }
+
+    public ArrayList<Double[]> getCoordinates() {
+        return this.coords;
+    }
+
+    public List<Integer> getTimestamps() {
+        return this.timestamps;
+    }
+
+    public Double getDistance() {
+        return this.distance;
+    }
+
+    public Integer getRID() {
+        return this.rid;
+    }
+
+    public Integer getPID() {
+        return this.pid;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getActivity() {
+        return this.activity;
+    }
+
+    public String getDifficulty() {
+        return this.diffRtng;
+    }
+
+    public boolean compareBasic(Route input) {
+        return false;
+    }
+
+    public boolean compareHausdorff(Route input) {
+        return false;
+    }
+
+    public boolean compareFrechet(Route input) {
+        return false;
+    }
 }

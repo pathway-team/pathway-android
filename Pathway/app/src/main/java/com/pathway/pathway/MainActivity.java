@@ -63,12 +63,14 @@ public class MainActivity extends AppCompatActivity
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
         OnMapReadyCallback,
-        FetchData.FetchDataCallbackInterface{
+        FetchData.FetchDataCallbackInterface,
+        SendData.SendDataCallbackInterface{
 
 
     private GoogleApiClient mapApiClient;
     private GoogleMap mMap;
     private LocationRequest locRequest;
+    private LatLng prevLoc;
     private LatLng lastLoc;
     private Polyline userRoute;
     private Route currentRoute;
@@ -82,6 +84,11 @@ public class MainActivity extends AppCompatActivity
     public void fetchDataCallback(String result) {
         this.ntwkData = result;
 
+        try {
+            JSONArray routesList = new JSONArray(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         Route testRoute = null;
         try {
             testRoute = new Route(result);
@@ -99,6 +106,11 @@ public class MainActivity extends AppCompatActivity
         mMap.animateCamera(CameraUpdateFactory.newLatLng(testRoute.getDrawPoints().get(0)));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(testRoute.getDrawPoints().get(0), 16));
         oldRoutes.setPoints(testRoute.getDrawPoints());
+    }
+
+    @Override
+    public void sendDataCallback(Integer result) {
+        int test = result;
     }
 
 
@@ -121,8 +133,38 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String jsonString =     "{" +
+                        "\"type\": \"LineString\"," +
+                        "\"bbox\": [-79.811818, 36.065488, -79.811308, 36.067061]," +
+                        "\"coordinates\": [" +
+                        "	[-79.811818, 36.065488, 250.8]," +
+                        "	[-79.811646, 36.065553, 251.1]," +
+                        "	[-79.811601, 36.065565, 250.8]" +
+                        " ]," +
+                        "\"timestamps\": [0, 3, 5]," +
+                        "\"distance\": 5280.0," +
+                        "\"rid\": 2," +
+                        "\"pid\": 1," +
+                        "\"name\": \"Bus Stop\"," +
+                        "\"diffRtng\": \"A-1\"," +
+                        "\"activity\": \"walk\"" +
+                        "}";
+
+                Route source = null;
+
+                try {
+                    source = new Route(jsonString);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //JSONObject testJson = new JSONObject();
+
+
+                String testURL = "http://138.197.103.225:8000/routes/";
+                String testURL2 = "http://138.197.103.225:8000/routes/";
                 //double elevation = getElev(lastLoc);
-                new FetchData("temp url", MainActivity.this).execute();
+                //new FetchData("temp url", MainActivity.this).execute();
+                new SendData(testURL, source, MainActivity.this).execute();
                 Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -159,11 +201,6 @@ public class MainActivity extends AppCompatActivity
                     .addApi(LocationServices.API)
                     .build();
         }
-
-/*        locRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(3000)
-                .setFastestInterval(1000);*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -248,12 +285,14 @@ public class MainActivity extends AppCompatActivity
         }
         googleMap.setOnMyLocationButtonClickListener(this);
         googleMap.setMyLocationEnabled(true);
+
     }
 
 
     //===============Map Functions===================
     @Override
     public void onLocationChanged(Location location) {
+
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
         double altitude = location.getAltitude();
         //double elevation = this.getElev(location);

@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import android.os.AsyncTask;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,10 +30,16 @@ import org.json.JSONObject;
         HttpURLConnection urlConnect;
         String url;
         FetchDataCallbackInterface fdCBInterface;
+        LatLng bbox;
 
         private String result;
 
         FetchData(String inURL, FetchDataCallbackInterface cbInterface) {
+            this.url = inURL;
+            this.fdCBInterface = cbInterface;
+        }
+
+        FetchData(String inURL, LatLng bounds, FetchDataCallbackInterface cbInterface) {
             this.url = inURL;
             this.fdCBInterface = cbInterface;
         }
@@ -61,9 +69,10 @@ import org.json.JSONObject;
 
                 //result = sb.toString();
 
-                JSONArray feature = new JSONArray(sb.toString());
-                JSONObject route = new JSONObject(feature.getJSONObject(1).getString("data"));
-                result = String.valueOf(new JSONObject(feature.getJSONObject(1).getString("data")));
+                //JSONArray feature = new JSONArray(sb.toString());
+                result = sb.toString();
+                //JSONObject route = new JSONObject(feature.getJSONObject(1).getString("data"));
+                //result = String.valueOf(new JSONObject(feature.getJSONObject(1).getString("data")));
                 //result = String.valueOf(route.getString("data"));
 
             } catch (Exception e) {

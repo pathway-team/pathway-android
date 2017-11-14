@@ -5,6 +5,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +31,9 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_JSON = "json_str";
 
+    //report information
+    private static final String KEY_DATE = "timestamp";
+
     //user information
     private static final String KEY_TOT_DIST = "Total_Distance";
     private static final String KEY_TOT_TIME = "Total_Runtime";
@@ -38,10 +46,6 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    /**
-     *
-     * @param db
-     */
     @Override
     public void onCreate(SQLiteDatabase db1) {
 
@@ -53,7 +57,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
      */
     public void createTables(){
         //creates databases if they do not exist
-        //
+
         SQLiteDatabase db = this.getWritableDatabase();
         //creates routes table
         String CREATE_ROUTES_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s " +
@@ -64,6 +68,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         //creates reports table
         String CREATE_report_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(%s INTEGER PRIMARY " + "KEY AUTOINCREMENT, " +
+                " %s TEXT, " +
                 "%s TEXT);", TABLE_REPORTS, KEY_ID, KEY_JSON);
         db.execSQL(CREATE_report_TABLE);
 
@@ -109,16 +114,72 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     }
 
     public String getRoute(int id) {
-    //    SQLiteDatabase db = this.getReadableDatabase();
-    //    create query request and return string
-    //    Cursor cursor = db.query(TABLE_ROUTES, )
-        return null;
+        String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_JSON, TABLE_ROUTES, KEY_ID, id);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        return (cursor.moveToFirst() == true) ? cursor.getString(0) : null;
     }
 
+    /**
+     * Returns all Routes in the Database as a List of Strings.
+     * If there are none in the Database it will return an empty List
+     * @return
+     */
     public List<String> getUserRoutes() {
-        //get and return all routes stored on device.
-        //user specific, so no need for a parameter
-        return null;
+        List<String> routeList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = String.format("SELECT %s FROM %s", KEY_JSON, TABLE_ROUTES);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                routeList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return route list
+        return routeList;
+    }
+
+    /**
+     * Gets all of the Users reports from the User Table and returns them as a list of Strings
+     * If there are non in the database it will return an empty list
+     * @return
+     */
+    public List<String> getUserReports(){
+        List<String> reportList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = String.format("SELECT %s FROM %s", "*", TABLE_USER);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                JSONObject jsonObject = new JSONObject();
+                for(int idx = 0; idx < cursor.getColumnCount(); idx++) {
+                    try {
+                        jsonObject.put(cursor.getColumnName(idx), cursor.getDouble(idx));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                reportList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return route list
+        return reportList;
+    }
+
+
+    public void addUserReport(UserReport r){
+
     }
 
 }

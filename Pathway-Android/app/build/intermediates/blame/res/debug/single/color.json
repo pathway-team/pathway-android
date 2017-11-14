@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_tint_seek_thumb.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_search_url_text.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_search_url_text.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
+        "source": "/home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/res/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_tint_switch_thumb.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
+        "source": "/home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/com_facebook_send_button_text_color.xml",
+        "source": "/home/eewest/.android/build-cache/305c71ccfca453c8d33704c7a0a94015070acc46/output/res/color/com_facebook_send_button_text_color.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_tint.xml",
+        "source": "/home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/res/color/common_google_signin_btn_tint.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_dark.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_hint_foreground_material_dark.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/com_facebook_button_text_color.xml",
+        "source": "/home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/res/color/com_facebook_button_text_color.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/design_tint_password_toggle.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/color/design_tint_password_toggle.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_light.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_secondary_text_material_light.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_tint_default.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_tint_default.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_tint_btn_checkable.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_tint_switch_track.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/design_error.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/color/design_error.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_tint_spinner.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_btn_colored_borderless_text_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_btn_colored_text_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/color/abc_tint_edittext.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/color/abc_tint_edittext.xml"
+    }
+]

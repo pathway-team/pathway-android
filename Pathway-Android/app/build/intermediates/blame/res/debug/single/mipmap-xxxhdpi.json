@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/achievement_unlocked.png",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/mipmap-xxxhdpi/achievement_unlocked.png"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/achievement_locked.png",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/mipmap-xxxhdpi/achievement_locked.png"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher_round.png",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    }
+]

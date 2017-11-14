@@ -1,0 +1,326 @@
+[
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_layout_tab_text.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_layout_tab_text.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/com_facebook_device_auth_dialog_fragment.xml",
+        "source": "/home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/res/layout/com_facebook_device_auth_dialog_fragment.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_navigation_menu.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_navigation_menu.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_register.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_register.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/card_layout.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/card_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/messenger_button_send_blue_small.xml",
+        "source": "/home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/res/layout/messenger_button_send_blue_small.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/messenger_button_send_blue_round.xml",
+        "source": "/home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/res/layout/messenger_button_send_blue_round.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_maps.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_maps.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/messenger_button_send_blue_large.xml",
+        "source": "/home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/res/layout/messenger_button_send_blue_large.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/com_facebook_smart_device_dialog_fragment.xml",
+        "source": "/home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/res/layout/com_facebook_smart_device_dialog_fragment.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_editpage.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_editpage.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_bottom_sheet_dialog.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/account_layout.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/account_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_navigation_item.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_navigation_item.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/notification_template_lines_media.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_layout_snackbar_include.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/com_facebook_tooltip_bubble.xml",
+        "source": "/home/eewest/.android/build-cache/324f533155f1586c7a64a2240811c15755f30d6e/output/res/layout/com_facebook_tooltip_bubble.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_listview.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_listview.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_title_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_accountlogin.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_accountlogin.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/com_facebook_login_fragment.xml",
+        "source": "/home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/res/layout/com_facebook_login_fragment.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/routepopwin.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/routepopwin.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_text_input_password_icon.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_pathway_nav_drawer.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_pathway_nav_drawer.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_login.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/com_facebook_activity_layout.xml",
+        "source": "/home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/res/layout/com_facebook_activity_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/stats_layout.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/stats_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_friends_list.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_friends_list.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/routes_layout.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/routes_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_routespopup.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_routespopup.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/content_friends_list.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/content_friends_list.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/messenger_button_send_white_round.xml",
+        "source": "/home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/res/layout/messenger_button_send_white_round.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_menu_item_action_area.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_bottom_navigation_item.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_bottom_navigation_item.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_navigation_item_separator.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/messenger_button_send_white_large.xml",
+        "source": "/home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/res/layout/messenger_button_send_white_large.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/content_pathway_nav_drawer.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/content_pathway_nav_drawer.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_layout_tab_icon.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_layout_snackbar.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_layout_snackbar.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_navigation_item_subheader.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/notification_template_media_custom.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/app_bar_pathway_nav_drawer.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/app_bar_pathway_nav_drawer.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/messenger_button_send_white_small.xml",
+        "source": "/home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/res/layout/messenger_button_send_white_small.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/design_navigation_item_header.xml",
+        "source": "/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/res/layout/design_navigation_item_header.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/nav_header_pathway_nav_drawer.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/nav_header_pathway_nav_drawer.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/activity_user_page.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/layout/activity_user_page.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout/abc_action_mode_close_item_material.xml"
+    }
+]

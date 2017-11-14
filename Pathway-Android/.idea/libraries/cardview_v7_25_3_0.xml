@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="cardview-v7-25.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/0f8143d87ce25151e23d1a5123c2d2ee912c6d11/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/0f8143d87ce25151e23d1a5123c2d2ee912c6d11/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/cardview-v7/25.3.0/cardview-v7-25.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

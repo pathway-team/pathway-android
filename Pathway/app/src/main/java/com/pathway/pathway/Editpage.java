@@ -36,16 +36,18 @@ public class Editpage extends AppCompatActivity {
     EditText etAge1;
     EditText etSex1;
     EditText etWeight1;
+    EditText etPhone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editpage);
 
-        EditText etEmail1 = (EditText) findViewById(R.id.etEmail1);
-        EditText etUsername1 = (EditText) findViewById(R.id.etUsername1);
-        EditText etAge1 = (EditText) findViewById(R.id.etAge1);
-        EditText etSex1 = (EditText) findViewById(R.id.etSex1);
-        EditText etWeight1 = (EditText) findViewById(R.id.etWeight1);
+        etEmail1 = (EditText) findViewById(R.id.etEmail1);
+        etUsername1 = (EditText) findViewById(R.id.etUsername1);
+        etAge1 = (EditText) findViewById(R.id.etAge1);
+        etSex1 = (EditText) findViewById(R.id.etSex1);
+        etWeight1 = (EditText) findViewById(R.id.etWeight1);
+        etPhone = (EditText) findViewById(R.id.etPhone);
         Button bSave = (Button) findViewById(R.id.bSave);
 
         final Intent intent = getIntent();
@@ -54,12 +56,14 @@ public class Editpage extends AppCompatActivity {
         final String username = intent.getStringExtra("username");
         final String age = intent.getStringExtra("age");
         final String weight = intent.getStringExtra("weight");
+        final String phone = intent.getStringExtra("phone");
 
         etEmail1.setText(email);
         etUsername1.setText(username);
         etAge1.setText(age);
         etSex1.setText(sex);
         etWeight1.setText(weight);
+        etPhone.setText(phone);
 
         bSave.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -70,6 +74,7 @@ public class Editpage extends AppCompatActivity {
                 editIntent.putExtra("age", age);
                 editIntent.putExtra("sex", sex);
                 editIntent.putExtra("weigth", weight);
+                editIntent.putExtra("phone", phone);
 
                 boolean result = false;
                 httpHandler handler = new httpHandler(getApplicationContext());
@@ -99,6 +104,8 @@ public class Editpage extends AppCompatActivity {
             jsonObject.put("age", etAge1.getText());
             jsonObject.put("gender", etSex1.getText().toString());
             jsonObject.put("weight", etWeight1.getText().toString());
+            jsonObject.put("email", etEmail1.getText().toString());
+            jsonObject.put("phone", etPhone.getText().toString());
 
             try(OutputStreamWriter outputStreamWriter = new OutputStreamWriter(conn.getOutputStream())){
                 String j = jsonObject.toString();

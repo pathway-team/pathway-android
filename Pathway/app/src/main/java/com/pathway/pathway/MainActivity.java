@@ -249,6 +249,13 @@ public class MainActivity extends AppCompatActivity
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
             //activityLink = (TextView) findViewById(R.id.tvRegisterHere);
+        } else if (id == R.id.nav_routes){
+            Intent myIntent = new Intent(this, RoutePage.class);
+            startActivity(myIntent);
+
+        } else if (id == R.id.nav_user && isLogin.islogin == true){
+            Intent myIntent = new Intent(this, UserPage.class);
+            startActivity(myIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

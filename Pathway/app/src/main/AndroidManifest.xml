@@ -68,5 +68,9 @@
         <activity android:name=".UserPage" />
         <activity android:name=".Editpage" />
         <activity android:name=".FacebookL"/>
+        <activity android:name=".RoutePage"/>
+        <activity android:name=".pop"
+            android:theme="@style/AppTheme.pop"
+            ></activity>
     </application>
 </manifest>

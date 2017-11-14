@@ -46,6 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etWeight;
     EditText etSex;
     EditText etPassword;
+    EditText etPhone;
+    EditText etCountry;
     Button bRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
         etWeight = (EditText) findViewById(R.id.etWeight);
         etSex = (EditText) findViewById(R.id.etSex);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        etPhone = (EditText) findViewById(R.id.etPhone);
+        etCountry = (EditText) findViewById(R.id.etCountry);
         bRegister = (Button) findViewById(R.id.bRegister);
 
         bRegister.setOnClickListener(new View.OnClickListener(){
@@ -89,7 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
             jsonObject.put("password", etPassword.getText().toString());
             jsonObject.put("age", etAge.getText());
             jsonObject.put("gender", etSex.getText().toString());
-            jsonObject.put("country", etWeight.getText().toString());
+            jsonObject.put("weight", etWeight.getText().toString());
+            jsonObject.put("phone", etPhone.getText().toString());
+            jsonObject.put("country", etCountry.getText().toString());
 
             try (DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream())) {
                 String j = jsonObject.toString();

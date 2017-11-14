@@ -51,7 +51,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/etUsername1"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@+id/etUsername1"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/etUsername1" />
@@ -133,9 +133,34 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Save"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/etSex1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/etSex1"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/etSex1"
+        android:layout_marginTop="17dp"
+        app:layout_constraintTop_toBottomOf="@+id/etSex1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/etSex1" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone#"
+        tools:layout_constraintTop_creator="1"
         app:layout_constraintTop_toBottomOf="@+id/etSex1"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/etSex1" />

@@ -64,23 +64,56 @@ public class MainActivity extends AppCompatActivity
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
-        OnMapReadyCallback {
+        OnMapReadyCallback,
+        FetchData.FetchDataCallbackInterface,
+        SendData.SendDataCallbackInterface{
 
 
     private GoogleApiClient mapApiClient;
     private GoogleMap mMap;
     private LocationRequest locRequest;
+    private LatLng prevLoc;
     private LatLng lastLoc;
     private Polyline userRoute;
     private Route currentRoute;
     private List<Route> nearbyRoutes;
+    private String ntwkData;
     private Button btnStart;
     private Chronometer timerRoute;
 
-    // take us to the login activity
-    TextView activityLink;
-    //private FetchData dataConnect = new FetchData();
 
+    @Override
+    public void fetchDataCallback(String result) {
+        this.ntwkData = result;
+
+        try {
+            JSONArray routesList = new JSONArray(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Route testRoute = null;
+        try {
+            testRoute = new Route(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //create Routes and show on map here
+        PolylineOptions routeOptions = new PolylineOptions()
+                .color(Color.BLUE)
+                .width(16)
+                .startCap(new RoundCap())
+                .endCap(new RoundCap())
+                .clickable(true);
+        Polyline oldRoutes = mMap.addPolyline(routeOptions);
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(testRoute.getDrawPoints().get(0)));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(testRoute.getDrawPoints().get(0), 16));
+        oldRoutes.setPoints(testRoute.getDrawPoints());
+    }
+
+    @Override
+    public void sendDataCallback(Integer result) {
+        int test = result;
+    }
 
     private enum RunStates {OFF, RUN, PAUSE}
 
@@ -102,52 +135,38 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 String jsonString =     "{" +
-                                "\"type\": \"LineString\"," +
-                                "\"bbox\": [-79.811818, 36.065488, -79.811308, 36.067061]," +
-                                "\"coordinates\": [" +
-                                "	[-79.811818, 36.065488, 250.8]," +
-                                "	[-79.811646, 36.065553, 251.1]," +
-                                "	[-79.811601, 36.065565, 250.8]" +
-                                " ]," +
-                                "\"timestamps\": [0, 3, 5]," +
-                                "\"distance\": 5280.0," +
-                                "\"rid\": 2," +
-                                "\"pid\": 1," +
-                                "\"name\": \"Bus Stop\"," +
-                                "\"diffRtng\": \"A-1\"," +
-                                "\"activity\": \"walk\"" +
-                                "}";
+                        "\"type\": \"LineString\"," +
+                        "\"bbox\": [-79.811818, 36.065488, -79.811308, 36.067061]," +
+                        "\"coordinates\": [" +
+                        "	[-79.811818, 36.065488, 250.8]," +
+                        "	[-79.811646, 36.065553, 251.1]," +
+                        "	[-79.811601, 36.065565, 250.8]" +
+                        " ]," +
+                        "\"timestamps\": [0, 3, 5]," +
+                        "\"distance\": 5280.0," +
+                        "\"rid\": 2," +
+                        "\"pid\": 1," +
+                        "\"name\": \"Bus Stop\"," +
+                        "\"diffRtng\": \"A-1\"," +
+                        "\"activity\": \"walk\"" +
+                        "}";
 
-                Route testRoute = null;
-                String test = "";
+                Route source = null;
+
                 try {
-                    test = new FetchData(test).execute().get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                try {
-                   testRoute = new Route(test);
+                    source = new Route(jsonString);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                PolylineOptions routeOptions = new PolylineOptions()
-                        .color(Color.BLUE)
-                        .width(16)
-                        .startCap(new RoundCap())
-                        .endCap(new RoundCap())
-                        .clickable(true);
-                Polyline oldRoutes = mMap.addPolyline(routeOptions);
-                //oldRoutes.
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(testRoute.getDrawPoints().get(0)));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(testRoute.getDrawPoints().get(0), 16));
-                oldRoutes.setPoints(testRoute.getDrawPoints());
-                if (lastLoc == null) {
-                    lastLoc = testRoute.getDrawPoints().get(testRoute.getDrawPoints().size() - 1);
-                }
-                double elevation = getElev(lastLoc);
-                Snackbar.make(view, testRoute.toString(), Snackbar.LENGTH_LONG)
+                //JSONObject testJson = new JSONObject();
+
+
+                String testURL = "http://138.197.103.225:8000/routes/";
+                String testURL2 = "http://138.197.103.225:8000/routes/";
+                //double elevation = getElev(lastLoc);
+                //new FetchData("temp url", MainActivity.this).execute();
+                new SendData(testURL, source, MainActivity.this).execute();
+                Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -183,11 +202,6 @@ public class MainActivity extends AppCompatActivity
                     .addApi(LocationServices.API)
                     .build();
         }
-
-/*        locRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(3000)
-                .setFastestInterval(1000);*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -276,18 +290,23 @@ public class MainActivity extends AppCompatActivity
         }
         googleMap.setOnMyLocationButtonClickListener(this);
         googleMap.setMyLocationEnabled(true);
+
     }
 
 
     //===============Map Functions===================
     @Override
     public void onLocationChanged(Location location) {
+
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
-        //double altitude = location.getAltitude();
+        double altitude = location.getAltitude();
         //double elevation = this.getElev(location);
         if (userRoute != null) {
             List<LatLng> points = userRoute.getPoints();
             points.add(lastLoc);
+            currentRoute.addCoords(lastLoc, altitude);
+            //currentRoute.addTime(timerRoute.get)
+
             userRoute.setPoints(points);
         }
         coordMsg = String.format("XY: %s.", lastLoc.toString());
@@ -385,7 +404,11 @@ public class MainActivity extends AppCompatActivity
 
     public void onStartPressed(View v) {
         if (runState == RunStates.OFF) {
-
+            try {
+                currentRoute = new Route();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             btnStart.setText("Stop");
             Snackbar.make(v, "Recording...", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();

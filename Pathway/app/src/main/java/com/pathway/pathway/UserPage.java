@@ -54,18 +54,17 @@ public class UserPage extends AppCompatActivity {
         handler.execute();
 
         DeviceDBHandler db = new DeviceDBHandler(getApplicationContext());
-        //db = db.getUser();
         try {
-            //JSONObject object = new JSONObject(String.valueOf(db));
-            //String TtlDist = object.getString("total_distance");
-            //String TtlRnTm = object.getString("total_run_time");
-            //String RoutesClrd = object.getString("routes_cleared");
-            //String RoutesRn = object.getString("routes_run");
+            JSONObject object = new JSONObject(String.valueOf(db.getUserReports()));
+            String TtlDist = object.getString("Total_Distance");
+            String TtlRnTm = object.getString("Total_Runtime");
+            String RoutesClrd = object.getString("Number_Routes");
+            String RoutesRn = object.getString("Number_Runs");
             //String CaloriesBrnd = object.getString("calories_burned");
-            //tvTtlDist.append(TtlDist);
-            //tvTtlRnTm.append(TtlRnTm);
-            //tvRoutesClrd.append(RoutesClrd);
-            //tvRoutesRn.append(RoutesRn);
+            tvTtlDist.append(TtlDist);
+            tvTtlRnTm.append(TtlRnTm);
+            tvRoutesClrd.append(RoutesClrd);
+            tvRoutesRn.append(RoutesRn);
             //tvCaloriesBrnd.append(CaloriesBrnd);
         } catch (Exception e){
             e.printStackTrace();

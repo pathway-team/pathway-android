@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.customtabs.CustomTabsIntent.KEY_ID;
+
 /**
  * Created by Johnny on 11/5/2017.
  * Edited by Eric West on 11/13/2017
@@ -182,7 +184,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
 
     public void addUserReport(UserReport r){
-
+        
     }
 
     public void addBasicReport(BasicReport r){

@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity
             Intent myIntent = new Intent(this, RoutePage.class);
             startActivity(myIntent);
 
-        } else if (id == R.id.nav_user && isLogin.islogin == true){
+        } else if (id == R.id.nav_user){
             Intent myIntent = new Intent(this, UserPage.class);
             startActivity(myIntent);
         }

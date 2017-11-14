@@ -76,8 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             URL url = new URL("http://138.197.103.225:8000/users/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            //conn.setReadTimeout(10000);
-            //conn.setConnectTimeout(15000);
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestMethod("POST");

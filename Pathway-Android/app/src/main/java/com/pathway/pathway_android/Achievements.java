@@ -1,7 +1,10 @@
 package com.pathway.pathway_android;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -11,7 +14,12 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.view.View.OnClickListener;import com.pathway.pathway_android.R;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
+
+import com.pathway.pathway_android.R;
+
+import org.json.JSONArray;
 
 public class Achievements extends AppCompatActivity{
 
@@ -66,6 +74,8 @@ public class Achievements extends AppCompatActivity{
         achieve_photo5 = (ImageView) findViewById(R.id.achieve_photo5);
 
         achieve_button = (Button) findViewById(R.id.achieve_button);
+
+
     }
 
 
@@ -73,48 +83,33 @@ public class Achievements extends AppCompatActivity{
 
 
     public void changePicture(View view) {
-
+    /*
         achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo2.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo3.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo4.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo5.setImageResource(R.mipmap.achievement_unlocked);
+        */
+        String phoneNumber = "9195206085";
+        String message = "This is a test message sent from the Pathway app";
+        //PendingIntent sentPI;
+        String SENT = "SMS_SENT";
 
+        //sentPI = PendingIntent.getBroadcast(this, 0,new Intent(SENT), 0);
+    try {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+        Toast.makeText(getApplicationContext(), "SMS Sent", Toast.LENGTH_SHORT).show();
 
+    } catch (Exception e){
+        Toast.makeText(getApplicationContext(), "SMS Failed", Toast.LENGTH_SHORT).show();
+        e.printStackTrace();
+    }
 
     }
 
 
-    public void animate(ImageView imageView) {
 
-        //imageView <-- The View which displays the images
-        //images[] <-- Holds R references to the images to display
-        //imageIndex <-- index of the first image to show in images[]
-        //forever <-- If equals true then after the last image it starts all over again with the first image resulting in an infinite loop. You have been warned.
-
-        int fadeInDuration = 500; // Configure time values here
-        int timeBetween = 3000;
-        int fadeOutDuration = 1000;
-
-        imageView.setVisibility(View.INVISIBLE);    //Visible or invisible by default - this will apply when the animation ends
-        imageView.setImageResource(R.mipmap.achievement_unlocked);
-
-        Animation fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setInterpolator(new DecelerateInterpolator()); // add this
-        fadeIn.setDuration(fadeInDuration);
-
-        Animation fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setInterpolator(new AccelerateInterpolator()); // and this
-        fadeOut.setStartOffset(fadeInDuration + timeBetween);
-        fadeOut.setDuration(fadeOutDuration);
-
-        AnimationSet animation = new AnimationSet(false); // change to false
-        animation.addAnimation(fadeIn);
-        animation.addAnimation(fadeOut);
-        imageView.setAnimation(animation);
-
-
-    }
 
 
 }

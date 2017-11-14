@@ -64,10 +64,10 @@
         app:layout_constraintRight_toRightOf="@+id/etSex"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/etSex"
-        app:layout_constraintHorizontal_bias="1.0"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="13dp"
-        app:layout_constraintTop_toBottomOf="@+id/etSex" />
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp" />
 
     <EditText
         android:id="@+id/etWeight"
@@ -117,4 +117,34 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Phone #"
+        android:inputType="textPersonName"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/etCountry"
+        app:layout_constraintRight_toRightOf="@+id/etSex"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintLeft_toLeftOf="@+id/etSex" />
+
+    <EditText
+        android:id="@+id/etCountry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Country"
+        android:inputType="textPersonName"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/bRegister"
+        app:layout_constraintRight_toRightOf="@+id/etPhone"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintLeft_toLeftOf="@+id/etPhone" />
 </android.support.constraint.ConstraintLayout>

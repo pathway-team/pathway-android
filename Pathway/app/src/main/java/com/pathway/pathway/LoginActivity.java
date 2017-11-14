@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -71,40 +72,9 @@ public class LoginActivity extends AppCompatActivity {
         bLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String username = etUsername.getText()+"";
-                String password = etPassword.getText()+"";
-                if(username.length() == 0 || password.length() == 0){
-                    Toast.makeText(c, "Please fill in user name and password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                try {
-                    URL url = new URL("https://www.youtube.com");
-                    HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
-                    conn.setReadTimeout(10000);
-                    conn.setConnectTimeout(15000);
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-
-                    Uri.Builder builder = new Uri.Builder()
-                            .appendQueryParameter("username", username)
-                            .appendQueryParameter("password", password);
-                    String query = builder.build().getEncodedQuery();
-                    OutputStream os = conn.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(query);
-                    writer.flush();
-                    writer.close();
-                    os.close();
-                    conn.connect();
-
-                    int responsecode = conn.getResponseCode();
-                    if(responsecode == HttpURLConnection.HTTP_OK){
-                        //call nav activity and set up main hub.
-                    }
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
+                boolean result = false;
+                httpHandler handler = new httpHandler(getApplicationContext());
+                handler.execute();
             }
         });
 
@@ -124,5 +94,69 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public int ByGet(){
+        int responsecode = -1;
+        try{
+            URL url = new URL("http://138.197.103.225:8000/users/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            responsecode = conn.getResponseCode();
+            if(responsecode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = in.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                String sb1 = sb.toString();
+                in.close();
+                isLogin.islogin = true;
+            }
+
+            conn.connect();
+
+        } catch(Exception e){
+
+        }
+        return responsecode;
+    }
+
+    class httpHandler extends AsyncTask<Void, Void, Boolean> {
+        Context context;
+        public int responsecode;
+        httpHandler(Context c) {
+            context = c;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            responsecode = ByGet();
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            super.onPostExecute(success);
+        }
+
+        @Override
+        protected void onCancelled() {
+
+        }
+    }
+
 }
 

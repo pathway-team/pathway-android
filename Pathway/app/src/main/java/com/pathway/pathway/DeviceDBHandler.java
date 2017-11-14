@@ -182,5 +182,8 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
     }
 
+    public void addBasicReport(BasicReport r){
+        
+    }
 }
 

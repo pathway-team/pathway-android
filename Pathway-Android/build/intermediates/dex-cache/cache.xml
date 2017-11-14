@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/eewest/.android/build-cache/c5601f0ea3b32eb22562e38fdbf6cf8e859737bd/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="a3e61044038fb54cddf6b8dc79f41d2b57f42caf">
+        <dex dex="/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4fd712bd80280209a8f7dbfeddb31ee77e4e451a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/eewest/.android/build-cache/8671264e215ee68a35be6e9750fc9a623438fe03/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="fbb206f7a119f66ce171d95aae1225a5b209a8b7">
+        <dex dex="/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2af5421bba0b9c7d4f1a986b710421968c5ef29d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="b61148caacf67748d84f22cd2e9c93d72314b357">
+        <dex dex="/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_003d36d39d03c81f6860262d36fae56c4d591b76/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4f9bab51a05f4bb7803ce18ee0ad9b39c509843c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="9ab787a20aae245b5b3651ae0b9c38459eb37715">
+        <dex dex="/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_502aeda26e400cd2e580c73f6fed29fb24936270/classes.dex" />
+    </item>
+
+</items>

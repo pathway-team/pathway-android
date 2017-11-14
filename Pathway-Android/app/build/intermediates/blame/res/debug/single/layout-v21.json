@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/res/layout-v21/notification_template_custom_big.xml"
+    }
+]

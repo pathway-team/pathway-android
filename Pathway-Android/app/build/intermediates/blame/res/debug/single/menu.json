@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/menu/activity_pathway_nav_drawer_drawer.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/menu/activity_pathway_nav_drawer_drawer.xml"
+    },
+    {
+        "merged": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/build/intermediates/res/merged/debug/menu/pathway_nav_drawer.xml",
+        "source": "/home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/res/menu/pathway_nav_drawer.xml"
+    }
+]

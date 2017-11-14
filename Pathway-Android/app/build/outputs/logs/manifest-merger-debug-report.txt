@@ -1,0 +1,293 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:2:1-95:12
+	package
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:3:5-42
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:5:5-67
+MERGED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:20:5-66
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.SEND_SMS
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:7:5-67
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:7:22-64
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:14:22-76
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:17:5-71
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:17:22-68
+uses-permission#android.permission.READ_PROFILE
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:18:5-71
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:18:22-68
+uses-permission#android.permission.READ_CONTACTS
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:19:5-72
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:19:22-69
+application
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:21:5-93:19
+MERGED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:24:5-19
+MERGED from [com.google.android.gms:play-services-base:11.0.4] /home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-tasks:11.0.4] /home/eewest/.android/build-cache/947a99de1bbe82b39a861b5788c1901a65ffa70c/output/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:11.0.4] /home/eewest/.android/build-cache/ef2889138af5730bd12080df621bd0419574c5d5/output/AndroidManifest.xml:19:5-21:19
+MERGED from [com.android.support:design:25.3.0] /home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:transition:25.3.0] /home/eewest/.android/build-cache/8671264e215ee68a35be6e9750fc9a623438fe03/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/eewest/.android/build-cache/2b9017badf647b8f4c1933dcecfdc4e4dcb65f5f/output/AndroidManifest.xml:9:5-20
+MERGED from [com.facebook.android:facebook-android-sdk:4.28.0] /home/eewest/.android/build-cache/6a0e0093f2e37c5e11cb3c92fde75accbe2632bd/output/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-share:4.28.0] /home/eewest/.android/build-cache/305c71ccfca453c8d33704c7a0a94015070acc46/output/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-places:4.28.0] /home/eewest/.android/build-cache/67a7daf8964b4453600ed94f150e67b856f9ae30/output/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-applinks:4.28.0] /home/eewest/.android/build-cache/10bd961ab5058d54a1c309cfae03363c85c49568/output/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-messenger:4.28.0] /home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-login:4.28.0] /home/eewest/.android/build-cache/324f533155f1586c7a64a2240811c15755f30d6e/output/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-common:4.28.0] /home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/AndroidManifest.xml:28:5-34:19
+MERGED from [com.facebook.android:facebook-core:4.28.0] /home/eewest/.android/build-cache/d2283ab43fbb93e5e26a96279f98636dc8dd3f39/output/AndroidManifest.xml:28:5-43:19
+MERGED from [com.android.support:appcompat-v7:25.3.0] /home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.0] /home/eewest/.android/build-cache/77c9e9cffc306314fc4e18ff38fac16d0d35f899/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.0] /home/eewest/.android/build-cache/3f78217be7434430a88f21fc2b614bd70492c82c/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:cardview-v7:25.3.0] /home/eewest/.android/build-cache/0f8143d87ce25151e23d1a5123c2d2ee912c6d11/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:customtabs:25.3.0] /home/eewest/.android/build-cache/04b69ef2b5e9f92b83925e22a7e7efaa5ca6d9f8/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-v4:25.3.0] /home/eewest/.android/build-cache/3c4941ce0e66fe951ab80c0344789325e4a7b05b/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.0] /home/eewest/.android/build-cache/552d8092e219b3226bb93f3f94d76b81eac1709f/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.0] /home/eewest/.android/build-cache/a268bdab5259ad70c8ee70dc942ae0cd47ed9967/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.0] /home/eewest/.android/build-cache/25c986cac45126518403db0d8e53f1c9a9bb3b1f/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.0] /home/eewest/.android/build-cache/7ea44fe983ae5c3063b659deea3e6e57b413d09c/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.0] /home/eewest/.android/build-cache/6ee6daea765d7dd5bd66e6ae22e28ea4cccb163f/output/AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:24:9-41
+	android:supportsRtl
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:26:9-35
+	android:roundIcon
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:25:9-54
+	android:allowBackup
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:22:9-35
+	android:icon
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:23:9-43
+	android:theme
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:27:9-40
+meta-data#com.google.android.geo.API_KEY
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:37:9-39:55
+	android:value
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:39:13-52
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:38:13-58
+activity#com.pathway.pathway_android.LoginActivity
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:41:9-47:20
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:41:19-48
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:42:13-46:29
+action#android.intent.action.MAIN
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:43:17-69
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:43:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:45:17-77
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:45:27-74
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:49:9-51:55
+	android:value
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:51:13-52
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:50:13-58
+activity#com.facebook.FacebookActivity
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:53:9-56:48
+MERGED from [com.facebook.android:facebook-common:4.28.0] /home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/AndroidManifest.xml:29:9-32:66
+	android:label
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:56:13-45
+	android:configChanges
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:55:13-96
+	android:theme
+		ADDED from [com.facebook.android:facebook-common:4.28.0] /home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/AndroidManifest.xml:32:13-63
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:54:13-57
+activity#com.facebook.CustomTabActivity
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:57:9-68:20
+	android:exported
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:59:13-36
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:58:13-58
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:60:13-67:29
+action#android.intent.action.VIEW
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:61:17-69
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:61:25-66
+category#android.intent.category.DEFAULT
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:63:17-76
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:63:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:64:17-78
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:64:27-75
+data
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:66:17-61
+	android:scheme
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:66:23-58
+activity#com.pathway.pathway_android.PathwayNavDrawer
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:69:9-72:59
+	android:label
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:71:13-70
+	android:theme
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:72:13-56
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:70:13-45
+activity#com.pathway.pathway_android.accountlogin
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:73:9-75:67
+	android:label
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:75:13-64
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:74:13-41
+activity#com.pathway.pathway_android.routespopup
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:76:9-49
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:76:19-46
+activity#com.pathway.pathway_android.routepop
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:77:9-79:56
+	android:theme
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:79:13-53
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:78:13-37
+activity#com.pathway.pathway_android.Achievements
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:80:9-83:52
+	android:screenOrientation
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:83:13-49
+	android:label
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:82:13-49
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:81:13-41
+activity#com.pathway.pathway_android.FBLoginButton
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:84:9-51
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:84:19-48
+activity#com.pathway.pathway_android.RegisterActivity
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:85:9-54
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:85:19-51
+activity#com.pathway.pathway_android.UserPage
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:86:9-46
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:86:19-43
+activity#com.pathway.pathway_android.MapsActivity
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:87:9-89:59
+	android:label
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:89:13-56
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:88:13-41
+activity#com.pathway.pathway_android.Editpage
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:90:9-46
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:90:19-43
+activity#com.pathway.pathway_android.FriendsList
+ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:91:9-92:59
+	android:label
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:92:19-47
+	android:name
+		ADDED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml:91:19-46
+uses-sdk
+INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:23:5-43
+MERGED from [com.google.android.gms:play-services-base:11.0.4] /home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-tasks:11.0.4] /home/eewest/.android/build-cache/947a99de1bbe82b39a861b5788c1901a65ffa70c/output/AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-basement:11.0.4] /home/eewest/.android/build-cache/ef2889138af5730bd12080df621bd0419574c5d5/output/AndroidManifest.xml:17:5-43
+MERGED from [com.android.support:design:25.3.0] /home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:transition:25.3.0] /home/eewest/.android/build-cache/8671264e215ee68a35be6e9750fc9a623438fe03/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/eewest/.android/build-cache/2b9017badf647b8f4c1933dcecfdc4e4dcb65f5f/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:recyclerview-v7:25.3.0] /home/eewest/.android/build-cache/c5601f0ea3b32eb22562e38fdbf6cf8e859737bd/output/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.android:facebook-android-sdk:4.28.0] /home/eewest/.android/build-cache/6a0e0093f2e37c5e11cb3c92fde75accbe2632bd/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-share:4.28.0] /home/eewest/.android/build-cache/305c71ccfca453c8d33704c7a0a94015070acc46/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-places:4.28.0] /home/eewest/.android/build-cache/67a7daf8964b4453600ed94f150e67b856f9ae30/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-applinks:4.28.0] /home/eewest/.android/build-cache/10bd961ab5058d54a1c309cfae03363c85c49568/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-messenger:4.28.0] /home/eewest/.android/build-cache/46970428118fc08cdfe140281ed9e54001c4c425/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-login:4.28.0] /home/eewest/.android/build-cache/324f533155f1586c7a64a2240811c15755f30d6e/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.28.0] /home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:4.28.0] /home/eewest/.android/build-cache/d2283ab43fbb93e5e26a96279f98636dc8dd3f39/output/AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:appcompat-v7:25.3.0] /home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.0] /home/eewest/.android/build-cache/77c9e9cffc306314fc4e18ff38fac16d0d35f899/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.0] /home/eewest/.android/build-cache/3f78217be7434430a88f21fc2b614bd70492c82c/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:25.3.0] /home/eewest/.android/build-cache/0f8143d87ce25151e23d1a5123c2d2ee912c6d11/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:customtabs:25.3.0] /home/eewest/.android/build-cache/04b69ef2b5e9f92b83925e22a7e7efaa5ca6d9f8/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:25.3.0] /home/eewest/.android/build-cache/3c4941ce0e66fe951ab80c0344789325e4a7b05b/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.0] /home/eewest/.android/build-cache/552d8092e219b3226bb93f3f94d76b81eac1709f/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.0] /home/eewest/.android/build-cache/a268bdab5259ad70c8ee70dc942ae0cd47ed9967/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.0] /home/eewest/.android/build-cache/25c986cac45126518403db0d8e53f1c9a9bb3b1f/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.0] /home/eewest/.android/build-cache/7ea44fe983ae5c3063b659deea3e6e57b413d09c/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.3.0] /home/eewest/.android/build-cache/6ee6daea765d7dd5bd66e6ae22e28ea4cccb163f/output/AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.3.0] /home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eewest/Documents/git_repos/Pathway/pathway-android/Pathway-Android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:19:5-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:19:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:21:5-77
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:21:19-51
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:11.0.4] /home/eewest/.android/build-cache/fa023a27cd90ad709e88566cdf34cfdeeb87b968/output/AndroidManifest.xml:21:52-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:11.0.4] /home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:11.0.4] /home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:11.0.4] /home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:11.0.4] /home/eewest/.android/build-cache/5cf840e154286e5c6f7658fb9161c2b96917ff64/output/AndroidManifest.xml:19:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:11.0.4] /home/eewest/.android/build-cache/ef2889138af5730bd12080df621bd0419574c5d5/output/AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:11.0.4] /home/eewest/.android/build-cache/ef2889138af5730bd12080df621bd0419574c5d5/output/AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:11.0.4] /home/eewest/.android/build-cache/ef2889138af5730bd12080df621bd0419574c5d5/output/AndroidManifest.xml:20:20-65
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.0] /home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:transition:25.3.0] /home/eewest/.android/build-cache/8671264e215ee68a35be6e9750fc9a623438fe03/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:recyclerview-v7:25.3.0] /home/eewest/.android/build-cache/c5601f0ea3b32eb22562e38fdbf6cf8e859737bd/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:appcompat-v7:25.3.0] /home/eewest/.android/build-cache/7adb5ede1282f4d22edcb925a4e17bfc3bdf63a7/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.0] /home/eewest/.android/build-cache/77c9e9cffc306314fc4e18ff38fac16d0d35f899/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.0] /home/eewest/.android/build-cache/3f78217be7434430a88f21fc2b614bd70492c82c/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:cardview-v7:25.3.0] /home/eewest/.android/build-cache/0f8143d87ce25151e23d1a5123c2d2ee912c6d11/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:customtabs:25.3.0] /home/eewest/.android/build-cache/04b69ef2b5e9f92b83925e22a7e7efaa5ca6d9f8/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.0] /home/eewest/.android/build-cache/3c4941ce0e66fe951ab80c0344789325e4a7b05b/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.0] /home/eewest/.android/build-cache/552d8092e219b3226bb93f3f94d76b81eac1709f/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.0] /home/eewest/.android/build-cache/a268bdab5259ad70c8ee70dc942ae0cd47ed9967/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.0] /home/eewest/.android/build-cache/25c986cac45126518403db0d8e53f1c9a9bb3b1f/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.0] /home/eewest/.android/build-cache/7ea44fe983ae5c3063b659deea3e6e57b413d09c/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.0] /home/eewest/.android/build-cache/6ee6daea765d7dd5bd66e6ae22e28ea4cccb163f/output/AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.0] /home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.0] /home/eewest/.android/build-cache/91bf0916e21cc4ab339055dced6cc5cff52c8df6/output/AndroidManifest.xml:26:9-47
+activity#com.facebook.CustomTabMainActivity
+ADDED from [com.facebook.android:facebook-common:4.28.0] /home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/AndroidManifest.xml:33:9-71
+	android:name
+		ADDED from [com.facebook.android:facebook-common:4.28.0] /home/eewest/.android/build-cache/74cea3956984f45b42f12d0a1ab6af74e23e1f6a/output/AndroidManifest.xml:33:19-68
+provider#com.facebook.internal.FacebookInitProvider
+ADDED from [com.facebook.android:facebook-core:4.28.0] /home/eewest/.android/build-cache/d2283ab43fbb93e5e26a96279f98636dc8dd3f39/output/AndroidManifest.xml:39:9-42:40
+	android:authorities
+		ADDED from [com.facebook.android:facebook-core:4.28.0] /home/eewest/.android/build-cache/d2283ab43fbb93e5e26a96279f98636dc8dd3f39/output/AndroidManifest.xml:41:13-72
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:4.28.0] /home/eewest/.android/build-cache/d2283ab43fbb93e5e26a96279f98636dc8dd3f39/output/AndroidManifest.xml:42:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:4.28.0] /home/eewest/.android/build-cache/d2283ab43fbb93e5e26a96279f98636dc8dd3f39/output/AndroidManifest.xml:40:13-70

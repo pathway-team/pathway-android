@@ -28,7 +28,8 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     private static final String TABLE_ACHIEVEMENTS = "tbl_achievements";
 
     //routes information
-    private static final String KEY_ID = "id";
+    private static final String KEY_PID = "pid";
+    private static final String KEY_RID = "rid";
     private static final String KEY_JSON = "json_str";
 
     //report information
@@ -63,6 +64,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         String CREATE_ROUTES_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(%s INTEGER PRIMARY " + "KEY AUTOINCREMENT, " +
                 "%s TEXT);", TABLE_ROUTES, KEY_ID, KEY_JSON);
+
         db.execSQL(CREATE_ROUTES_TABLE);
 
         //creates reports table
@@ -101,6 +103,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(KEY_JSON, path.toString());
+        values.put(KEY_RID, path.getRID());
 
         long id = db.insert(TABLE_ROUTES, null, values);
 

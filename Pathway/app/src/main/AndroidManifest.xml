@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pathway.pathway">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -37,13 +36,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!--
-             The API key for Google Maps-based APIs.
-        -->
+        <!--              The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDUTweLJByJYvZvf-B6615i8DP5RfIArUA" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="1560940130595086" />
@@ -67,10 +63,12 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserPage" />
         <activity android:name=".Editpage" />
-        <activity android:name=".FacebookL"/>
-        <activity android:name=".RoutePage"/>
-        <activity android:name=".pop"
-            android:theme="@style/AppTheme.pop"
-            ></activity>
+        <activity android:name=".FacebookL" />
+        <activity android:name=".RoutePage" />
+        <activity
+            android:name=".pop"
+            android:theme="@style/AppTheme.pop" />
+        <activity android:name=".ReportPlotView"></activity>
     </application>
+
 </manifest>

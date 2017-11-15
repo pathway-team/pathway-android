@@ -1,6 +1,10 @@
 package com.pathway.pathway;
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +14,12 @@ import java.util.List;
  */
 
 public class PathwayStats {
+
+    /**
+     *Creates a Basic Report from a route object.
+     * @param r
+     * @return
+     */
     public static BasicReport generateBasicReport(Route r){
         BasicReport report = new BasicReport();
         List<LatLng> points = r.getDrawPoints();
@@ -31,12 +41,51 @@ public class PathwayStats {
         report.setTime_x(timestamps);
         report.setMaxSpeed(findMax(speedList));
         report.setAvgSpeed(calcAvg(speedList));
-
+        report.setRid(r.getRID());
+        report.setPid(r.getPID());
         report.setTotalTimeSec(timestamps.size()*3);//temporary until timestamps is setup in route
 
         return report;
     }
 
+    /**
+     *
+     * @param c
+     * @return
+     */
+    public static UserReport generateUserReport(Context c){
+        DeviceDBHandler handler = new DeviceDBHandler(c);
+        List<String> routes = handler.getUserRoutes();
+
+        double totalDistance = 0;
+        int totalTime = 0;
+        int numRuns = routes.size();
+        int numRoutes = handler.getParentRoutes().size();
+
+        for(int idx = 0; idx < routes.size(); idx++){
+            try {
+                Route r = new Route(routes.get(idx));
+                totalDistance += r.getDistance();
+                totalTime += r.getTimestamps().get(r.getTimestamps().size());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        //add calculated results to the UserReport
+        UserReport r = new UserReport();
+        r.setNumRoutes(numRoutes);
+        r.setNumRuns(numRuns);
+        r.setTotalDistance(totalDistance);
+        r.setTotalTime(totalTime);
+
+        //add UserReport r to database
+        handler.addUserReport(r);
+
+        //return the UserReport r to the caller
+        return r;
+
+    }
 
     private static double calcDist(double lat1, double lat2, double lon1,
                                   double lon2, double el1, double el2) {

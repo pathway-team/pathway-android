@@ -30,12 +30,14 @@ public class UserPage extends AppCompatActivity {
     TextView tvRoutesRn;
     TextView tvCaloriesBrnd;
     TextView tvPhone;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
 
+        bundle = savedInstanceState;
         tvEmail = (TextView) findViewById(R.id.etEmail1);
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         tvAge = (TextView) findViewById(R.id.tvAge);
@@ -102,7 +104,9 @@ public class UserPage extends AppCompatActivity {
     public int ByGet(){
         int responsecode = -1;
         try{
-            URL url = new URL("https://www.youtube.com");
+            String username1 = bundle.getString("username");
+            String httpurl = String.format("http://138.197.103.225:8000/users/%s", username1);
+            URL url = new URL(httpurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             //conn.setReadTimeout(10000);
             //conn.setConnectTimeout(15000);

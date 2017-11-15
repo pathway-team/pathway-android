@@ -268,11 +268,11 @@ public class MainActivity extends AppCompatActivity
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
             //activityLink = (TextView) findViewById(R.id.tvRegisterHere);
-        } else if (id == R.id.nav_routes){
+        } else if (id == R.id.nav_routes && isLogin.islogin == true){
             Intent myIntent = new Intent(this, RoutePage.class);
             startActivity(myIntent);
 
-        } else if (id == R.id.nav_user){
+        } else if (id == R.id.nav_user && isLogin.islogin == true){
             Intent myIntent = new Intent(this, UserPage.class);
             startActivity(myIntent);
         }

@@ -125,7 +125,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         //get count of parent routes to set new pid
         String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_PID, TABLE_ROUTES, KEY_RID, 0);
         Cursor cursor = db.rawQuery(selectQuery, null);
-        int pid = cursor.getCount();
+        int pid = cursor.getCount()+1;
 
         values.put(KEY_JSON, path.toString());
         values.put(KEY_PID, pid);
@@ -308,7 +308,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
      * @return
      */
     public String getLatestUserReport(){
-        String query = String.format("SELECT TOP 1 %s FROM %s ORDER BY %s DESC", KEY_JSON, TABLE_USER, KEY_ID );
+        String query = String.format("SELECT %s FROM %s ORDER BY %s DESC", KEY_JSON, TABLE_USER, KEY_ID );
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -319,6 +319,14 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return null;
     }
 
+    /**
+     * Add a user report to the user table.
+     * @param r
+     * @return
+     * Returns true if the action was successful
+     * @param r
+     * @return
+     */
     public boolean addUserReport(UserReport r){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -335,6 +343,12 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return (id >= 0);
     }
 
+    /**
+     * Add a basic report to the report table.
+     * @param r
+     * @return
+     * Returns true if the action was successful
+     */
     public boolean addBasicReport(BasicReport r){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -348,6 +362,10 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return (id >= 0);
     }
 
+    /**
+     * Returns a list of strings containing all route reports in JSON format.
+     * @return
+     */
     public List<String> getRouteReports(){
         List<String> reportList = new ArrayList<String>();
         // Select All Query
@@ -367,8 +385,42 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return reportList;
     }
 
+    /**
+     * Gets all route reports with matching pid.
+     *
+     *
+     * @param pid
+     * @return
+     * Will return a JSON formatted string containing a dictionary with report data or an empty List
+     * with size 0.
+     */
+    public List<String> getRouteReports(int pid){
+        List<String> reportList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = String.format("SELECT %s FROM %s WHERE %s=%d", KEY_JSON, TABLE_REPORTS, KEY_PID, pid);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                reportList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return route list
+        return reportList;
+    }
+
+    /**
+     * Get the last report entered into the database. This is done by sorting by ID in descending order
+     * and returning the first one. As a JSON formatted string with a dictionary.
+     * @return
+     * Returns either a String with JSON format or an empty string if table is empty.
+     */
     public String getLastRoute(){
-        String query = String.format("SELECT TOP 1 %s FROM %s ORDER BY %s DESC", KEY_JSON, TABLE_ROUTES, KEY_ID );
+        String query = String.format("SELECT %s FROM %s ORDER BY %s DESC", KEY_JSON, TABLE_ROUTES, KEY_ID );
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -376,7 +428,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             return cursor.getString(0);
         }
-        return null;
+        return "";
     }
 
 }

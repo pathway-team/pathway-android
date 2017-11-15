@@ -127,6 +127,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     /**
      * Adds a New Route to the Table
      * Will set the pid to highestpid+1 and rid to 0
+     * This route will be the parent of the route.
      * @param path
      * @return
      */
@@ -134,10 +135,15 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        //get count of routes to set new pid
+        //get count of parent routes to set new pid
+        String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_PID, TABLE_ROUTES, KEY_RID, 0);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int pid = cursor.getCount();
 
         values.put(KEY_JSON, path.toString());
-        values.put(KEY_PID, path.getPID());
+        values.put(KEY_PID, pid);
         values.put(KEY_RID, 0);
 
         long id = db.insert(TABLE_ROUTES, null, values);
@@ -146,13 +152,26 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return id;
     }
 
+    /**
+     * Adds a new Run of a currently existing route to the local Database.
+     * **Requirements: path variable needs to have the pid set to some value(int)
+     * @param path
+     * @return
+     */
     public long addRun(Route path) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        //get count of parent routes to set new pid
+        String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_PID, TABLE_ROUTES, KEY_PID, path.getPID());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int rid = cursor.getCount();
+
         values.put(KEY_JSON, path.toString());
         values.put(KEY_PID, path.getPID());
-        values.put(KEY_RID, path.getRID());
+        values.put(KEY_RID, rid);
 
         long id = db.insert(TABLE_ROUTES, null, values);
 

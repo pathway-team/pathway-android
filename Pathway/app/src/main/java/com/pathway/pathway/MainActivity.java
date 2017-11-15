@@ -513,7 +513,9 @@ public class MainActivity extends AppCompatActivity
                     currentRoute.setName(rtName);
                     currentRoute.setActivity(actType);
                     currentRoute.buildJSON();
-                    //new SendData(getString(R.string.routesURL), currentRoute, MainActivity.this).execute();
+                    dbHandler.addNewRoute(currentRoute);
+                    //dbHandler.getRoute()
+                    new SendData(getString(R.string.routesURL), currentRoute, MainActivity.this).execute();
                     popupWindow.dismiss();
                 }
             });

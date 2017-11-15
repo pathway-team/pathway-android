@@ -1,5 +1,7 @@
 package com.pathway.pathway;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +45,17 @@ public class BasicReport extends JSONObject{
         }
     }
 
+    public BasicReport(String jsonString) throws JSONException {
+        super(jsonString);
+        setPid(this.getInt("pid"));
+        this.getInt("rid");
+        setSpeed_y(this.stringToDouArray(this.getString("speed_y")));
+        setTime_x(this.stringToIntArray(this.getString("time_x")));
+        setMaxSpeed(this.getDouble("maxSpeed"));
+        setAvgSpeed(this.getDouble("avgSpeed"));
+        setTotalTimeSec(this.getInt("totalTimeSec"));
+    }
+
     public ArrayList<Double> getSpeed_y() {
         return speed_y;
     }
@@ -58,6 +71,7 @@ public class BasicReport extends JSONObject{
     public void setTime_x(ArrayList<Integer> time_x) {
         this.time_x = time_x;
     }
+
 
     public double getMaxSpeed() {
         return maxSpeed;
@@ -98,4 +112,23 @@ public class BasicReport extends JSONObject{
     public void setRid(int rid) {
         this.rid = rid;
     }
+
+    public ArrayList<Integer> stringToIntArray(String input) {
+        String[] items = input.substring(1, input.length() - 1).split(",");
+        ArrayList<Integer> list = new ArrayList<>(items.length);
+        for (int i = 0; i < items.length; i++) {
+            list.add(Integer.parseInt(items[i]));
+        }
+        return list;
+    }
+
+    public ArrayList<Double> stringToDouArray(String input) {
+        String[] items = input.substring(1, input.length() - 1).split(",");
+        ArrayList<Double> list = new ArrayList<>(items.length);
+        for (int i = 0; i < items.length; i++) {
+            list.add(Double.parseDouble(items[i]));
+        }
+        return list;
+    }
+
 }

@@ -56,6 +56,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -131,9 +132,25 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ///Test area for eewest-stats branches--remove before production or x-mas
         dbHandler = new DeviceDBHandler(getApplicationContext());
 
         dbHandler.createTables();
+        try {
+            Route r = new Route();
+            dbHandler.addNewRoute(r);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        dbHandler.addUserReport(PathwayStats.generateUserReport(getApplicationContext()));
+
+        String tempStr = dbHandler.getLatestUserReport();
+
+        List<String> temp = dbHandler.getUserRoutes();
+
+        List<String> temp1 = dbHandler.getParentRoutes();
+
+        /// End fo test area for eewest
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

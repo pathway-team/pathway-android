@@ -30,20 +30,17 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     private static final String TABLE_USER = "tbl_user";
     private static final String TABLE_ACHIEVEMENTS = "tbl_achievements";
 
-    //routes information
+    //routes and report key information
     private static final String KEY_ID = "id";
     private static final String KEY_PID = "pid";
     private static final String KEY_RID = "rid";
     private static final String KEY_JSON = "json_str";
 
-    //report information
-    private static final String KEY_DATE = "timestamp";
-
     //user information
-    private static final String KEY_TOT_DIST = "Total_Distance";
-    private static final String KEY_TOT_TIME = "Total_Runtime";
-    private static final String KEY_NUM_ROUT = "Number_Routes";
-    private static final String KEY_NUM_RUNS = "Number_Runs";
+    private static final String KEY_TOT_DIST = "totalDistance";
+    private static final String KEY_TOT_TIME = "totalTime";
+    private static final String KEY_NUM_ROUT = "numRoutes";
+    private static final String KEY_NUM_RUNS = "numRuns";
 
     //achievements information
     private static final String KEY_ACH_SET = "isSet";
@@ -108,23 +105,12 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer) {
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_ROUTES));
-        this.onCreate(db);
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_ACHIEVEMENTS));
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_REPORTS));
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_USER));
+        this.createTables();
     }
-/*
-    public long addRoute(Route path) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
 
-        values.put(KEY_JSON, path.toString());
-        values.put(KEY_PID, )
-        values.put(KEY_RID, path.getRID());
-
-        long id = db.insert(TABLE_ROUTES, null, values);
-
-        db.close();
-        return id;
-    }
-*/
     /**
      * Adds a New Route to the Table
      * Will set the pid to highestpid+1 and rid to 0
@@ -160,7 +146,6 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
      * @return
      */
     public long addRun(Route path) {
-        BasicReport report = PathwayStats.generateBasicReport(path);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -175,14 +160,15 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         long id = db.insert(TABLE_ROUTES, null, values);
 
+        // Create report of run path
+        BasicReport report = PathwayStats.generateBasicReport(path);
+
+        this.addBasicReport(report);
+
         db.close();
         return id;
     }
 
-    public void delRoute(int id) {
-        //may not need.
-        //allows user to remove route from local db.
-    }
 
     public String getRoute(int id) {
         String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_JSON, TABLE_ROUTES, KEY_ID, id);
@@ -268,6 +254,70 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return reportList;
     }
 
+    /**
+     * Adds an achievement to the database and sets its value.
+     *
+     * The Achievement parameter is the name of the achievement
+     * The set parameter will represent a boolean: 0 or less is off, 1 or more is on
+     *
+     * @param Achievement
+     * @param set
+     * @return
+     */
+    public boolean addAchievement(String Achievement, int set){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_ACH_NAME,Achievement);
+        values.put(KEY_ACH_SET, set);
+        return false;
+    }
+
+    public List<String> getAchievements(){
+        List<String> reportList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = String.format("SELECT %s FROM %s", "*", TABLE_ACHIEVEMENTS);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                JSONObject jsonObject = new JSONObject();
+                for(int idx = 0; idx < cursor.getColumnCount(); idx++) {
+                    try {
+                        jsonObject.put(cursor.getColumnName(idx), cursor.getDouble(idx));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                reportList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return route list
+        return reportList;
+    }
+
+    /**
+     * Retrieves the latest user report from the local database as a JSON string.
+     *
+     * **The JSON string can be passed to the UserReport through
+     * its constructor to allow easier access to the contained fields
+     * @return
+     */
+    public String getLatestUserReport(){
+        String query = String.format("SELECT TOP 1 %s FROM %s ORDER BY %s DESC", KEY_JSON, TABLE_USER, KEY_ID );
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0);
+        }
+        return null;
+    }
 
     public boolean addUserReport(UserReport r){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -297,5 +347,37 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         db.close();
         return (id >= 0);
     }
+
+    public List<String> getRouteReports(){
+        List<String> reportList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = String.format("SELECT %s FROM %s", KEY_JSON, TABLE_REPORTS);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                reportList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return route list
+        return reportList;
+    }
+
+    public String getLastRoute(){
+        String query = String.format("SELECT TOP 1 %s FROM %s ORDER BY %s DESC", KEY_JSON, TABLE_ROUTES, KEY_ID );
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0);
+        }
+        return null;
+    }
+
 }
 

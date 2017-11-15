@@ -17,18 +17,22 @@ public class BasicReport extends JSONObject{
     private double maxSpeed;
     private double avgSpeed;
     private int totalTimeSec;
+    private int pid;
+    private int rid;
 
     public BasicReport(){
-        int routeTbl_ID;
+
         setSpeed_y(new ArrayList<Double>());
         setTime_x(new ArrayList<Integer>());
         setMaxSpeed(0);
         setAvgSpeed(0);
         setTotalTimeSec(0);
-        routeTbl_ID = -1;
+        setPid(-1);
+        setRid(-1);
 
         try {
-            this.put("routeTbl_ID",routeTbl_ID);
+            this.put("pid", getPid());
+            this.put("rid", getRid());
             this.put("speed_y", new JSONArray(getSpeed_y().toArray()));
             this.put("time_x", new JSONArray(getTime_x().toArray()));
             this.put("maxSpeed", getMaxSpeed());
@@ -77,5 +81,21 @@ public class BasicReport extends JSONObject{
 
     public void setTotalTimeSec(int totalTimeSec) {
         this.totalTimeSec = totalTimeSec;
+    }
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
     }
 }

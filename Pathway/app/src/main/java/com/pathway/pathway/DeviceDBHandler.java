@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Path;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -146,6 +147,8 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         long id = db.insert(TABLE_ROUTES, null, values);
 
+        BasicReport r = PathwayStats.generateBasicReport(path);
+        addBasicReport(r);
         db.close();
         return id;
     }
@@ -157,6 +160,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
      * @return
      */
     public long addRun(Route path) {
+        BasicReport report = PathwayStats.generateBasicReport(path);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -186,6 +190,26 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         return (cursor.moveToFirst() == true) ? cursor.getString(0) : null;
+    }
+
+
+    public List<String> getParentRoutes(){
+        List<String> routeList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = String.format("SELECT %s FROM %s where rid=0", KEY_JSON, TABLE_ROUTES);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                routeList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return route list
+        return routeList;
     }
 
     /**
@@ -245,12 +269,33 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addUserReport(UserReport r){
-        
+    public boolean addUserReport(UserReport r){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_JSON, r.toString());
+        values.put(KEY_TOT_DIST, r.getTotalDistance());
+        values.put(KEY_TOT_TIME, r.getTotalTime());
+        values.put(KEY_NUM_ROUT, r.getNumRoutes());
+        values.put(KEY_NUM_RUNS, r.getNumRuns());
+
+        long id = db.insert(TABLE_USER, null, values);
+
+        db.close();
+        return (id >= 0);
     }
 
-    public void addBasicReport(BasicReport r){
-        
+    public boolean addBasicReport(BasicReport r){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_JSON, r.toString());
+        values.put(KEY_PID, r.getPid());
+        values.put(KEY_RID, r.getRid());
+        long id = db.insert(TABLE_USER, null, values);
+
+        db.close();
+        return (id >= 0);
     }
 }
 

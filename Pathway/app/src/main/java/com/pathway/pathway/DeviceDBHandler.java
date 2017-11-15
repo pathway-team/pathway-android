@@ -279,6 +279,10 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getAchievements(){
         List<String> reportList = new ArrayList<String>();
         // Select All Query
@@ -389,6 +393,27 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         cursor.close();
         // return route list
         return reportList;
+    }
+
+    /**
+     * Returns a list of strings containing all route reports in JSON format.
+     * @return
+     */
+    public String getLastRouteReports(){
+
+        // Select All Query
+        String selectQuery = String.format("SELECT %s FROM %s ORDER BY %s DESC", KEY_JSON, TABLE_REPORTS, KEY_ID);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            return (cursor.getString(0));
+        }
+        cursor.close();
+        // return route list
+        return "";
     }
 
     /**

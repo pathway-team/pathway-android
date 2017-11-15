@@ -137,8 +137,6 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         //get count of parent routes to set new pid
         String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_PID, TABLE_ROUTES, KEY_RID, 0);
-
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         int pid = cursor.getCount();
 
@@ -164,8 +162,6 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         //get count of parent routes to set new pid
         String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_PID, TABLE_ROUTES, KEY_PID, path.getPID());
-
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         int rid = cursor.getCount();
 

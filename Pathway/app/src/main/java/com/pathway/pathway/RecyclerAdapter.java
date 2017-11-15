@@ -19,9 +19,9 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    ArrayList<String> arrayList;
-    public RecyclerAdapter(ArrayList<String> arrayList){
-        this.arrayList = arrayList;
+    ArrayList<Route> jsonStuff;
+    public RecyclerAdapter(ArrayList<Route> jsonStuff){
+        this.jsonStuff = jsonStuff;
     }
 
     @Override
@@ -31,15 +31,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.info.setText(arrayList.get(position));
-        holder.info2.setText(arrayList.get(position));
-        holder.info3.setText(arrayList.get(position));
-        holder.info4.setText(arrayList.get(position));
+        try {
+            holder.info.setText(jsonStuff.get(position).getString("name"));
+            holder.info2.setText(jsonStuff.get(position).getString("diffRtng"));
+            holder.info3.setText(jsonStuff.get(position).getString("activity"));
+            holder.info4.setText(jsonStuff.get(position).getString("distance"));
+            holder.info5.setText(jsonStuff.get(position).getString("timestamps"));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return jsonStuff.size();
     }
 
 
@@ -48,12 +53,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView info2;
         TextView info3;
         TextView info4;
+        TextView info5;
         public ViewHolder(View itemView){
             super(itemView);
             info = (TextView) itemView.findViewById(R.id.route);
-            info2 = (TextView) itemView.findViewById(R.id.max_speed);
-            info3 = (TextView) itemView.findViewById(R.id.avg_speed);
-            info4 = (TextView) itemView.findViewById(R.id.totalTimeSec);
+            info2 = (TextView) itemView.findViewById(R.id.DifficultyRtng);
+            info3 = (TextView) itemView.findViewById(R.id.ActivityTyp);
+            info4 = (TextView) itemView.findViewById(R.id.Dist);
+            info5 = (TextView) itemView.findViewById(R.id.Tim);
             itemView.setOnClickListener(this);
         }
 
@@ -64,6 +71,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             intent.putExtra("text1", info2.getText());
             intent.putExtra("text2", info3.getText());
             intent.putExtra("text3", info4.getText());
+            intent.putExtra("text4", info5.getText());
             v.getContext().startActivity(intent);
         }
 

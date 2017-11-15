@@ -22,17 +22,20 @@ public class pop extends Activity {
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*.8), (int)(height*.6));
         final Intent intent = getIntent();
-        final TextView tv = (TextView) findViewById(R.id.textView12);
-        final TextView tv1 = (TextView) findViewById(R.id.textView13);
-        final TextView tv2 = (TextView) findViewById(R.id.textView14);
-        final TextView tv3 = (TextView) findViewById(R.id.textView15);
+        final TextView tv = (TextView) findViewById(R.id.tvRouteNm);
+        final TextView tv1 = (TextView) findViewById(R.id.tvdiffRtng);
+        final TextView tv2 = (TextView) findViewById(R.id.tvActivityType);
+        final TextView tv3 = (TextView) findViewById(R.id.tvDistance);
+        final TextView tv4 = (TextView) findViewById(R.id.tvTime);
         final String text = intent.getStringExtra("text");
         final String text1 = intent.getStringExtra("text1");
         final String text2 = intent.getStringExtra("text2");
         final String text3 = intent.getStringExtra("text3");
+        final String text4 = intent.getStringExtra("text4");
         tv.setText(text);
         tv1.setText(text1);
         tv2.setText(text2);
         tv3.setText(text3);
+        tv4.setText(text4);
     }
 }

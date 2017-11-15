@@ -24,17 +24,22 @@
             android:layout_height="wrap_content"
             android:text="Testing"/>
         <TextView
-            android:id="@+id/max_speed"
+            android:id="@+id/DifficultyRtng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Testing"/>
         <TextView
-            android:id="@+id/avg_speed"
+            android:id="@+id/ActivityTyp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Testing"/>
         <TextView
-            android:id="@+id/totalTimeSec"
+            android:id="@+id/Dist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Testing"/>
+        <TextView
+            android:id="@+id/Tim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Testing"/>

@@ -185,6 +185,8 @@ public class MainActivity extends AppCompatActivity
 
         /// End fo test area for eewest
 
+
+        //Start Test Area for jebragg
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,15 +219,30 @@ public class MainActivity extends AppCompatActivity
 
 
                 String testURL = getString(R.string.routesURL);
-                String testURL2 = "http://138.197.103.225:8000/routes/";
                 //double elevation = getElev(lastLoc);
-                //new FetchData("temp url", MainActivity.this).execute();
+                new FetchData("temp url", MainActivity.this).execute();
+                /*source.setName("Test Route");
+                source.setActivity("W");
                 source.buildJSON();
-                new SendData(testURL, source, MainActivity.this).execute();
+                dbHandler.addNewRoute(source);
+                List<String> test = dbHandler.getUserRoutes();
+                try {
+                    String testGet = dbHandler.getLastRoute();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    source = new Route(dbHandler.getLastRoute());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                new SendData(testURL, source, MainActivity.this).execute();*/
                 Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+
+        //End test area for jebragg
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -531,7 +548,11 @@ public class MainActivity extends AppCompatActivity
                     currentRoute.setActivity(actType);
                     currentRoute.buildJSON();
                     dbHandler.addNewRoute(currentRoute);
-                    //dbHandler.getRoute()
+                    try {
+                        currentRoute = new Route(dbHandler.getLastRoute());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     new SendData(getString(R.string.routesURL), currentRoute, MainActivity.this).execute();
                     popupWindow.dismiss();
                 }

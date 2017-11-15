@@ -57,14 +57,13 @@ public class LoginActivity extends AppCompatActivity {
     Button bLogin;
     TextView registerLink;
     TextView FacebookLogin;
-    Bundle bundle;
+    static Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        bundle = savedInstanceState;
         c = this;
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -104,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             String username = etUsername.getText().toString();
             String password = etPassword.getText().toString();
             bundle.putString("username", etUsername.getText().toString());
+            bundle.putString("password", etPassword.getText().toString());
             String httpurl = "http://138.197.103.225:8000/users/";
             String str = String.format("%s:%s", username, password);
             String encoding = Base64.encodeToString(str.getBytes(), Base64.DEFAULT);
@@ -111,10 +111,9 @@ public class LoginActivity extends AppCompatActivity {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic" + encoding);
+            conn.setRequestProperty("Authorization", "Basic " + encoding);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
-            conn.setDoOutput(true);
 
             responsecode = conn.getResponseCode();
             if(responsecode == HttpURLConnection.HTTP_OK) {
@@ -124,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
             conn.connect();
 
         } catch(Exception e){
-
+            e.printStackTrace();
         }
         return responsecode;
     }

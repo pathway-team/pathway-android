@@ -37,11 +37,14 @@ public class Editpage extends AppCompatActivity {
     EditText etSex1;
     EditText etWeight1;
     EditText etPhone;
+    Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editpage);
 
+        bundle = savedInstanceState;
         etEmail1 = (EditText) findViewById(R.id.etEmail1);
         etUsername1 = (EditText) findViewById(R.id.etUsername1);
         etAge1 = (EditText) findViewById(R.id.etAge1);
@@ -89,7 +92,9 @@ public class Editpage extends AppCompatActivity {
     public int ByPut(){
         int responsecode = -1;
         try {
-            URL url = new URL("http://138.197.103.225:8000/users/");
+            String username1 = bundle.getString("username");
+            String httpurl = String.format("http://138.197.103.225:8000/users/%s", username1);
+            URL url = new URL(httpurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             //conn.setReadTimeout(10000);
             //conn.setConnectTimeout(15000);
@@ -101,7 +106,7 @@ public class Editpage extends AppCompatActivity {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("username", etUsername1.getText().toString());
-            jsonObject.put("age", etAge1.getText());
+            jsonObject.put("age", etAge1.getText().toString());
             jsonObject.put("gender", etSex1.getText().toString());
             jsonObject.put("weight", etWeight1.getText().toString());
             jsonObject.put("email", etEmail1.getText().toString());

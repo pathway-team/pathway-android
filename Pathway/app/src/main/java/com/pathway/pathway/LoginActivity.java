@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,12 +57,14 @@ public class LoginActivity extends AppCompatActivity {
     Button bLogin;
     TextView registerLink;
     TextView FacebookLogin;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        bundle = savedInstanceState;
         c = this;
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -98,24 +101,23 @@ public class LoginActivity extends AppCompatActivity {
     public int ByGet(){
         int responsecode = -1;
         try{
-            URL url = new URL("http://138.197.103.225:8000/users/");
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+            bundle.putString("username", etUsername.getText().toString());
+            String httpurl = "http://138.197.103.225:8000/users/";
+            String str = String.format("%s:%s", username, password);
+            String encoding = Base64.encodeToString(str.getBytes(), Base64.DEFAULT);
+            URL url = new URL(httpurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Basic" + encoding);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
             responsecode = conn.getResponseCode();
             if(responsecode == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = in.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                String sb1 = sb.toString();
-                in.close();
                 isLogin.islogin = true;
             }
 

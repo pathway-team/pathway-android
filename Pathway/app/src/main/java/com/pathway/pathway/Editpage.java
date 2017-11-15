@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,14 +38,12 @@ public class Editpage extends AppCompatActivity {
     EditText etSex1;
     EditText etWeight1;
     EditText etPhone;
-    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editpage);
 
-        bundle = savedInstanceState;
         etEmail1 = (EditText) findViewById(R.id.etEmail1);
         etUsername1 = (EditText) findViewById(R.id.etUsername1);
         etAge1 = (EditText) findViewById(R.id.etAge1);
@@ -54,12 +53,12 @@ public class Editpage extends AppCompatActivity {
         Button bSave = (Button) findViewById(R.id.bSave);
 
         final Intent intent = getIntent();
-        final String sex = intent.getStringExtra("sex");
+        final String sex = intent.getStringExtra("gender");
         final String email = intent.getStringExtra("email");
         final String username = intent.getStringExtra("username");
         final String age = intent.getStringExtra("age");
         final String weight = intent.getStringExtra("weight");
-        final String phone = intent.getStringExtra("phone");
+        final String phone = intent.getStringExtra("phonenumber");
 
         etEmail1.setText(email);
         etUsername1.setText(username);
@@ -75,9 +74,9 @@ public class Editpage extends AppCompatActivity {
                 editIntent.putExtra("email", email);
                 editIntent.putExtra("username", username);
                 editIntent.putExtra("age", age);
-                editIntent.putExtra("sex", sex);
-                editIntent.putExtra("weigth", weight);
-                editIntent.putExtra("phone", phone);
+                editIntent.putExtra("gender", sex);
+                editIntent.putExtra("weight", weight);
+                editIntent.putExtra("phonenumber", phone);
 
                 boolean result = false;
                 httpHandler handler = new httpHandler(getApplicationContext());
@@ -92,15 +91,17 @@ public class Editpage extends AppCompatActivity {
     public int ByPut(){
         int responsecode = -1;
         try {
-            String username1 = bundle.getString("username");
-            String httpurl = String.format("http://138.197.103.225:8000/users/%s", username1);
+            String username1 = LoginActivity.bundle.getString("username");
+            String password1 = LoginActivity.bundle.getString("password");
+            String httpurl = String.format("http://138.197.103.225:8000/users/%s/", username1);
+            String auth = String.format("%s:%s", username1, password1);
+            String authEncode = Base64.encodeToString(auth.getBytes(), Base64.DEFAULT);
             URL url = new URL(httpurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            //conn.setReadTimeout(10000);
-            //conn.setConnectTimeout(15000);
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Authorization", "Basic " + authEncode);
+            conn.setRequestMethod("PATCH");
             conn.setDoInput(true);
             conn.setDoOutput(true);
 

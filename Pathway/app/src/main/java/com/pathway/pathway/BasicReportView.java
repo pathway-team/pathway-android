@@ -71,7 +71,8 @@ public class BasicReportView extends AppCompatActivity {
         }
 
         Intent i = new Intent(this, ReportPlotView.class);
-        i.getExtras().putInt("rid", report.getRid());
+        i.getExtras().putDoubleArray("speedy", temp);
+        i.getExtras().putIntegerArrayList("timex", report.getTime_x());
         startActivity(i);
     }
 

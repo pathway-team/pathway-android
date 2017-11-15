@@ -35,7 +35,8 @@ public class ReportPlotView extends AppCompatActivity {
         DeviceDBHandler db = new DeviceDBHandler(getApplicationContext());
         List<String> reportLists = db.getRouteReports();
         try {
-            BasicReport r = new BasicReport(reportLists.get(reportLists.size() - 1));
+
+            BasicReport r = new BasicReport(reportLists.get(savedInstanceState.getInt("rid")));
 
             XYSeries series1 = new SimpleXYSeries((r.getTime_x()), (r.getSpeed_y()) , "Recent");
 

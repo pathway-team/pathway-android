@@ -17,78 +17,71 @@ import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-    public class FetchData extends AsyncTask<String, Void, String> {
+public class FetchData extends AsyncTask<String, Void, String> {
 
-        public interface FetchDataCallbackInterface {
-            // method called when server's data get fetched
-            public void fetchDataCallback (String result);
-        }
-
-        private static final String OPEN_DATABASE = "http://138.197.103.225:8000/%s/";
-
-
-        HttpURLConnection urlConnect;
-        String url;
-        FetchDataCallbackInterface fdCBInterface;
-        LatLng bbox;
-
-        private String result;
-
-        FetchData(String inURL, FetchDataCallbackInterface cbInterface) {
-            this.url = inURL;
-            this.fdCBInterface = cbInterface;
-        }
-
-        FetchData(String inURL, LatLng bounds, FetchDataCallbackInterface cbInterface) {
-            this.url = inURL;
-            this.fdCBInterface = cbInterface;
-        }
-
-
-
-        @Override
-        protected String doInBackground(String... params) {
-            StringBuilder sb = new StringBuilder();
-            try {
-                URL url = new URL(String.format(OPEN_DATABASE, "routes"));
-                //URL url = new URL(this.url);
-                urlConnect = (HttpURLConnection)url.openConnection();
-
-
-                urlConnect = (HttpURLConnection) url.openConnection();
-                InputStream in = new BufferedInputStream(urlConnect.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                //BufferedReader reader = new BufferedReader(
-                //        new InputStreamReader(urlConnect.getInputStream()));
-
-                String tmp;
-                while ((tmp = reader.readLine()) != null) {
-                    sb.append(tmp);
-                }
-
-                //result = sb.toString();
-
-                //JSONArray feature = new JSONArray(sb.toString());
-                result = sb.toString();
-                //JSONObject route = new JSONObject(feature.getJSONObject(1).getString("data"));
-                //result = String.valueOf(new JSONObject(feature.getJSONObject(1).getString("data")));
-                //result = String.valueOf(route.getString("data"));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                urlConnect.disconnect();
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            this.fdCBInterface.fetchDataCallback(result);
-          }
-
+    public interface FetchDataCallbackInterface {
+        // method called when server's data get fetched
+        public void fetchDataCallback (String result);
     }
 
+    public interface FetchElevationCallbackInterface {
+        public void fetchElevCallback (String result);
+    }
+
+    private static final String OPEN_DATABASE = "http://138.197.103.225:8000/%s/";
+
+
+    HttpURLConnection urlConnect;
+    String url;
+    FetchDataCallbackInterface fdCBInterface;
+    FetchElevationCallbackInterface elevCBInterface;
+    LatLng bbox;
+
+    private String result;
+
+    FetchData(String inURL, FetchDataCallbackInterface cbInterface) {
+        this.url = inURL;
+        this.fdCBInterface = cbInterface;
+    }
+
+    FetchData(String inURL, LatLng bounds, FetchDataCallbackInterface cbInterface) {
+        this.url = inURL;
+        this.fdCBInterface = cbInterface;
+    }
+
+
+
+    @Override
+    protected String doInBackground(String... params) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            URL url = new URL(this.url);
+            urlConnect = (HttpURLConnection)url.openConnection();
+
+
+            urlConnect = (HttpURLConnection) url.openConnection();
+            InputStream in = new BufferedInputStream(urlConnect.getInputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+            String tmp;
+            while ((tmp = reader.readLine()) != null) {
+                sb.append(tmp);
+            }
+
+            result = sb.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            urlConnect.disconnect();
+        }
+        return result;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        this.fdCBInterface.fetchDataCallback(result);
+    }
+}

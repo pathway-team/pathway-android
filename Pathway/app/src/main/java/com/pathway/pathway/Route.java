@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.maps.android.SphericalUtil;
@@ -32,19 +33,20 @@ public class Route extends JSONObject {
 
 
     Route() throws JSONException {
-        super("{" +
+        super();
+/*        super("{" +
                 "\"type\": \"LineString\"," +
                 "\"bbox\": [0.0, 0.0, 1.0, 1.0]," +
                 "\"coordinates\": [" +
-                "	[0,0,0]," +
-                "	[1,1,0]" +
+                "	[0.0, 0.0, 0.0]," +
+                "	[1.0, 1.0, 1000.0]" +
                 " ]," +
                 "\"timestamps\": [0,10]," +
                 "\"distance\": 0.0," +
                 "\"rid\": 0," +
                 "\"pid\": 0," +
                 "\"name\": \"My Route\"," +
-                "\"activity\": \"W\"," +
+                "\"atype\": \"W\"," +
                 "\"diffRtng\": \"A-1\"" +
                 "}");
 
@@ -55,8 +57,18 @@ public class Route extends JSONObject {
         this.rid = Integer.parseInt(this.getString("rid"));
         this.pid = Integer.parseInt(this.getString("pid"));
         this.name = this.getString("name");
-        this.activity = this.getString("activity");
-        this.diffRtng = this.getString("diffRtng");
+        this.activity = this.getString("atype");
+        this.diffRtng = this.getString("diffRtng");*/
+
+        this.bbox = new Double[4];
+        this.coords = new ArrayList<>();
+        this.timestamps = new ArrayList<>();
+        this.distance = 0.0;
+        this.rid = 0;
+        this.pid = 0;
+        this.name = "My Route";
+        this.activity = "W";
+        this.diffRtng = "A-1";
 
     }
 
@@ -69,7 +81,7 @@ public class Route extends JSONObject {
         this.rid = Integer.parseInt(this.getString("rid"));
         this.pid = Integer.parseInt(this.getString("pid"));
         this.name = this.getString("name");
-        this.activity = this.getString("activity");
+        this.activity = this.getString("atype");
         this.diffRtng = this.getString("diffRtng");
 
     }
@@ -109,8 +121,8 @@ public class Route extends JSONObject {
 
         for (int i = 0; i < items.length; i = i + 3) {
             Double temp[] = {Double.parseDouble(items[i]),
-                             Double.parseDouble(items[i+1]),
-                             Double.parseDouble(items[i+2])};
+                    Double.parseDouble(items[i+1]),
+                    Double.parseDouble(items[i+2])};
             results.add(temp);
         }
 
@@ -130,6 +142,13 @@ public class Route extends JSONObject {
         timestamps.add(sec);
     }
 
+    public void setName(String input) {
+        this.name = input;
+    }
+
+    public void setActivity(String input) {
+        this.activity = input;
+    }
 
     public void setBbox(Double min_x, Double min_y, Double max_x, Double max_y) {
         this.bbox[0] = min_x;
@@ -151,6 +170,10 @@ public class Route extends JSONObject {
 
     public void setCoords(ArrayList<Double[]> coordinates){
         this.coords = coordinates;
+    }
+
+    public void setDistance(Double input) {
+        this.distance = input;
     }
 
     public void calcBBox() {
@@ -224,7 +247,97 @@ public class Route extends JSONObject {
         return this.diffRtng;
     }
 
+    public void calcDistance() {
+        this.distance = 0.0;
+        for (int i = 0; i < this.coords.size() - 1; i++) {
+            this.distance += SphericalUtil.computeDistanceBetween(
+                    new LatLng(this.coords.get(i)[1], this.coords.get(i)[0]),
+                    new LatLng(this.coords.get(i+1)[1], this.coords.get(i+1)[0])
+            );
+        }
+
+    }
+
+    public void buildJSON() {
+        StringBuilder sb = new StringBuilder("[");
+        this.calcBBox();
+        this.calcDifficulty();
+        this.calcDistance();
+        this.calcDifficulty();
+
+        try {
+            this.remove("bbox");
+            this.put("bbox", Arrays.toString(this.bbox));
+            for (Double[] cd : this.coords) {
+                sb.append(Arrays.toString(cd));
+            }
+            sb.append("]");
+            this.remove("coordinates");
+            this.put("coordinates", sb.toString().replace("][", "],["));
+            this.remove("timestamps");
+            this.put("timestamps", Arrays.toString(this.timestamps.toArray()));
+            this.put("distance", this.distance);
+            this.put("name", this.name);
+            this.put("atype", this.activity);
+            this.put("diffRtng", this.diffRtng);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void calcDifficulty() {
+        String diff = "";
+        double min_elev = this.coords.get(0)[2];
+        double max_elev = this.coords.get(0)[2];
+
+
+        if (this.distance <= 762) {
+            diff = "A";
+        }
+        else if (this.distance <= 1524) {
+            diff = "B";
+        }
+        else if (this.distance <= 2286) {
+            diff = "C";
+        }
+        else if (this.distance <= 3048) {
+            diff = "D";
+        }
+        else if (this.distance <= 3810) {
+            diff = "E";
+        }
+        else if (this.distance <= 4572) {
+            diff = "F";
+        }
+
+        for (int i = 0; i < this.coords.size(); i++ ) {
+            if (this.coords.get(i)[2] < min_elev) {
+                min_elev = this.coords.get(i)[2];
+            }
+            if (this.coords.get(i)[2] > max_elev) {
+                max_elev = this.coords.get(i)[2];
+            }
+        }
+
+        if (max_elev - min_elev <= 60) {
+            diff = diff + "-1";
+        }
+        else if (this.distance <= 120) {
+            diff = diff + "-2";
+        }
+        else if (this.distance <= 180) {
+            diff = diff + "-3";
+        }
+        else if (this.distance <= 240) {
+            diff = diff + "-4";
+        }
+        else {
+            diff = diff + "-5";
+        }
+    }
+
     public boolean compareBasic(Route input) {
+
         return false;
     }
 

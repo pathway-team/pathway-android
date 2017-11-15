@@ -27,14 +27,14 @@ public class SendData extends AsyncTask<String, Void, Integer> {
 
     HttpURLConnection urlConnect;
     String url;
-    SendDataCallbackInterface fdCBInterface;
+    SendDataCallbackInterface sdCBInterface;
     //JSONObject inRoute;
     Route inRoute;
 
     SendData(String inURL, Route input, SendDataCallbackInterface cbInterface) {
         this.url = inURL;
         this.inRoute = input;
-        this.fdCBInterface = cbInterface;
+        this.sdCBInterface = cbInterface;
     }
 
 
@@ -64,11 +64,11 @@ public class SendData extends AsyncTask<String, Void, Integer> {
                 testJson.put("min_long", inRoute.getBounds()[0]);
                 testJson.put("max_lat", inRoute.getBounds()[3]);
                 testJson.put("max_long", inRoute.getBounds()[2]);
-                //testJson.put("user", "jebragg");
+                testJson.put("user", "http://web/users/jebragg/");
                 testJson.put("routeid", inRoute.getRID());
                 testJson.put("parentid", inRoute.getPID());
                 testJson.put("data", inRoute.toString());
-                //testJson.put("atype", inRoute.getActivity());
+                testJson.put("atype", inRoute.getActivity());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -98,8 +98,7 @@ public class SendData extends AsyncTask<String, Void, Integer> {
     @Override
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
-        this.fdCBInterface.sendDataCallback(result);
-      }
+        this.sdCBInterface.sendDataCallback(result);
+    }
 
 }
-

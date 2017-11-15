@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.pathway.pathway_android.R;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Achievements extends AppCompatActivity{
 
@@ -57,54 +58,51 @@ public class Achievements extends AppCompatActivity{
         achieve_name2 =  (TextView) findViewById(R.id.achieve_name2);
         achieve_name3 =  (TextView) findViewById(R.id.achieve_name3);
         achieve_name4 =  (TextView) findViewById(R.id.achieve_name4);
-        achieve_name5 =  (TextView) findViewById(R.id.achieve_name5);
+
 
 
         achieve_desc1 =  (TextView) findViewById(R.id.achieve_desc1);
         achieve_desc2 =  (TextView) findViewById(R.id.achieve_desc2);
         achieve_desc3 =  (TextView) findViewById(R.id.achieve_desc3);
         achieve_desc4 =  (TextView) findViewById(R.id.achieve_desc4);
-        achieve_desc5 =  (TextView) findViewById(R.id.achieve_desc5);
+
 
 
         achieve_photo1 = (ImageView) findViewById(R.id.achieve_photo1);
         achieve_photo2 = (ImageView) findViewById(R.id.achieve_photo2);
         achieve_photo3 = (ImageView) findViewById(R.id.achieve_photo3);
         achieve_photo4 = (ImageView) findViewById(R.id.achieve_photo4);
-        achieve_photo5 = (ImageView) findViewById(R.id.achieve_photo5);
+
 
         achieve_button = (Button) findViewById(R.id.achieve_button);
 
 
+
+
+
     }
+
+    class Achievements2 extends JSONObject {
+
+
+
+    }
+
+
+
 
 
 
 
 
     public void changePicture(View view) {
-    /*
+
         achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo2.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo3.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo4.setImageResource(R.mipmap.achievement_unlocked);
         achieve_photo5.setImageResource(R.mipmap.achievement_unlocked);
-        */
-        String phoneNumber = "9195206085";
-        String message = "This is a test message sent from the Pathway app";
-        //PendingIntent sentPI;
-        String SENT = "SMS_SENT";
 
-        //sentPI = PendingIntent.getBroadcast(this, 0,new Intent(SENT), 0);
-    try {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-        Toast.makeText(getApplicationContext(), "SMS Sent", Toast.LENGTH_SHORT).show();
-
-    } catch (Exception e){
-        Toast.makeText(getApplicationContext(), "SMS Failed", Toast.LENGTH_SHORT).show();
-        e.printStackTrace();
-    }
 
     }
 

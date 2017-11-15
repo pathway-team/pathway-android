@@ -14,6 +14,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,8 +27,13 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetBehavior;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Chronometer;
+import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,11 +64,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnPolylineClickListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
@@ -77,7 +86,9 @@ public class MainActivity extends AppCompatActivity
     private LatLng lastLoc;
     private Polyline userRoute;
     private Route currentRoute;
-    private List<Route> nearbyRoutes;
+    private Double polyDist;
+    private List<Polyline> areaRoutes = new ArrayList<>();
+    private List<Route> nearbyRoutes = new ArrayList<>();
     private String ntwkData;
     private Button btnStart;
     private Chronometer timerRoute;
@@ -87,38 +98,60 @@ public class MainActivity extends AppCompatActivity
     public void fetchDataCallback(String result) {
         this.ntwkData = result;
 
+
+        JSONArray routesList = new JSONArray();
+        if (nearbyRoutes != null) {
+            nearbyRoutes.clear();
+        }
+        if (areaRoutes != null) {
+            for (Polyline pl : areaRoutes) {
+                pl.remove();
+            }
+        }
         try {
-            JSONArray routesList = new JSONArray(result);
+            routesList = new JSONArray(result);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Route testRoute = null;
-        try {
-            testRoute = new Route(result);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        for (int i = 0; i < routesList.length(); i++) {
+            try {
+                JSONObject tempJson = new JSONObject(routesList.getString(i));
+                if (tempJson.get("data") != "{}") {
+                    Route tempRoute = new Route(tempJson.getString("data").replace("activity", "atype"));
+                    PolylineOptions routeOptions = new PolylineOptions()
+                            .color(Color.BLUE)
+                            .width(16)
+                            .startCap(new RoundCap())
+                            .endCap(new RoundCap())
+                            .clickable(true);
+
+                    Polyline oldRoute = mMap.addPolyline(routeOptions);
+                    oldRoute.setTag(tempRoute);
+                    oldRoute.setPoints(tempRoute.getDrawPoints());
+                    areaRoutes.add(oldRoute);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        //create Routes and show on map here
-        PolylineOptions routeOptions = new PolylineOptions()
-                .color(Color.BLUE)
-                .width(16)
-                .startCap(new RoundCap())
-                .endCap(new RoundCap())
-                .clickable(true);
-        Polyline oldRoutes = mMap.addPolyline(routeOptions);
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(testRoute.getDrawPoints().get(0)));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(testRoute.getDrawPoints().get(0), 16));
-        oldRoutes.setPoints(testRoute.getDrawPoints());
     }
 
     @Override
     public void sendDataCallback(Integer result) {
         int test = result;
+        switch (test) {
+            case (201):
+                Toast.makeText(this, "Route successfully saved.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onPolylineClick(Polyline polyline) {
+        Toast.makeText(this, polyline.getTag().toString(), Toast.LENGTH_LONG).show();
+
     }
 
     private enum RunStates {OFF, RUN, PAUSE}
-
-    ;
     private RunStates runState = RunStates.OFF;
     private String coordMsg;
 
@@ -153,7 +186,7 @@ public class MainActivity extends AppCompatActivity
                         "\"pid\": 1," +
                         "\"name\": \"Bus Stop\"," +
                         "\"diffRtng\": \"A-1\"," +
-                        "\"activity\": \"walk\"" +
+                        "\"atype\": \"walk\"" +
                         "}";
 
                 Route source = null;
@@ -166,10 +199,11 @@ public class MainActivity extends AppCompatActivity
                 //JSONObject testJson = new JSONObject();
 
 
-                String testURL = "http://138.197.103.225:8000/routes/";
+                String testURL = getString(R.string.routesURL);
                 String testURL2 = "http://138.197.103.225:8000/routes/";
                 //double elevation = getElev(lastLoc);
                 //new FetchData("temp url", MainActivity.this).execute();
+                source.buildJSON();
                 new SendData(testURL, source, MainActivity.this).execute();
                 Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -287,11 +321,12 @@ public class MainActivity extends AppCompatActivity
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
         mMap = googleMap;
-        LatLng sydney = new LatLng(-33.852, 151.211);
+        LatLng startLoc = new LatLng(39.8283, -98.5795);
         googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //googleMap.addMarker(new MarkerOptions().position(sydney)
+        //        .title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(startLoc));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLoc, 3));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -301,6 +336,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
         googleMap.setOnMyLocationButtonClickListener(this);
+        googleMap.setOnPolylineClickListener(this);
         googleMap.setMyLocationEnabled(true);
 
     }
@@ -310,18 +346,27 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
 
+        prevLoc = lastLoc;
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
-        double altitude = location.getAltitude();
+
         //double elevation = this.getElev(location);
         if (userRoute != null) {
-            List<LatLng> points = userRoute.getPoints();
-            points.add(lastLoc);
-            currentRoute.addCoords(lastLoc, altitude);
-            //currentRoute.addTime(timerRoute.get)
-
-            userRoute.setPoints(points);
+            try {
+                double altitude = location.getAltitude();
+                List<LatLng> points = userRoute.getPoints();
+                points.add(lastLoc);
+                currentRoute.addCoords(lastLoc, altitude);
+                currentRoute.addTime((int) (SystemClock.elapsedRealtime() - timerRoute.getBase()) / 1000);
+                currentRoute.calcBBox();
+                polyDist += SphericalUtil.computeDistanceBetween(lastLoc, prevLoc);
+                currentRoute.setDistance(polyDist);
+                currentRoute.buildJSON();
+                userRoute.setPoints(points);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        coordMsg = String.format("XY: %s.", lastLoc.toString());
+
         mMap.animateCamera(CameraUpdateFactory.newLatLng(lastLoc));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 16));
     }
@@ -430,8 +475,7 @@ public class MainActivity extends AppCompatActivity
                     .color(Color.RED)
                     .width(12)
                     .startCap(new RoundCap())
-                    .endCap(new RoundCap())
-                    .clickable(true);
+                    .endCap(new RoundCap());
             timerRoute.setBase(SystemClock.elapsedRealtime());
             timerRoute.start();
             userRoute = mMap.addPolyline(routeOptions);
@@ -442,6 +486,40 @@ public class MainActivity extends AppCompatActivity
             btnStart.setText("Start");
             Snackbar.make(v, "Recording Stopped.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+
+            LayoutInflater layoutInflater
+                    = (LayoutInflater) getBaseContext()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = layoutInflater.inflate(R.layout.route_save_window, null);
+
+            final EditText routeName = (EditText) popupView.findViewById(R.id.editRtName);
+            final Spinner dropdown = (Spinner) popupView.findViewById(R.id.actDropDown);
+            final CheckBox exporter = (CheckBox) popupView.findViewById(R.id.checkExport);
+
+            final PopupWindow popupWindow = new PopupWindow(
+                    popupView,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,true);
+
+            Button btnDismiss = (Button) popupView.findViewById(R.id.dismiss);
+            btnDismiss.setOnClickListener(new Button.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    //Spinner dropdown = (Spinner)findViewById(R.id.actDropDown);
+                    String rtName = routeName.getText().toString();
+                    String actType = dropdown.getSelectedItem().toString().substring(0,1);
+
+                    currentRoute.setName(rtName);
+                    currentRoute.setActivity(actType);
+                    currentRoute.buildJSON();
+                    //new SendData(getString(R.string.routesURL), currentRoute, MainActivity.this).execute();
+                    popupWindow.dismiss();
+                }
+            });
+            if (currentRoute.getCoordinates().size() > 1) {
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+            }
 
             runState = RunStates.OFF;
             userRoute.remove();

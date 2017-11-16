@@ -29,7 +29,7 @@ public class FriendsList extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_friends_list);
        Intent intent = getIntent();
-        startActivity(intent);
+
                 String jsondata = intent.getStringExtra("jsondata"); // receiving data from  FBLoginButton.java
         JSONArray friendslist;
                 ArrayList<String> friends = new ArrayList<String>();
@@ -46,6 +46,16 @@ public class FriendsList extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listView);
                 listView.setAdapter(adapter);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3 = new Intent(FriendsList.this,MainActivity.class);
+                startActivity(intent3);
+            }
+        });
+    }
+
 
         
     }
@@ -54,4 +64,3 @@ public class FriendsList extends AppCompatActivity {
 
 
 
-}

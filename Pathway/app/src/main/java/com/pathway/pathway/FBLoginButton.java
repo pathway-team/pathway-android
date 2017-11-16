@@ -71,7 +71,7 @@ public class FBLoginButton extends AppCompatActivity {
                                 try {
                                         JSONArray rawName = response.getJSONObject().getJSONArray("data");
                                         intent.putExtra("jsondata", rawName.toString());
-                                        //startActivity(intent);
+                                        startActivity(intent);
                                 } catch (JSONException e) {
                                         e.printStackTrace();
                                 }
@@ -79,7 +79,7 @@ public class FBLoginButton extends AppCompatActivity {
                         }
                 ).executeAsync();
 
-                startActivity(i);
+
 
                 Toast.makeText(getApplicationContext(), "Logging In...", Toast.LENGTH_SHORT).show();
 

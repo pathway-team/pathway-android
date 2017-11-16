@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity
         dbHandler = new DeviceDBHandler(getApplicationContext());
 
         //clears tables
-        dbHandler.onUpgrade(dbHandler.getWritableDatabase(),0,0);
+        //dbHandler.onUpgrade(dbHandler.getWritableDatabase(),0,0);
 
         //only call this here!!!
         dbHandler.createTables();

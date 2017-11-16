@@ -31,6 +31,18 @@ public class UserReport extends JSONObject{
         }
     }
 
+    public UserReport(String json) throws JSONException{
+        super(json);
+
+        try {
+            totalDistance = this.getDouble("totalDistance");
+            totalTime = this.getDouble("totalTime");
+            numRuns = this.getInt("numRuns");
+            this.getInt("numRoutes");
+        }catch(JSONException e){
+            Log.d("PathwayError", e.getMessage());
+        }
+    }
 
     public double getTotalDistance() {
         return totalDistance;

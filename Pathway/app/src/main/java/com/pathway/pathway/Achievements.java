@@ -1,6 +1,7 @@
 package com.pathway.pathway;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,11 @@ import android.widget.Toast;
 
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Achievements extends AppCompatActivity{
 
@@ -45,6 +50,9 @@ public class Achievements extends AppCompatActivity{
     ImageView achieve_photo5;
 
     Button achieve_button;
+
+    DeviceDBHandler obj;
+    UserReport userReport;
 
 
 
@@ -76,35 +84,44 @@ public class Achievements extends AppCompatActivity{
 
         achieve_button = (Button) findViewById(R.id.achieve_button);
 
+        obj = new DeviceDBHandler(getApplicationContext());
+
+
+        try {
+            UserReport userReport = new UserReport(obj.getLatestUserReport());
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        if(userReport.getNumRoutes() > 0){
+            obj.updateAchievement("BabySteps", 1);
+            achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
+        }
+
+        if(userReport.getTotalDistance() >= 10){
+            obj.updateAchievement("GoodonMileage", 1);
+            achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
+        }
+
+        if(userReport.getTotalTime() >= 86400){
+            obj.updateAchievement("DaynNight", 1);
+            achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
+        }
 
 
 
 
     }
 
-    class Achievements2 extends JSONObject {
-
-
-
-    }
 
 
 
 
 
 
-
-
-    public void changePicture(View view) {
-
-        achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
-        achieve_photo2.setImageResource(R.mipmap.achievement_unlocked);
-        achieve_photo3.setImageResource(R.mipmap.achievement_unlocked);
-        achieve_photo4.setImageResource(R.mipmap.achievement_unlocked);
-        achieve_photo5.setImageResource(R.mipmap.achievement_unlocked);
-
-
-    }
 
 
 

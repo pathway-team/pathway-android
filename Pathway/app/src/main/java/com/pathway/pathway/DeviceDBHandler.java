@@ -379,7 +379,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         values.put(KEY_JSON, r.toString());
         values.put(KEY_PID, r.getPid());
         values.put(KEY_RID, r.getRid());
-        long id = db.insert(TABLE_USER, null, values);
+        long id = db.insert(TABLE_REPORTS, null, values);
 
         db.close();
         return (id >= 0);

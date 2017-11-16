@@ -42,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
     Context c = this;
     EditText etUsername;
     EditText etAge;
-    EditText etEmail;
     EditText etWeight;
     EditText etSex;
     EditText etPassword;
@@ -56,7 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etAge = (EditText) findViewById(R.id.etAge);
-        etEmail = (EditText) findViewById(R.id.etEmail1);
         etWeight = (EditText) findViewById(R.id.etWeight);
         etSex = (EditText) findViewById(R.id.etSex);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -92,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
             jsonObject.put("age", etAge.getText());
             jsonObject.put("gender", etSex.getText().toString());
             jsonObject.put("weight", etWeight.getText().toString());
-            jsonObject.put("phone", etPhone.getText().toString());
+            jsonObject.put("phonenumber", etPhone.getText().toString());
             jsonObject.put("country", etCountry.getText().toString());
 
             try (DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream())) {

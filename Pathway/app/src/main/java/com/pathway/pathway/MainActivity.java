@@ -235,12 +235,12 @@ public class MainActivity extends AppCompatActivity
                         e.printStackTrace();
                     }
 
-                    Intent myIntent = new Intent(MainActivity.this, BasicReportView.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("pid", source.getPID());
-                    bundle.putInt("rid", source.getRID());
-                    myIntent.putExtras(bundle);
-                    startActivity(myIntent);
+                    //Intent myIntent = new Intent(MainActivity.this, BasicReportView.class);
+                    //Bundle bundle = new Bundle();
+                    //bundle.putInt("pid", source.getPID());
+                    //bundle.putInt("rid", source.getRID());
+                    //myIntent.putExtras(bundle);
+                    //startActivity(myIntent);
 
                     //new SendData(testURL, source, MainActivity.this).execute();
                     //Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
@@ -421,7 +421,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         mMap.animateCamera(CameraUpdateFactory.newLatLng(lastLoc));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 18));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 17));
     }
 
     @Override
@@ -567,12 +567,14 @@ public class MainActivity extends AppCompatActivity
                     currentRoute.setActivity(actType);
                     currentRoute.buildJSON();
                     dbHandler.addNewRoute(currentRoute);
+                    dbHandler.addRun(currentRoute);
                     try {
                         currentRoute = new Route(dbHandler.getLastRoute());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     new SendData(getString(R.string.routesURL), currentRoute, MainActivity.this).execute();
+
                     popupWindow.dismiss();
 
                     Intent myIntent = new Intent(MainActivity.this, BasicReportView.class);

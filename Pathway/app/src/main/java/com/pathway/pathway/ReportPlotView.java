@@ -75,7 +75,7 @@ public class ReportPlotView extends AppCompatActivity {
         });
 
         //set min/max y-axis values and step interval
-        plot.setRangeBoundaries(0, 3, BoundaryMode.FIXED);
+        /*plot.setRangeBoundaries(0, 3, BoundaryMode.FIXED);
         plot.setRangeStep(StepMode.INCREMENT_BY_VAL, 1);
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).setFormat(new Format() {
             @Override
@@ -91,7 +91,7 @@ public class ReportPlotView extends AppCompatActivity {
                 // unused
                 return null;
             }
-        });
+        });*/
 
         //setup plot pan functionality for side-scrolling
         plot.getOuterLimits().set(0, 1000, 0, 25);

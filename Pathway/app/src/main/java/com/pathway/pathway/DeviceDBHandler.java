@@ -115,7 +115,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_ACHIEVEMENTS));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_REPORTS));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_USER));
-        this.createTables();
+
     }
 
     /**
@@ -489,6 +489,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         }catch (SQLiteException e){
             Log.d("SQLiteException ", e.getMessage());
         }
+        return false;
     }
 
 }

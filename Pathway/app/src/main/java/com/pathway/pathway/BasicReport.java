@@ -61,7 +61,13 @@ public class BasicReport extends JSONObject{
     }
 
     public void setSpeed_y(ArrayList<Double> speed_y) {
-        this.speed_y = speed_y;
+        try{
+            this.put("speed_y", new JSONArray(speed_y.toArray()));
+            this.speed_y = speed_y;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
+
     }
 
     public ArrayList<Integer> getTime_x() {
@@ -69,7 +75,13 @@ public class BasicReport extends JSONObject{
     }
 
     public void setTime_x(ArrayList<Integer> time_x) {
-        this.time_x = time_x;
+        try{
+            this.put("time_x", new JSONArray(time_x.toArray()));
+            this.time_x = time_x;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
+
     }
 
 
@@ -78,7 +90,13 @@ public class BasicReport extends JSONObject{
     }
 
     public void setMaxSpeed(double maxSpeed) {
-        this.maxSpeed = maxSpeed;
+        try{
+            this.put("maxSpeed", maxSpeed);
+            this.maxSpeed = maxSpeed;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
+
     }
 
     public double getAvgSpeed() {
@@ -86,7 +104,13 @@ public class BasicReport extends JSONObject{
     }
 
     public void setAvgSpeed(double avgSpeed) {
-        this.avgSpeed = avgSpeed;
+        try{
+            this.put("avgSpeed", avgSpeed);
+            this.avgSpeed = avgSpeed;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
+
     }
 
     public int getTotalTimeSec() {
@@ -94,7 +118,13 @@ public class BasicReport extends JSONObject{
     }
 
     public void setTotalTimeSec(int totalTimeSec) {
-        this.totalTimeSec = totalTimeSec;
+
+        try{
+            this.put("totalTimeSec", totalTimeSec);
+            this.totalTimeSec = totalTimeSec;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
     }
 
     public int getPid() {
@@ -102,7 +132,13 @@ public class BasicReport extends JSONObject{
     }
 
     public void setPid(int pid) {
-        this.pid = pid;
+
+        try{
+            this.put("pid", pid);
+            this.pid = pid;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
     }
 
     public int getRid() {
@@ -110,7 +146,13 @@ public class BasicReport extends JSONObject{
     }
 
     public void setRid(int rid) {
-        this.rid = rid;
+        try{
+            this.put("rid", rid);
+            this.rid = rid;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
+
     }
 
     public ArrayList<Integer> stringToIntArray(String input) {

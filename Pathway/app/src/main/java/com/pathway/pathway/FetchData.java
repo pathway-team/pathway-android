@@ -58,7 +58,7 @@ public class FetchData extends AsyncTask<String, Void, String> {
         StringBuilder sb = new StringBuilder();
         try {
             URL url = new URL(this.url);
-            if (this.bbox == null) {
+            if (this.bbox != null) {
                 url = new URL(String.format("%s?min_lat=%d,min_long=%d,max_lat=%d,max_long=%d",
                         this.url, bbox.southwest.latitude,
                         bbox.southwest.longitude,

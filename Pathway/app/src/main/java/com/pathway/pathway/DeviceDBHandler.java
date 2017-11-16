@@ -133,6 +133,12 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         int pid = cursor.getCount()+1;
 
+        try {
+            path.put("pid", pid);
+            path.put("rid", 0);
+        }catch(JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
         values.put(KEY_JSON, path.toString());
         values.put(KEY_PID, pid);
         values.put(KEY_RID, 0);
@@ -159,6 +165,12 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         String selectQuery = String.format("SELECT %s FROM %s WHERE %s = %d", KEY_PID, TABLE_ROUTES, KEY_PID, path.getPID());
         Cursor cursor = db.rawQuery(selectQuery, null);
         int rid = cursor.getCount();
+
+        try {
+            path.put("rid", rid);
+        }catch(JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
 
         values.put(KEY_JSON, path.toString());
         values.put(KEY_PID, path.getPID());

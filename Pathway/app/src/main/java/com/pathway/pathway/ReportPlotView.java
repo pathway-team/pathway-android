@@ -35,9 +35,9 @@ public class ReportPlotView extends AppCompatActivity {
         plot = (XYPlot) findViewById(R.id.plot);
         plot.setTitle("Speed plot");
 
-        List<Integer> timex = savedInstanceState.getIntegerArrayList("timex");
+        List<Integer> timex = getIntent().getExtras().getIntegerArrayList("timex");
         List<Double> speedy = new ArrayList<>();
-        double[] temp = savedInstanceState.getDoubleArray("speedy");
+        double[] temp = getIntent().getExtras().getDoubleArray("speedy");
 
         for (double d : temp) {
             speedy.add(d);
@@ -75,7 +75,7 @@ public class ReportPlotView extends AppCompatActivity {
         });
 
         //set min/max y-axis values and step interval
-        plot.setRangeBoundaries(0, 15, BoundaryMode.FIXED);
+        plot.setRangeBoundaries(0, 3, BoundaryMode.FIXED);
         plot.setRangeStep(StepMode.INCREMENT_BY_VAL, 1);
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).setFormat(new Format() {
             @Override

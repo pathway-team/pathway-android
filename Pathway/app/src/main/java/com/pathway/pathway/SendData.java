@@ -74,7 +74,7 @@ public class SendData extends AsyncTask<String, Void, Integer> {
                 testJson.put("min_long", inRoute.getBounds()[0]);
                 testJson.put("max_lat", inRoute.getBounds()[3]);
                 testJson.put("max_long", inRoute.getBounds()[2]);
-                testJson.put("user", "http://web/users/jebragg/");
+                testJson.put("user", String.format("http://web/users/%s/", username));
                 testJson.put("routeid", inRoute.getRID());
                 testJson.put("parentid", inRoute.getPID());
                 testJson.put("data", inRoute.toString());

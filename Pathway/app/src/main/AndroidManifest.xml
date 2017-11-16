@@ -38,7 +38,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!--              The API key for Google Maps-based APIs. -->
+        <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDUTweLJByJYvZvf-B6615i8DP5RfIArUA" />
@@ -74,7 +74,8 @@
         <activity
             android:name=".pop"
             android:theme="@style/AppTheme.pop" />
-        <activity android:name=".ReportPlotView"></activity>
+        <activity android:name=".ReportPlotView" />
+        <activity android:name=".BasicReportView"></activity>
     </application>
 
 </manifest>

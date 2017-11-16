@@ -306,9 +306,13 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_friendsview && FBLoginButton.isFBLogin == true) {
+            Intent myIntent = new Intent(this, FriendsList.class);
+            startActivity(myIntent);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_achieve && (isLogin.islogin == true || FBLoginButton.isFBLogin == true)) {
+            Intent myIntent1 = new Intent(this, Achievements.class);
+            startActivity(myIntent1);
 
         } else if (id == R.id.nav_share) {
 

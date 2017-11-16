@@ -555,6 +555,11 @@ public class MainActivity extends AppCompatActivity
 
 
     public void onStartPressed(View v) {
+        if (isLogin.islogin == false) {
+            Toast.makeText(this, "No User Logged in.\nPlease login before using Pathway.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (runState == RunStates.OFF) {
 
             try {

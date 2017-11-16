@@ -43,7 +43,17 @@ public class SendData extends AsyncTask<String, Void, Integer> {
     protected Integer doInBackground(String... params) {
         int responseCode = -1;
         try {
-            String userPass = "jebragg:avalon11";
+
+            String username = "";
+            String password = "";
+
+            try {
+                username = LoginActivity.bundle.getString("username");
+                password = LoginActivity.bundle.getString("password");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String userPass = String.format("%s:%s", username, password);
             String encoding = Base64.encodeToString(userPass.getBytes(), Base64.DEFAULT);
 
 

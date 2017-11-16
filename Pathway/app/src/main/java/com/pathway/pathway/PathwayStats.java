@@ -57,8 +57,8 @@ public class PathwayStats {
      * @param c
      * @return
      */
-    public static UserReport generateUserReport(Context c){
-        DeviceDBHandler handler = new DeviceDBHandler(c);
+    public static UserReport generateUserReport(DeviceDBHandler handler){
+
         List<String> routes = handler.getUserRoutes();
 
         double totalDistance = 0;

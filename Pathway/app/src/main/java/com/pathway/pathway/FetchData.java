@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.net.URL;
 import org.json.JSONArray;
@@ -35,7 +36,7 @@ public class FetchData extends AsyncTask<String, Void, String> {
     String url;
     FetchDataCallbackInterface fdCBInterface;
     FetchElevationCallbackInterface elevCBInterface;
-    LatLng bbox;
+    LatLngBounds bbox;
 
     private String result;
 
@@ -44,8 +45,9 @@ public class FetchData extends AsyncTask<String, Void, String> {
         this.fdCBInterface = cbInterface;
     }
 
-    FetchData(String inURL, LatLng bounds, FetchDataCallbackInterface cbInterface) {
+    FetchData(String inURL, LatLngBounds bounds, FetchDataCallbackInterface cbInterface) {
         this.url = inURL;
+        this.bbox = bounds;
         this.fdCBInterface = cbInterface;
     }
 
@@ -56,6 +58,14 @@ public class FetchData extends AsyncTask<String, Void, String> {
         StringBuilder sb = new StringBuilder();
         try {
             URL url = new URL(this.url);
+            if (this.bbox == null) {
+                url = new URL(String.format("%s?min_lat=%d,min_long=%d,max_lat=%d,max_long=%d",
+                        this.url, bbox.southwest.latitude,
+                        bbox.southwest.longitude,
+                        bbox.northeast.latitude,
+                        bbox.northeast.longitude));
+            }
+
             urlConnect = (HttpURLConnection)url.openConnection();
 
 

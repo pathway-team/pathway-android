@@ -76,8 +76,8 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         //creates reports table
         String CREATE_report_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(%s INTEGER PRIMARY " + "KEY AUTOINCREMENT, " +
-                "%s INTEGER PRIMARY KEY," +
-                "%s INTEGER PRIMARY KEY," +
+                "%s INTEGER," +
+                "%s INTEGER," +
                 " %s TEXT" +
                 ");", TABLE_REPORTS, KEY_ID, KEY_PID, KEY_RID,  KEY_JSON);
         db.execSQL(CREATE_report_TABLE);
@@ -95,7 +95,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         //creates achievements table(holds boolean values for when a user qualifies for achievements)
         String create_tbl_achievements = String.format("CREATE TABLE IF NOT EXISTS %s " +
-                "(%s INTEGER PRIMARY " + "KEY AUTOINCREMENT, " +
+                "(%s INTEGER AUTOINCREMENT, " +
                 "%s TEXT PRIMARY KEY," +
                 "%s INTEGER" +
                 ");", TABLE_ACHIEVEMENTS, KEY_ID, KEY_ACH_NAME, KEY_ACH_SET);

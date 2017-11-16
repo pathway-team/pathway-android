@@ -165,8 +165,45 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPolylineClick(Polyline polyline) {
-        Toast.makeText(this, polyline.getTag().toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, polyline.getTag().toString(), Toast.LENGTH_LONG).show();
 
+        LayoutInflater layoutInflater
+                = (LayoutInflater) getBaseContext()
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.route_info_window, null);
+
+        final TextView routeName = (TextView) popupView.findViewById(R.id.nameField);
+        final TextView routeDist = (TextView) popupView.findViewById(R.id.distField);
+        final TextView routeType = (TextView) popupView.findViewById(R.id.actField);
+        final TextView routeDiff = (TextView) popupView.findViewById(R.id.diffField);
+
+
+        try {
+            Route temp = new Route(polyline.getTag().toString());
+            routeName.setText(temp.getName());
+            routeDist.setText(temp.getDistance().toString());
+            routeType.setText(temp.getActivity());
+            routeDiff.setText(temp.getDifficulty());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,true);
+
+        Button btnStExist = (Button) popupView.findViewById(R.id.existStart);
+        btnStExist.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                popupWindow.dismiss();
+
+            }
+        });
+            popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER, 0, 0);
     }
 
 
@@ -181,6 +218,9 @@ public class MainActivity extends AppCompatActivity
 
 
         dbHandler = new DeviceDBHandler(getApplicationContext());
+
+        //clears tables
+        //dbHandler.onUpgrade(dbHandler.getWritableDatabase(),0,0);
 
         //only call this here!!!
         dbHandler.createTables();
@@ -329,23 +369,18 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_routes_map) {
             // handle the routes map fragment
-        } else if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
         } else if (id == R.id.nav_friendsview && FBLoginButton.isFBLogin == true) {
             Intent myIntent = new Intent(this, FriendsList.class);
             startActivity(myIntent);
-
         } else if (id == R.id.nav_achieve && (isLogin.islogin == true || FBLoginButton.isFBLogin == true)) {
             Intent myIntent1 = new Intent(this, Achievements.class);
             startActivity(myIntent1);
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } else if (id == R.id.nav_login) {
+        } else if(id == R.id.nav_logout && isLogin.islogin == true) {
+            isLogin.islogin = false;
+            LoginActivity.bundle.remove("username");
+            LoginActivity.bundle.remove("password");
+            Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_login && isLogin.islogin == false) {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
             //activityLink = (TextView) findViewById(R.id.tvRegisterHere);
@@ -396,6 +431,11 @@ public class MainActivity extends AppCompatActivity
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
         if (prevLoc == null) {
             prevLoc = lastLoc;
+            double dist = 2275.95045447; //1609.34m (or 1 mile) * sqrt(2). Finds distance of sw and ne corners.
+            LatLng swCnr = SphericalUtil.computeOffset(lastLoc, dist, 225.0);
+            LatLng neCnr = SphericalUtil.computeOffset(lastLoc, dist, 45.0);
+            LatLngBounds bBox = new LatLngBounds(swCnr, neCnr);
+            new FetchData(getString(R.string.routesURL), bBox, MainActivity.this).execute();
         }
         if (SphericalUtil.computeDistanceBetween(prevLoc, lastLoc) > 500) {
             prevLoc = lastLoc;
@@ -425,7 +465,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         mMap.animateCamera(CameraUpdateFactory.newLatLng(lastLoc));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 17));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 16));
     }
 
     @Override
@@ -517,6 +557,11 @@ public class MainActivity extends AppCompatActivity
 
 
     public void onStartPressed(View v) {
+        if (isLogin.islogin == false) {
+            Toast.makeText(this, "No User Logged in.\nPlease login before using Pathway.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (runState == RunStates.OFF) {
 
             try {
@@ -533,7 +578,8 @@ public class MainActivity extends AppCompatActivity
                     .color(Color.RED)
                     .width(12)
                     .startCap(new RoundCap())
-                    .endCap(new RoundCap());
+                    .endCap(new RoundCap())
+                    .zIndex((2.0f));
             timerRoute.setBase(SystemClock.elapsedRealtime());
             timerRoute.start();
             userRoute = mMap.addPolyline(routeOptions);
@@ -571,7 +617,7 @@ public class MainActivity extends AppCompatActivity
                     currentRoute.setActivity(actType);
                     currentRoute.buildJSON();
                     dbHandler.addNewRoute(currentRoute);
-                    dbHandler.addRun(currentRoute);
+                    
                     try {
                         currentRoute = new Route(dbHandler.getLastRoute());
                     } catch (JSONException e) {

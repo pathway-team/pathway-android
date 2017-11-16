@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -70,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
         bLogin = (Button) findViewById(R.id.bLogin);
         registerLink = (TextView) findViewById(R.id.tvRegisterHere);
         FacebookLogin = (TextView) findViewById(R.id.tvFacebook);
+        bundle.putString("username", "");
+        bundle.putString("password", "");
 
         bLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -77,6 +80,14 @@ public class LoginActivity extends AppCompatActivity {
                 boolean result = false;
                 httpHandler handler = new httpHandler(getApplicationContext());
                 handler.execute();
+                if(isLogin.islogin == true){
+                    Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                if(isLogin.islogin == false){
+                    Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

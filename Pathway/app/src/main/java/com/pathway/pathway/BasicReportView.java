@@ -31,7 +31,7 @@ public class BasicReportView extends AppCompatActivity {
         List<String> testReports = new DeviceDBHandler(getApplicationContext()).getRouteReports();
         List<String> listReport = new DeviceDBHandler(getApplicationContext()).getRouteReports(pid);
         try {
-             report = new BasicReport(listReport.get(listReport.size() - 1));
+             report = new BasicReport(listReport.get(rid));
 
             //format time seconds into minutes and seconds
             int timeMin = report.getTotalTimeSec() / 60;
@@ -39,8 +39,8 @@ public class BasicReportView extends AppCompatActivity {
 
             List<String> temp = new ArrayList<>();
             temp.add(String.format("%13s   %2d : %2d", "Time", timeMin, timeSec));
-            temp.add(String.format("%13s   %5d mph", "Max Speed", report.getMaxSpeed()));
-            temp.add(String.format("%13s   %5d mph", "Average Spd", report.getAvgSpeed()));
+            temp.add(String.format("%13s   %5.2f mph", "Max Speed", report.getMaxSpeed()));
+            temp.add(String.format("%13s   %5.2f mph", "Average Spd", report.getAvgSpeed()));
             temp.add("View Graph:Spd/Time");
 
 
@@ -73,8 +73,10 @@ public class BasicReportView extends AppCompatActivity {
         }
 
         Intent i = new Intent(this, ReportPlotView.class);
-        i.getExtras().putDoubleArray("speedy", temp);
-        i.getExtras().putIntegerArrayList("timex", report.getTime_x());
+        Bundle bundle = new Bundle();
+        bundle.putDoubleArray("speedy", temp);
+        bundle.putIntegerArrayList("timex", report.getTime_x());
+        i.putExtras(bundle);
         startActivity(i);
     }
 

@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by eewest on 11/13/17.
@@ -78,6 +79,19 @@ public class BasicReport extends JSONObject{
         try{
             this.put("time_x", new JSONArray(time_x.toArray()));
             this.time_x = time_x;
+        }catch (JSONException e){
+            Log.d("JSONException", e.getMessage());
+        }
+
+    }
+
+    public void setTime_x(List<Integer> time_x) {
+        try{
+            this.put("time_x", new JSONArray(time_x.toArray()));
+            for(int idx = 0; idx < time_x.size(); idx++){
+                this.time_x.add(time_x.get(idx));
+            }
+
         }catch (JSONException e){
             Log.d("JSONException", e.getMessage());
         }

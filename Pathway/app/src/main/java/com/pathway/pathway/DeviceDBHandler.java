@@ -95,7 +95,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         //creates achievements table(holds boolean values for when a user qualifies for achievements)
         String create_tbl_achievements = String.format("CREATE TABLE IF NOT EXISTS %s " +
-                "(%s INTEGER AUTOINCREMENT, " +
+                "(" +
                 "%s TEXT PRIMARY KEY," +
                 "%s INTEGER" +
                 ");", TABLE_ACHIEVEMENTS, KEY_ID, KEY_ACH_NAME, KEY_ACH_SET);

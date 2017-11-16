@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity
             for (Polyline pl : areaRoutes) {
                 pl.remove();
             }
+            areaRoutes.clear();
         }
         try {
             routesList = new JSONArray(result);
@@ -224,7 +225,7 @@ public class MainActivity extends AppCompatActivity
                     source.setName("Test Route");
                     source.setActivity("W");
                     source.buildJSON();
-                    dbHandler.addNewRoute(source);
+                    //dbHandler.addNewRoute(source);
                     List<String> test = dbHandler.getUserRoutes();
                     String dbTest = dbHandler.getLastRoute();
                     int breakpoint = 0;
@@ -233,9 +234,17 @@ public class MainActivity extends AppCompatActivity
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    Intent myIntent = new Intent(MainActivity.this, BasicReportView.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("pid", source.getPID());
+                    bundle.putInt("rid", source.getRID());
+                    myIntent.putExtras(bundle);
+                    startActivity(myIntent);
+
                     //new SendData(testURL, source, MainActivity.this).execute();
-                    Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    //Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -380,13 +389,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
 
-        prevLoc = lastLoc;
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
-        if (SphericalUtil.computeDistanceBetween(prevLoc, lastLoc) > 300) {
-            double dist = 424.264068712; //300 * sqrt(2)
+        if (prevLoc == null) {
+            prevLoc = lastLoc;
+        }
+        if (SphericalUtil.computeDistanceBetween(prevLoc, lastLoc) > 500) {
+            prevLoc = lastLoc;
+            double dist = 2275.95045447; //1609.34m (or 1 mile) * sqrt(2). Finds distance of sw and ne corners.
             LatLng swCnr = SphericalUtil.computeOffset(lastLoc, dist, 225.0);
-            LatLng neCnr =
-                    SphericalUtil.computeOffset(lastLoc, dist, 45.0);
+            LatLng neCnr = SphericalUtil.computeOffset(lastLoc, dist, 45.0);
             LatLngBounds bBox = new LatLngBounds(swCnr, neCnr);
             new FetchData(getString(R.string.routesURL), bBox, MainActivity.this).execute();
         }
@@ -522,7 +533,7 @@ public class MainActivity extends AppCompatActivity
             timerRoute.setBase(SystemClock.elapsedRealtime());
             timerRoute.start();
             userRoute = mMap.addPolyline(routeOptions);
-            startLocationUpdates();
+            //startLocationUpdates();
         }
         else if(runState == RunStates.RUN) {
 
@@ -563,6 +574,13 @@ public class MainActivity extends AppCompatActivity
                     }
                     new SendData(getString(R.string.routesURL), currentRoute, MainActivity.this).execute();
                     popupWindow.dismiss();
+
+                    Intent myIntent = new Intent(MainActivity.this, BasicReportView.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("pid", currentRoute.getPID());
+                    bundle.putInt("rid", currentRoute.getRID());
+                    myIntent.putExtras(bundle);
+                    startActivity(myIntent);
                 }
             });
             if (currentRoute.getCoordinates().size() > 1) {
@@ -574,7 +592,7 @@ public class MainActivity extends AppCompatActivity
             userRoute.remove();
             userRoute = null;
             timerRoute.stop();
-            stopLocationUpdates();
+            //stopLocationUpdates();
         }
     }
     public void onStopPressed() {

@@ -148,7 +148,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         BasicReport r = PathwayStats.generateBasicReport(path);
         addBasicReport(r);
-        PathwayStats.generateUserReport(this);
+        //PathwayStats.generateUserReport(this);
         db.close();
         return id;
     }
@@ -184,7 +184,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         BasicReport report = PathwayStats.generateBasicReport(path);
 
         this.addBasicReport(report);
-        PathwayStats.generateUserReport(this);
+        //PathwayStats.generateUserReport(this);
         db.close();
         return id;
     }

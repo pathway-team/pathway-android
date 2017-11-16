@@ -252,19 +252,16 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_routes_map) {
             // handle the routes map fragment
-        } else if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.nav_login) {
+        } else if(id == R.id.nav_logout && isLogin.islogin == true) {
+            isLogin.islogin = false;
+            LoginActivity.bundle.remove("username");
+            LoginActivity.bundle.remove("password");
+            Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_login && isLogin.islogin == false) {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
             //activityLink = (TextView) findViewById(R.id.tvRegisterHere);

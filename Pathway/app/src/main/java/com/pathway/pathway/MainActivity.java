@@ -165,7 +165,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        dbHandler = new DeviceDBHandler(getApplicationContext());
 
+        //only call this here!!!
+        dbHandler.createTables();
 
 
         //Start Test Area for jebragg

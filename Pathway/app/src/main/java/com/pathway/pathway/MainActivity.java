@@ -165,8 +165,45 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPolylineClick(Polyline polyline) {
-        Toast.makeText(this, polyline.getTag().toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, polyline.getTag().toString(), Toast.LENGTH_LONG).show();
 
+        LayoutInflater layoutInflater
+                = (LayoutInflater) getBaseContext()
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.route_info_window, null);
+
+        final TextView routeName = (TextView) popupView.findViewById(R.id.nameField);
+        final TextView routeDist = (TextView) popupView.findViewById(R.id.distField);
+        final TextView routeType = (TextView) popupView.findViewById(R.id.actField);
+        final TextView routeDiff = (TextView) popupView.findViewById(R.id.diffField);
+
+
+        try {
+            Route temp = new Route(polyline.getTag().toString());
+            routeName.setText(temp.getName());
+            routeDist.setText(temp.getDistance().toString());
+            routeType.setText(temp.getActivity());
+            routeDiff.setText(temp.getDifficulty());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,true);
+
+        Button btnStExist = (Button) popupView.findViewById(R.id.existStart);
+        btnStExist.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                popupWindow.dismiss();
+
+            }
+        });
+            popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER, 0, 0);
     }
 
 
@@ -534,7 +571,8 @@ public class MainActivity extends AppCompatActivity
                     .color(Color.RED)
                     .width(12)
                     .startCap(new RoundCap())
-                    .endCap(new RoundCap());
+                    .endCap(new RoundCap())
+                    .zIndex((2.0f));
             timerRoute.setBase(SystemClock.elapsedRealtime());
             timerRoute.start();
             userRoute = mMap.addPolyline(routeOptions);

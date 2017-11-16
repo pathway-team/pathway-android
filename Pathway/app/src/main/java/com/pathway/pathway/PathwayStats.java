@@ -1,6 +1,7 @@
 package com.pathway.pathway;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -24,25 +25,28 @@ public class PathwayStats {
         BasicReport report = new BasicReport();
         List<LatLng> points = r.getDrawPoints();
         ArrayList<Double> speedList = new ArrayList<>((points.size()/2)+1);
-
+        ArrayList<Integer> timestamps = new ArrayList<>();
+        timestamps.add(0);
         for(int idx = 0; idx < points.size() - 1; idx++){
+            int timeDelta = r.getTimestamps().get(idx+1) - r.getTimestamps().get(idx);
             double dist = calcDist(points.get(idx).latitude,points.get(idx+1).latitude,
                     points.get(idx).longitude, points.get(idx+1).longitude, 0, 0);
-            speedList.add(dist/3);//3 is a place holder until more functionality is added to route class
+            speedList.add(dist/timeDelta);//3 is a place holder until more functionality is added to route class
+            timestamps.add(timestamps.get(timestamps.size()-1) + timeDelta);
         }
-
+        timestamps.remove(1);
         //temporary: simulate timestamps from route class
-        ArrayList<Integer> timestamps = new ArrayList<>(speedList.size());
-        for(int idx = 0; idx < timestamps.size() - 1; idx++){
-            timestamps.add(3);
-        }
 
         report.setSpeed_y(speedList);
         report.setTime_x(timestamps);
         report.setMaxSpeed(findMax(speedList));
         report.setAvgSpeed(calcAvg(speedList));
-        report.setRid(r.getRID());
-        report.setPid(r.getPID());
+        try {
+            report.setRid(r.getInt("rid"));
+            report.setPid(r.getInt("pid"));
+        }catch(JSONException e){
+            Log.d("JSONException",e.getMessage());
+        }
         report.setTotalTimeSec(timestamps.size()*3);//temporary until timestamps is setup in route
 
         return report;

@@ -392,6 +392,11 @@ public class MainActivity extends AppCompatActivity
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
         if (prevLoc == null) {
             prevLoc = lastLoc;
+            double dist = 2275.95045447; //1609.34m (or 1 mile) * sqrt(2). Finds distance of sw and ne corners.
+            LatLng swCnr = SphericalUtil.computeOffset(lastLoc, dist, 225.0);
+            LatLng neCnr = SphericalUtil.computeOffset(lastLoc, dist, 45.0);
+            LatLngBounds bBox = new LatLngBounds(swCnr, neCnr);
+            new FetchData(getString(R.string.routesURL), bBox, MainActivity.this).execute();
         }
         if (SphericalUtil.computeDistanceBetween(prevLoc, lastLoc) > 500) {
             prevLoc = lastLoc;
@@ -421,7 +426,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         mMap.animateCamera(CameraUpdateFactory.newLatLng(lastLoc));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 17));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 16));
     }
 
     @Override

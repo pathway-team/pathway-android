@@ -3,6 +3,8 @@ package com.pathway.pathway;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.location.Location;
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity
     private enum RunStates {OFF, RUN, PAUSE}
     private RunStates runState = RunStates.OFF;
     private String coordMsg;
-    DeviceDBHandler dbHandler = new DeviceDBHandler(this);
+    private DeviceDBHandler dbHandler = new DeviceDBHandler(this);
 
     @Override
     public void fetchDataCallback(String result) {
@@ -176,9 +178,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
         //Start Test Area for jebragg
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +217,7 @@ public class MainActivity extends AppCompatActivity
                     source.setName("Test Route");
                     source.setActivity("W");
                     source.buildJSON();
-                    //dbHandler.addNewRoute(source);
+                    dbHandler.addNewRoute(source);
                     List<String> test = dbHandler.getUserRoutes();
                     String dbTest = dbHandler.getLastRoute();
                     int breakpoint = 0;

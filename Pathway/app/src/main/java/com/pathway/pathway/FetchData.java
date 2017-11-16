@@ -57,19 +57,19 @@ public class FetchData extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         StringBuilder sb = new StringBuilder();
         try {
-            URL url = new URL(this.url);
+            URL curl = new URL(this.url);
             if (this.bbox != null) {
-                url = new URL(String.format("%s?min_lat=%s,min_long=%s,max_lat=%s,max_long=%s",
+                curl = new URL(String.format("%s?min_lat=%s,min_long=%s,max_lat=%s,max_long=%s",
                         this.url, bbox.southwest.latitude,
                         bbox.southwest.longitude,
                         bbox.northeast.latitude,
                         bbox.northeast.longitude));
             }
 
-            urlConnect = (HttpURLConnection)url.openConnection();
+            //urlConnect = (HttpURLConnection)curl.openConnection();
 
 
-            urlConnect = (HttpURLConnection) url.openConnection();
+            urlConnect = (HttpURLConnection) curl.openConnection();
             InputStream in = new BufferedInputStream(urlConnect.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 

@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         FacebookLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent FacebookLogin = new Intent(LoginActivity.this, FacebookL.class);
+                Intent FacebookLogin = new Intent(LoginActivity.this, FBLoginButton.class);
                 LoginActivity.this.startActivity(FacebookLogin);
             }
         });

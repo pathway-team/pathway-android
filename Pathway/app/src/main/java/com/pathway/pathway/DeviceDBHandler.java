@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Path;
 import android.util.Log;
@@ -114,7 +115,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_ACHIEVEMENTS));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_REPORTS));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_USER));
-        this.createTables();
+
     }
 
     /**
@@ -474,6 +475,22 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return "";
     }
 
+
+    public boolean updateAchievement(String ach_name, int set){
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_ACH_SET, set);
+
+        String where = KEY_ACH_NAME +" == ? ";
+
+        String whereArgs[] = new String[] {ach_name};
+        try {
+            int res = this.getWritableDatabase().update(TABLE_ACHIEVEMENTS, newValues, where, whereArgs);
+            return (res > 0);
+        }catch (SQLiteException e){
+            Log.d("SQLiteException ", e.getMessage());
+        }
+        return false;
+    }
 
 }
 

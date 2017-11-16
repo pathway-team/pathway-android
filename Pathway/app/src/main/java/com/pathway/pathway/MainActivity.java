@@ -369,10 +369,12 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_routes_map) {
             // handle the routes map fragment
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_friendsview && FBLoginButton.isFBLogin == true) {
+            Intent myIntent = new Intent(this, FriendsList.class);
+            startActivity(myIntent);
+        } else if (id == R.id.nav_achieve && (isLogin.islogin == true || FBLoginButton.isFBLogin == true)) {
+            Intent myIntent1 = new Intent(this, Achievements.class);
+            startActivity(myIntent1);
         } else if(id == R.id.nav_logout && isLogin.islogin == true) {
             isLogin.islogin = false;
             LoginActivity.bundle.remove("username");

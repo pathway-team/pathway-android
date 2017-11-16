@@ -84,9 +84,9 @@ public class Achievements extends AppCompatActivity{
 
         achieve_button = (Button) findViewById(R.id.achieve_button);
 
-        obj = new DeviceDBHandler(getApplicationContext());
+       // obj = new DeviceDBHandler(getApplicationContext());
 
-
+        /*
         try {
             UserReport userReport = new UserReport(obj.getLatestUserReport());
 
@@ -94,6 +94,7 @@ public class Achievements extends AppCompatActivity{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
 
         if(userReport.getNumRoutes() > 0){
@@ -110,6 +111,7 @@ public class Achievements extends AppCompatActivity{
             obj.updateAchievement("DaynNight", 1);
             achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
         }
+        */
 
 
 

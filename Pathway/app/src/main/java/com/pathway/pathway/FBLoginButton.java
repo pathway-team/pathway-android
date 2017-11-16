@@ -29,6 +29,7 @@ public class FBLoginButton extends AppCompatActivity {
     //creates button and callbackmanager so that facebook API and app can exchange information
     LoginButton loginButton;
     CallbackManager callbackManager;
+    public static boolean isFBLogin = false;
 
 
 
@@ -53,10 +54,11 @@ public class FBLoginButton extends AppCompatActivity {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
+                isFBLogin = true;
 
-               startActivity(i);
 
-                /*
+
+
                 GraphRequestAsyncTask graphRequestAsyncTask = new GraphRequest(
                         loginResult.getAccessToken(),
                         //AccessToken.getCurrentAccessToken(),
@@ -69,15 +71,15 @@ public class FBLoginButton extends AppCompatActivity {
                                 try {
                                         JSONArray rawName = response.getJSONObject().getJSONArray("data");
                                         intent.putExtra("jsondata", rawName.toString());
-                                        startActivity(intent);
+                                        //startActivity(intent);
                                 } catch (JSONException e) {
                                         e.printStackTrace();
                                 }
                             }
                         }
                 ).executeAsync();
-                */
 
+                startActivity(i);
 
                 Toast.makeText(getApplicationContext(), "Logging In...", Toast.LENGTH_SHORT).show();
 
@@ -179,6 +181,7 @@ public class FBLoginButton extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+
     }
 
 

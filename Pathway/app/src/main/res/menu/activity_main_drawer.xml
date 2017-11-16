@@ -6,6 +6,12 @@
             android:id="@+id/nav_routes_map"
             android:title="Routes Map" />
         <item
+            android:id="@+id/nav_friendsview"
+            android:title="Friends" />
+        <item
+            android:id="@+id/nav_achieve"
+            android:title="Achievements" />
+        <item
             android:id="@+id/nav_logout"
             android:title="Logout"/>
         <item

@@ -27,19 +27,25 @@ public class SendMessage extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestSmsPermission();
-                try {
-
-                    sendSms("9195206085", "This is a test message");
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                sendText();
             }
         });
 
 
     }
+
+    public void sendText(){
+        requestSmsPermission();
+        try {
+
+            sendSms("9195206085", "This is a test message");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 

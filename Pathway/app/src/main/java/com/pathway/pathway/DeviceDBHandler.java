@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Path;
 import android.util.Log;
@@ -75,8 +76,8 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         //creates reports table
         String CREATE_report_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(%s INTEGER PRIMARY " + "KEY AUTOINCREMENT, " +
-                "%s INTEGER PRIMARY KEY," +
-                "%s INTEGER PRIMARY KEY," +
+                "%s INTEGER," +
+                "%s INTEGER," +
                 " %s TEXT" +
                 ");", TABLE_REPORTS, KEY_ID, KEY_PID, KEY_RID,  KEY_JSON);
         db.execSQL(CREATE_report_TABLE);
@@ -94,7 +95,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         //creates achievements table(holds boolean values for when a user qualifies for achievements)
         String create_tbl_achievements = String.format("CREATE TABLE IF NOT EXISTS %s " +
-                "(%s INTEGER PRIMARY " + "KEY AUTOINCREMENT, " +
+                "(%s INTEGER AUTOINCREMENT, " +
                 "%s TEXT PRIMARY KEY," +
                 "%s INTEGER" +
                 ");", TABLE_ACHIEVEMENTS, KEY_ID, KEY_ACH_NAME, KEY_ACH_SET);
@@ -114,7 +115,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_ACHIEVEMENTS));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_REPORTS));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_USER));
-        this.createTables();
+
     }
 
     /**
@@ -474,6 +475,22 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return "";
     }
 
+
+    public boolean updateAchievement(String ach_name, int set){
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_ACH_SET, set);
+
+        String where = KEY_ACH_NAME +" == ? ";
+
+        String whereArgs[] = new String[] {ach_name};
+        try {
+            int res = this.getWritableDatabase().update(TABLE_ACHIEVEMENTS, newValues, where, whereArgs);
+            return (res > 0);
+        }catch (SQLiteException e){
+            Log.d("SQLiteException ", e.getMessage());
+        }
+        return false;
+    }
 
 }
 

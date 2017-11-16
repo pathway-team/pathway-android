@@ -46,7 +46,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -87,13 +90,16 @@ public class MainActivity extends AppCompatActivity
     private LatLng lastLoc;
     private Polyline userRoute;
     private Route currentRoute;
-    private Double polyDist;
+    private Double polyDist = 0.0;
     private List<Polyline> areaRoutes = new ArrayList<>();
     private List<Route> nearbyRoutes = new ArrayList<>();
     private String ntwkData;
     private Button btnStart;
     private Chronometer timerRoute;
-
+    private enum RunStates {OFF, RUN, PAUSE}
+    private RunStates runState = RunStates.OFF;
+    private String coordMsg;
+    DeviceDBHandler dbHandler = new DeviceDBHandler(this);
 
     @Override
     public void fetchDataCallback(String result) {
@@ -143,6 +149,14 @@ public class MainActivity extends AppCompatActivity
         switch (test) {
             case (201):
                 Toast.makeText(this, "Route successfully saved.", Toast.LENGTH_SHORT).show();
+                break;
+            case (400):
+                Toast.makeText(this, "Route not saved to external.\nRequest not understood.",
+                        Toast.LENGTH_SHORT).show();
+                        break;
+            case(403):
+                Toast.makeText(this, "Route not saved.\nMake sure you are signed in.",
+                        Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -152,11 +166,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private enum RunStates {OFF, RUN, PAUSE}
-    private RunStates runState = RunStates.OFF;
-    private String coordMsg;
 
-    DeviceDBHandler dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,54 +184,55 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String jsonString =     "{" +
-                        "\"type\": \"LineString\"," +
-                        "\"bbox\": [-79.811818, 36.065488, -79.811308, 36.067061]," +
-                        "\"coordinates\": [" +
-                        "	[-79.811818, 36.065488, 250.8]," +
-                        "	[-79.811646, 36.065553, 251.1]," +
-                        "	[-79.811601, 36.065565, 250.8]" +
-                        " ]," +
-                        "\"timestamps\": [0, 3, 5]," +
-                        "\"distance\": 5280.0," +
-                        "\"rid\": 2," +
-                        "\"pid\": 1," +
-                        "\"name\": \"Bus Stop\"," +
-                        "\"diffRtng\": \"A-1\"," +
-                        "\"atype\": \"walk\"" +
-                        "}";
-
-                Route source = null;
-
                 try {
-                    source = new Route(jsonString);
-                } catch (JSONException e) {
+                    String jsonString = "{" +
+                            "\"type\": \"LineString\"," +
+                            "\"bbox\": [-79.811818, 36.065488, -79.811308, 36.067061]," +
+                            "\"coordinates\": [" +
+                            "	[-79.811818, 36.065488, 250.8]," +
+                            "	[-79.811646, 36.065553, 251.1]," +
+                            "	[-79.811601, 36.065565, 250.8]" +
+                            " ]," +
+                            "\"timestamps\": [0, 3, 5]," +
+                            "\"distance\": 5280.0," +
+                            "\"rid\": 2," +
+                            "\"pid\": 1," +
+                            "\"name\": \"Bus Stop\"," +
+                            "\"diffRtng\": \"A-1\"," +
+                            "\"atype\": \"walk\"" +
+                            "}";
+
+                    Route source = null;
+
+                    try {
+                        source = new Route(jsonString);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    //JSONObject testJson = new JSONObject();
+
+
+                    String testURL = getString(R.string.routesURL);
+                    //double elevation = getElev(lastLoc);
+                    new FetchData(testURL, MainActivity.this).execute();
+                    source.setName("Test Route");
+                    source.setActivity("W");
+                    source.buildJSON();
+                    //dbHandler.addNewRoute(source);
+                    List<String> test = dbHandler.getUserRoutes();
+                    String dbTest = dbHandler.getLastRoute();
+                    int breakpoint = 0;
+                    try {
+                        source = new Route(dbHandler.getLastRoute());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //new SendData(testURL, source, MainActivity.this).execute();
+                    Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                //JSONObject testJson = new JSONObject();
-
-
-                String testURL = getString(R.string.routesURL);
-                //double elevation = getElev(lastLoc);
-                new FetchData("temp url", MainActivity.this).execute();
-                /*source.setName("Test Route");
-                source.setActivity("W");
-                source.buildJSON();
-                dbHandler.addNewRoute(source);
-                List<String> test = dbHandler.getUserRoutes();
-                try {
-                    String testGet = dbHandler.getLastRoute();
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    source = new Route(dbHandler.getLastRoute());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                new SendData(testURL, source, MainActivity.this).execute();*/
-                Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 
@@ -364,6 +376,14 @@ public class MainActivity extends AppCompatActivity
 
         prevLoc = lastLoc;
         lastLoc = new LatLng(location.getLatitude(), location.getLongitude());
+        if (SphericalUtil.computeDistanceBetween(prevLoc, lastLoc) > 300) {
+            double dist = 424.264068712; //300 * sqrt(2)
+            LatLng swCnr = SphericalUtil.computeOffset(lastLoc, dist, 225.0);
+            LatLng neCnr =
+                    SphericalUtil.computeOffset(lastLoc, dist, 45.0);
+            LatLngBounds bBox = new LatLngBounds(swCnr, neCnr);
+            new FetchData(getString(R.string.routesURL), bBox, MainActivity.this).execute();
+        }
 
         //double elevation = this.getElev(location);
         if (userRoute != null) {
@@ -384,7 +404,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         mMap.animateCamera(CameraUpdateFactory.newLatLng(lastLoc));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 16));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoc, 18));
     }
 
     @Override
@@ -436,7 +456,7 @@ public class MainActivity extends AppCompatActivity
 
     protected void startLocationUpdates() {
         LocationRequest locationRequest = new LocationRequest()
-                .setInterval(3000)
+                .setInterval(5000)
                 .setFastestInterval(1000)
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
@@ -477,6 +497,7 @@ public class MainActivity extends AppCompatActivity
 
     public void onStartPressed(View v) {
         if (runState == RunStates.OFF) {
+
             try {
                 currentRoute = new Route();
             } catch (JSONException e) {
@@ -522,7 +543,6 @@ public class MainActivity extends AppCompatActivity
 
                 @Override
                 public void onClick(View v) {
-                    //Spinner dropdown = (Spinner)findViewById(R.id.actDropDown);
                     String rtName = routeName.getText().toString();
                     String actType = dropdown.getSelectedItem().toString().substring(0,1);
 
@@ -544,6 +564,7 @@ public class MainActivity extends AppCompatActivity
             }
 
             runState = RunStates.OFF;
+            polyDist = 0.0;
             userRoute.remove();
             userRoute = null;
             timerRoute.stop();

@@ -91,7 +91,7 @@ public class Route extends JSONObject {
         String[] items = input.substring(1, input.length() - 1).split(",");
         Double results[] = new Double[items.length];
         for (int i = 0; i < items.length; i++) {
-            results[i] =  Double.parseDouble(items[i]);
+            results[i] =  Double.parseDouble(items[i].trim());
         }
         return results;
     }
@@ -100,7 +100,7 @@ public class Route extends JSONObject {
         String[] items = input.substring(1, input.length() - 1).split(",");
         Integer results[] = new Integer[items.length];
         for (int i = 0; i < items.length; i++) {
-            results[i] =  Integer.parseInt(items[i]);
+            results[i] =  Integer.parseInt(items[i].trim());
         }
         return results;
     }
@@ -109,7 +109,7 @@ public class Route extends JSONObject {
         String[] items = input.substring(1, input.length() - 1).split(",");
         List<Integer> results = new ArrayList();
         for (int i = 0; i < items.length; i++) {
-            results.add(Integer.parseInt(items[i]));
+            results.add(Integer.parseInt(items[i].trim()));
         }
         return results;
     }
@@ -174,6 +174,14 @@ public class Route extends JSONObject {
 
     public void setDistance(Double input) {
         this.distance = input;
+    }
+
+    protected void setRid(int input) {
+        this.rid = input;
+    }
+
+    protected void setPid(int input) {
+        this.pid = input;
     }
 
     public void calcBBox() {
@@ -261,7 +269,6 @@ public class Route extends JSONObject {
     public void buildJSON() {
         StringBuilder sb = new StringBuilder("[");
         this.calcBBox();
-        this.calcDifficulty();
         this.calcDistance();
         this.calcDifficulty();
 
@@ -269,14 +276,16 @@ public class Route extends JSONObject {
             this.remove("bbox");
             this.put("bbox", Arrays.toString(this.bbox));
             for (Double[] cd : this.coords) {
-                sb.append(Arrays.toString(cd));
+                sb.append(Arrays.toString(cd).replace(" ", ""));
             }
             sb.append("]");
             this.remove("coordinates");
-            this.put("coordinates", sb.toString().replace("][", "],["));
+            this.put("coordinates", sb.toString().replace("][", "],[").replace(" ", ""));
             this.remove("timestamps");
-            this.put("timestamps", Arrays.toString(this.timestamps.toArray()));
+            this.put("timestamps", Arrays.toString(this.timestamps.toArray()).replace(" ", ""));
             this.put("distance", this.distance);
+            this.put("rid", this.rid);
+            this.put("pid", this.pid);
             this.put("name", this.name);
             this.put("atype", this.activity);
             this.put("diffRtng", this.diffRtng);

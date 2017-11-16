@@ -25,8 +25,10 @@ public class BasicReportView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_report_view);
-        int rid = savedInstanceState.getInt("rid");
-        int pid = savedInstanceState.getInt("pid");
+        int rid = getIntent().getExtras().getInt("rid");
+        int pid = getIntent().getExtras().getInt("pid");
+        String test = new DeviceDBHandler(getApplicationContext()).getRoute(pid);
+        List<String> testReports = new DeviceDBHandler(getApplicationContext()).getRouteReports();
         List<String> listReport = new DeviceDBHandler(getApplicationContext()).getRouteReports(pid);
         try {
              report = new BasicReport(listReport.get(listReport.size() - 1));

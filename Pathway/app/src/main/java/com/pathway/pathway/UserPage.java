@@ -19,7 +19,6 @@ import java.net.URL;
 
 public class UserPage extends AppCompatActivity {
 
-    TextView tvEmail;
     TextView tvUsername;
     TextView tvAge;
     TextView tvSex;
@@ -28,7 +27,6 @@ public class UserPage extends AppCompatActivity {
     TextView tvTtlRnTm;
     TextView tvRoutesClrd;
     TextView tvRoutesRn;
-    TextView tvCaloriesBrnd;
     TextView tvPhone;
 
     @Override
@@ -36,7 +34,6 @@ public class UserPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
 
-        tvEmail = (TextView) findViewById(R.id.etEmail1);
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         tvAge = (TextView) findViewById(R.id.tvAge);
         tvSex = (TextView) findViewById(R.id.tvSex);
@@ -45,7 +42,6 @@ public class UserPage extends AppCompatActivity {
         tvTtlRnTm = (TextView) findViewById(R.id.tvTtlRnTm);
         tvRoutesClrd = (TextView) findViewById(R.id.tvRoutesClrd);
         tvRoutesRn = (TextView) findViewById(R.id.tvRoutesRn);
-        tvCaloriesBrnd = (TextView) findViewById(R.id.tvCaloriesBrned);
         tvPhone = (TextView) findViewById(R.id.tvPhone);
         Button bEdit = (Button) findViewById(R.id.bEdit);
 
@@ -60,12 +56,10 @@ public class UserPage extends AppCompatActivity {
             String TtlRnTm = object.getString("Total_Runtime");
             String RoutesClrd = object.getString("Number_Routes");
             String RoutesRn = object.getString("Number_Runs");
-            //String CaloriesBrnd = object.getString("calories_burned");
             tvTtlDist.append(TtlDist);
             tvTtlRnTm.append(TtlRnTm);
             tvRoutesClrd.append(RoutesClrd);
             tvRoutesRn.append(RoutesRn);
-            //tvCaloriesBrnd.append(CaloriesBrnd);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -138,7 +132,6 @@ public class UserPage extends AppCompatActivity {
                     in.close();
                     JSONObject jsonObject = new JSONObject(sb1);
                     username = jsonObject.getString("username");
-                    //String email = jsonObject.getString("email");
                     age = jsonObject.getString("age");
                     sex = jsonObject.getString("gender");
                     weight = jsonObject.getString("weight");

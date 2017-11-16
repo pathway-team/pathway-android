@@ -32,7 +32,6 @@ import static com.pathway.pathway.R.id.tvUsername;
 import static com.pathway.pathway.R.id.tvWeight;
 
 public class Editpage extends AppCompatActivity {
-    EditText etEmail1;
     EditText etUsername1;
     EditText etAge1;
     EditText etSex1;
@@ -44,7 +43,6 @@ public class Editpage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editpage);
 
-        etEmail1 = (EditText) findViewById(R.id.etEmail1);
         etUsername1 = (EditText) findViewById(R.id.etUsername1);
         etAge1 = (EditText) findViewById(R.id.etAge1);
         etSex1 = (EditText) findViewById(R.id.etSex1);
@@ -60,7 +58,6 @@ public class Editpage extends AppCompatActivity {
         final String weight = intent.getStringExtra("weight");
         final String phone = intent.getStringExtra("phonenumber");
 
-        etEmail1.setText(email);
         etUsername1.setText(username);
         etAge1.setText(age);
         etSex1.setText(sex);
@@ -110,7 +107,6 @@ public class Editpage extends AppCompatActivity {
             jsonObject.put("age", etAge1.getText().toString());
             jsonObject.put("gender", etSex1.getText().toString());
             jsonObject.put("weight", etWeight1.getText().toString());
-            jsonObject.put("email", etEmail1.getText().toString());
             jsonObject.put("phone", etPhone.getText().toString());
 
             try(OutputStreamWriter outputStreamWriter = new OutputStreamWriter(conn.getOutputStream())){

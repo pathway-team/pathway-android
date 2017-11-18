@@ -617,7 +617,7 @@ public class MainActivity extends AppCompatActivity
                     currentRoute.setActivity(actType);
                     currentRoute.buildJSON();
                     dbHandler.addNewRoute(currentRoute);
-                    
+
                     try {
                         currentRoute = new Route(dbHandler.getLastRoute());
                     } catch (JSONException e) {

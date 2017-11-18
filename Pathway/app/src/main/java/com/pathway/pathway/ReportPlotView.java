@@ -56,8 +56,8 @@ public class ReportPlotView extends AppCompatActivity {
         series1Format.setLinePaint(p);
 
         //set min/max x-axis values and step interval
-        plot.setDomainBoundaries(0, 30, BoundaryMode.FIXED);
-        plot.setDomainStep(StepMode.INCREMENT_BY_VAL, 3);
+        plot.setDomainBoundaries(0, 60, BoundaryMode.FIXED);
+        plot.setDomainStep(StepMode.INCREMENT_BY_VAL, 5);
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).setFormat(new Format() {
             @Override
             public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) {
@@ -75,7 +75,7 @@ public class ReportPlotView extends AppCompatActivity {
         });
 
         //set min/max y-axis values and step interval
-        /*plot.setRangeBoundaries(0, 3, BoundaryMode.FIXED);
+        plot.setRangeBoundaries(0, PathwayStats.findMax((ArrayList<Double>) speedy), BoundaryMode.FIXED);
         plot.setRangeStep(StepMode.INCREMENT_BY_VAL, 1);
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).setFormat(new Format() {
             @Override
@@ -91,7 +91,7 @@ public class ReportPlotView extends AppCompatActivity {
                 // unused
                 return null;
             }
-        });*/
+        });
 
         //setup plot pan functionality for side-scrolling
         plot.getOuterLimits().set(0, 1000, 0, 25);

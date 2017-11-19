@@ -345,8 +345,23 @@ public class Route extends JSONObject {
         }
     }
 
-    public boolean compareBasic(Route input) {
+    public boolean compareBasic(Route input, int counter, double difference) {
+        boolean match = false;
+        if (counter + 1 > 4) {
+            match = true;
+        }
+        else if (this.length() == 0 || input.length() == 0) {
+            return false;
+        }
+        else if (this.length() == 1 && input.length() == 1){
+            if (SphericalUtil.computeDistanceBetween(this.getDrawPoints().get(0),
+                    input.getDrawPoints().get(0)) <= difference) {
+                match = true;
+            }
+        }
+        else if (true) {
 
+        }
         return false;
     }
 

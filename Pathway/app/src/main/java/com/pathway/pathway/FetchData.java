@@ -29,16 +29,16 @@ public class FetchData extends AsyncTask<String, Void, String> {
         public void fetchElevCallback (String result);
     }
 
-    private static final String OPEN_DATABASE = "http://138.197.103.225:8000/%s/";
 
 
-    HttpURLConnection urlConnect;
-    String url;
-    FetchDataCallbackInterface fdCBInterface;
-    FetchElevationCallbackInterface elevCBInterface;
-    LatLngBounds bbox;
+    private HttpURLConnection urlConnect;
+    private String url;
+    private FetchDataCallbackInterface fdCBInterface;
+    private FetchElevationCallbackInterface elevCBInterface;
+    private LatLngBounds bbox;
+    private LatLng center;
 
-    private String result;
+    private String result = "";
 
     FetchData(String inURL, FetchDataCallbackInterface cbInterface) {
         this.url = inURL;
@@ -49,6 +49,12 @@ public class FetchData extends AsyncTask<String, Void, String> {
         this.url = inURL;
         this.bbox = bounds;
         this.fdCBInterface = cbInterface;
+    }
+
+    FetchData(LatLng point, FetchElevationCallbackInterface cbInterface) {
+        this.url = "http://maps.googleapis.com/maps/api/elevation/" + "json?locations=";
+        this.center = point;
+        this.elevCBInterface = cbInterface;
     }
 
 
@@ -64,6 +70,10 @@ public class FetchData extends AsyncTask<String, Void, String> {
                         bbox.southwest.longitude,
                         bbox.northeast.latitude,
                         bbox.northeast.longitude));
+            }
+            else if (this.center != null) {
+                curl = new URL(String.format("%s%s,%s",this.url, String.valueOf(center.latitude),
+                        String.valueOf(center.longitude)));
             }
 
             //urlConnect = (HttpURLConnection)curl.openConnection();
@@ -92,6 +102,9 @@ public class FetchData extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
+        if (center != null) {
+            this.elevCBInterface.fetchElevCallback(result);
+        }
         this.fdCBInterface.fetchDataCallback(result);
     }
 }

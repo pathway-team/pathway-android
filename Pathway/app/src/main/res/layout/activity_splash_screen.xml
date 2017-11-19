@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.pathway.pathway.SplashScreen"
-    android:background="@color/ap_white">
+    android:background="@color/ap_white"
+    >
 
 
     <ImageView
@@ -14,6 +15,5 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/pathwayicon"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="18dp" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

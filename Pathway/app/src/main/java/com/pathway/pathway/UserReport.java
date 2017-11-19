@@ -1,5 +1,6 @@
 package com.pathway.pathway;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -32,15 +33,25 @@ public class UserReport extends JSONObject{
     }
 
     public UserReport(String json) throws JSONException{
-        super(json);
+        super((json != null) ? json : "");
 
         try {
             totalDistance = this.getDouble("totalDistance");
             totalTime = this.getDouble("totalTime");
             numRuns = this.getInt("numRuns");
-            this.getInt("numRoutes");
+            numRoutes = this.getInt("numRoutes");
         }catch(JSONException e){
             Log.d("PathwayError", e.getMessage());
+            totalDistance = 0;
+            totalTime = 0;
+            numRuns = 0;
+            numRoutes = 0;
+        }catch(NullPointerException e){
+            Log.d("PathwayError", e.getMessage());
+            totalDistance = 0;
+            totalTime = 0;
+            numRuns = 0;
+            numRoutes = 0;
         }
     }
 

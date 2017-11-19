@@ -75,7 +75,7 @@ public class ReportPlotView extends AppCompatActivity {
         });
 
         //set min/max y-axis values and step interval
-        plot.setRangeBoundaries(0, PathwayStats.findMax((ArrayList<Double>) speedy), BoundaryMode.FIXED);
+        plot.setRangeBoundaries(0, Math.nextUp(PathwayStats.findMax((ArrayList<Double>) speedy)) + 0.5, BoundaryMode.FIXED);
         plot.setRangeStep(StepMode.INCREMENT_BY_VAL, 1);
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).setFormat(new Format() {
             @Override

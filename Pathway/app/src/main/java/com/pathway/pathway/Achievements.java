@@ -33,23 +33,23 @@ public class Achievements extends AppCompatActivity{
     TextView achieve_name2;
     TextView achieve_name3;
     TextView achieve_name4;
-    TextView achieve_name5;
+
 
 
     TextView achieve_desc1;
     TextView achieve_desc2;
     TextView achieve_desc3;
     TextView achieve_desc4;
-    TextView achieve_desc5;
+
 
 
     ImageView achieve_photo1;
     ImageView achieve_photo2;
     ImageView achieve_photo3;
     ImageView achieve_photo4;
-    ImageView achieve_photo5;
 
-    Button achieve_button;
+
+    
 
     DeviceDBHandler obj;
     UserReport userReport;
@@ -84,6 +84,7 @@ public class Achievements extends AppCompatActivity{
 
 
 
+  /*
        obj = new DeviceDBHandler(getApplicationContext());
 
 
@@ -111,6 +112,7 @@ public class Achievements extends AppCompatActivity{
             obj.updateAchievement("DaynNight", 1);
             achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
         }
+      */
 
 
 

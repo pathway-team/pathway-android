@@ -19,7 +19,7 @@ public final class RouteCompare {
     private RouteCompare() {
 
     }
-    
+
 
     public static boolean basicCompare(List<LatLng> L1, List<LatLng> L2, int counter) {
         boolean match = false;

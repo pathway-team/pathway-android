@@ -20,8 +20,12 @@
             android:layout_height="90dp"
             android:layout_marginBottom="4dp"
 
+
             cv1:cardCornerRadius="16dp"
+
             android:id="@+id/cv1"
+           
+          
             >
 
             <RelativeLayout
@@ -70,6 +74,8 @@
 
             cv2:cardCornerRadius="16dp"
             android:id="@+id/cv2"
+            
+            
             >
 
             <RelativeLayout
@@ -121,6 +127,7 @@
 
             cv3:cardCornerRadius="16dp"
             android:id="@+id/cv3"
+            
             >
 
             <RelativeLayout
@@ -168,6 +175,7 @@
 
             cv4:cardCornerRadius="16dp"
             android:id="@+id/cv4"
+           
             >
 
             <RelativeLayout
@@ -201,7 +209,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/achieve_name4"
                     android:layout_toRightOf="@+id/achieve_photo4"
+
                     android:text="Ran a total duration of 24 hours" />
+
 
             </RelativeLayout>
 

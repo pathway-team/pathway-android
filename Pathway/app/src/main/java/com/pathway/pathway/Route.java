@@ -345,16 +345,4 @@ public class Route extends JSONObject {
         }
     }
 
-    public boolean compareBasic(Route input) {
-
-        return false;
-    }
-
-    public boolean compareHausdorff(Route input) {
-        return false;
-    }
-
-    public boolean compareFrechet(Route input) {
-        return false;
-    }
 }

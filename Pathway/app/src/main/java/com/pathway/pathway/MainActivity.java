@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         LocationListener,
         OnMapReadyCallback,
         FetchData.FetchDataCallbackInterface,
+        FetchData.FetchElevationCallbackInterface,
         SendData.SendDataCallbackInterface{
 
 
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity
     private String ntwkData;
     private Button btnStart;
     private Chronometer timerRoute;
+
     private enum RunStates {OFF, RUN, PAUSE}
     private RunStates runState = RunStates.OFF;
     private String coordMsg;
@@ -136,9 +138,10 @@ public class MainActivity extends AppCompatActivity
                             .clickable(true);
 
                     Polyline oldRoute = mMap.addPolyline(routeOptions);
-                    oldRoute.setTag(tempRoute);
                     oldRoute.setPoints(tempRoute.getDrawPoints());
+                    oldRoute.setTag(areaRoutes.size());
                     areaRoutes.add(oldRoute);
+                    nearbyRoutes.add(tempRoute);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -147,19 +150,34 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void fetchElevCallback(String result) {
+        JSONArray feature = null;
+        try {
+            feature = new JSONArray(result);
+            double temp = Double.parseDouble(feature.getJSONObject(0).getString("elevation"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            //return -10000.0;
+        }
+
+    }
+
+    @Override
     public void sendDataCallback(Integer result) {
         int test = result;
         switch (test) {
             case (201):
-                Toast.makeText(this, "Route successfully saved.", Toast.LENGTH_SHORT).show();
-                break;
+                Toast.makeText(this, "Route successfully saved.",
+                        Toast.LENGTH_SHORT).show();
+                        break;
             case (400):
-                Toast.makeText(this, "Route not saved to external.\nRequest not understood.",
+                Toast.makeText(this, "Route not saved to external database.\nRequest not understood.",
                         Toast.LENGTH_SHORT).show();
                         break;
             case(403):
                 Toast.makeText(this, "Route not saved.\nMake sure you are signed in.",
                         Toast.LENGTH_SHORT).show();
+                        break;
         }
     }
 
@@ -177,8 +195,15 @@ public class MainActivity extends AppCompatActivity
         final TextView routeType = (TextView) popupView.findViewById(R.id.actField);
         final TextView routeDiff = (TextView) popupView.findViewById(R.id.diffField);
 
+        int index = (int)polyline.getTag();
 
-        try {
+        Route temp = nearbyRoutes.get(index);
+        routeName.setText(temp.getName());
+        routeDist.setText(String.format("%1$,.2f", temp.getDistance()));
+        routeType.setText(temp.getActivity());
+        routeDiff.setText(temp.getDifficulty());
+
+/*        try {
             Route temp = new Route(polyline.getTag().toString());
             routeName.setText(temp.getName());
             routeDist.setText(temp.getDistance().toString());
@@ -186,7 +211,7 @@ public class MainActivity extends AppCompatActivity
             routeDiff.setText(temp.getDifficulty());
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
         final PopupWindow popupWindow = new PopupWindow(
                 popupView,
@@ -275,16 +300,9 @@ public class MainActivity extends AppCompatActivity
                         e.printStackTrace();
                     }
 
-                    //Intent myIntent = new Intent(MainActivity.this, BasicReportView.class);
-                    //Bundle bundle = new Bundle();
-                    //bundle.putInt("pid", source.getPID());
-                    //bundle.putInt("rid", source.getRID());
-                    //myIntent.putExtras(bundle);
-                    //startActivity(myIntent);
 
                     //new SendData(testURL, source, MainActivity.this).execute();
-                    //Snackbar.make(view, ntwkData, Snackbar.LENGTH_LONG)
-                    //        .setAction("Action", null).show();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -303,6 +321,7 @@ public class MainActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        mapFragment.setRetainInstance(true);
 
 
 
@@ -402,13 +421,13 @@ public class MainActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
-        mMap = googleMap;
-        LatLng startLoc = new LatLng(39.8283, -98.5795);
-        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        //googleMap.addMarker(new MarkerOptions().position(sydney)
-        //        .title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(startLoc));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLoc, 3));
+        if (mMap == null) {
+            mMap = googleMap;
+            LatLng startLoc = new LatLng(39.8283, -98.5795);
+            googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(startLoc));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLoc, 3));
+        }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -617,7 +636,7 @@ public class MainActivity extends AppCompatActivity
                     currentRoute.setActivity(actType);
                     currentRoute.buildJSON();
                     dbHandler.addNewRoute(currentRoute);
-                    
+
                     try {
                         currentRoute = new Route(dbHandler.getLastRoute());
                     } catch (JSONException e) {
@@ -651,34 +670,5 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
-    public double getElev(LatLng point) {
-        double result = -100000.0;
-
-        String path = "http://maps.googleapis.com/maps/api/elevation/" + "json?locations="
-                + String.valueOf(point.latitude) + "," + String.valueOf(point.longitude) + "&sensor=true";
-        try {
-            URL url = new URL(String.format(path));
-            HttpURLConnection connection =
-                    (HttpURLConnection)url.openConnection();
-
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-            StringBuilder sb = new StringBuilder();
-
-            String tmp;
-            while ((tmp = reader.readLine()) != null) {
-                sb.append(tmp);
-            }
-
-            JSONArray feature = new JSONArray(sb.toString());
-            result = Double.parseDouble(feature.getJSONObject(0).getString("elevation"));
-
-            connection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 
 }

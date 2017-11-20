@@ -112,7 +112,11 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
                 Log.d("Status", "Creation and prep of Achievements DB");
             }
         }
-
+        if(getUserReports().size() == 0){
+            if(addUserReport(new UserReport())){
+                Log.d("Status", "User Report DB created successfully");
+            }
+        }
     }
 
     @Override
@@ -484,7 +488,12 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         return "";
     }
 
-
+    /**
+     * Updates the state of an achievement on the local database
+     * @param ach_name
+     * @param set
+     * @return
+     */
     public boolean updateAchievement(String ach_name, int set){
         ContentValues newValues = new ContentValues();
         newValues.put(KEY_ACH_SET, set);
@@ -500,5 +509,6 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         }
         return false;
     }
+
 
 }

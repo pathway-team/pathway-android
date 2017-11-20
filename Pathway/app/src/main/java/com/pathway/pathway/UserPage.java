@@ -51,11 +51,11 @@ public class UserPage extends AppCompatActivity {
 
         DeviceDBHandler db = new DeviceDBHandler(getApplicationContext());
         try {
-            JSONObject object = new JSONObject(String.valueOf(db.getUserReports()));
-            String TtlDist = object.getString("Total_Distance");
-            String TtlRnTm = object.getString("Total_Runtime");
-            String RoutesClrd = object.getString("Number_Routes");
-            String RoutesRn = object.getString("Number_Runs");
+            UserReport object = new UserReport(db.getLatestUserReport());
+            String TtlDist = String.format("%2.2f miles", object.getTotalDistance());
+            String TtlRnTm = String.format("%2d:%2d", (int)object.getTotalTime()/60, (int)object.getTotalTime()%60);
+            String RoutesClrd = String.format("%2d ", object.getNumRoutes());
+            String RoutesRn = String.format("%2d miles", object.getNumRuns());
             tvTtlDist.append(TtlDist);
             tvTtlRnTm.append(TtlRnTm);
             tvRoutesClrd.append(RoutesClrd);

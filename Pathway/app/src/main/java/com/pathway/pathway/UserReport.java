@@ -33,7 +33,7 @@ public class UserReport extends JSONObject{
     }
 
     public UserReport(String json) throws JSONException{
-        super((json != null) ? json : "");
+        super(json);
 
         try {
             totalDistance = this.getDouble("totalDistance");

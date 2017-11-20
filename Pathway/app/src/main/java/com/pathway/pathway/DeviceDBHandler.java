@@ -44,7 +44,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
     private static final String KEY_NUM_RUNS = "numRuns";
 
     //achievements information
-    private static final String KEY_ACH_SET = "isSet";
+    private static final String KEY_ACH_SET = "achStatus";
     private static final String KEY_ACH_NAME = "Name";
 
     public DeviceDBHandler(Context context) {
@@ -96,16 +96,22 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         //creates achievements table(holds boolean values for when a user qualifies for achievements)
         String create_tbl_achievements = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(" +
-                "%s TEXT PRIMARY KEY," +
+                "%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "%s TEXT," +
                 "%s INTEGER" +
                 ");", TABLE_ACHIEVEMENTS, KEY_ID, KEY_ACH_NAME, KEY_ACH_SET);
         db.execSQL(create_tbl_achievements);
 
-        //insert the achievements to the local table
-        addAchievement("BabySteps", 0);
-        addAchievement("BurnBabyBurn", 0);
-        addAchievement("GoodonMileage", 0);
-        addAchievement("DaynNight", 0);
+        //insert the achievements to the local table if they don't exist
+        if(getAchievements().size() == 0) {
+            addAchievement("BabySteps", 0);
+            addAchievement("BurnBabyBurn", 0);
+            addAchievement("GoodonMileage", 0);
+            addAchievement("DaynNight", 0);
+            if(getAchievements().size() > 0){
+                Log.d("Status", "Creation and prep of Achievements DB");
+            }
+        }
 
     }
 
@@ -290,7 +296,9 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
 
         values.put(KEY_ACH_NAME,Achievement);
         values.put(KEY_ACH_SET, set);
-        return false;
+
+        long id = db.insert(TABLE_ACHIEVEMENTS, null, values);
+        return (id > 0);
     }
 
     /**
@@ -340,7 +348,7 @@ public class DeviceDBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             return cursor.getString(0);
         }
-        return null;
+        return "";
     }
 
     /**

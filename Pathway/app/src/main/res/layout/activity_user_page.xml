@@ -163,7 +163,7 @@
         android:id="@+id/tvRoutesClrd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Routes Cleared: "
+        android:text="Routes Created: "
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintTop_toBottomOf="@+id/tvTtlRnTm"

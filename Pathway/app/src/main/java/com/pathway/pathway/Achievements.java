@@ -84,12 +84,13 @@ public class Achievements extends AppCompatActivity{
 
 
 
-  /*
-       obj = new DeviceDBHandler(getApplicationContext());
 
+
+        obj = new DeviceDBHandler(getApplicationContext());
 
         try {
-            UserReport userReport = new UserReport(obj.getLatestUserReport());
+
+            userReport = new UserReport(obj.getLatestUserReport());
 
 
         } catch (JSONException e) {
@@ -112,7 +113,7 @@ public class Achievements extends AppCompatActivity{
             obj.updateAchievement("DaynNight", 1);
             achieve_photo1.setImageResource(R.mipmap.achievement_unlocked);
         }
-      */
+
 
 
 
